@@ -1,0 +1,52 @@
+# Phoneme SOP Section 8.3 — Staging Server Auto-Deploy on Commit
+#
+# Fires on every push/merge into `staging`. Runs the build + automated test
+# suite (SOP Section 5.2); only on a fully green run does it call Coolify's
+# deploy webhook to redeploy the Staging application from this exact commit.
+#
+# SETUP REQUIRED before this workflow can run (see Deployment/ci-cd/COOLIFY_SETUP.md):
+#   1. Coolify installed on Phoneme's own server/VM, with a "Staging" application
+#      created for this product, pointed at this repo's `staging` branch.
+#   2. In Coolify: Staging application -> Webhooks -> copy the deploy webhook URL.
+#   3. In GitHub: Settings -> Secrets and variables -> Actions, add a repo secret
+#      named COOLIFY_STAGING_WEBHOOK with that URL.
+#   4. Fill in the <PLACEHOLDER> build/test commands below once this product's
+#      Technical Stack Charter (phoneme-technical-stack) is confirmed — they are
+#      left generic here because that charter is not yet finalized for Teamora.
+
+name: Staging Deploy
+
+on:
+  push:
+    branches: [staging]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up runtime
+        run: echo "<PLACEHOLDER: set up the language runtime pinned in the Technical Stack Charter, e.g. actions/setup-node@v4>"
+
+      - name: Install dependencies
+        run: echo "<PLACEHOLDER: install from the committed lockfile, e.g. npm ci>"
+
+      - name: Build
+        run: echo "<PLACEHOLDER: production build command, e.g. npm run build>"
+
+      - name: Run automated test suite
+        run: echo "<PLACEHOLDER: unit + integration test command, e.g. npm test>"
+
+  deploy-to-staging:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Coolify staging redeploy
+        run: |
+          curl --fail --silent --show-error \
+            -X POST "${{ secrets.COOLIFY_STAGING_WEBHOOK }}"
+
+      - name: Note
+        run: echo "Coolify pulls this exact commit and redeploys the Staging application. QA (Machine B, SOP Section 8.2) tests this build next."
