@@ -1,0 +1,24 @@
+# Local development tools and dependencies
+.tools/
+node_modules/
+**/node_modules/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Test/build output
+coverage/
+dist/
+build/
+.pytest_cache/
+.ruff_cache/
+
+# Machine setup script run logs
+Deployment/machine1-setup-logs/
+Deployment/machineb-setup-logs/

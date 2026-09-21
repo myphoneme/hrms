@@ -1,9 +1,15 @@
 # Coolify Setup — Phoneme Self-Hosted Staging & Production
 
-Companion to `Phoneme_SDLC_SOP_v1.1.docx` Section 8.3–8.5. This is the one-time
-setup per product; the GitHub Actions workflows in this same folder
-(`staging-deploy.yml`, `production-release.yml`) are what run on every commit
-afterward.
+Companion to `Phoneme_SDLC_SOP_v1.1.docx` Section 8.3–8.5 and
+`Technical/Teamora_Technical_Stack_Charter_v1.0.md`. This is the one-time setup
+per **service** (Teamora is a microservices product per Tech Design §17 — Auth,
+Notification, Requisition, Scoring Matrix, JD Generation, Resume Parsing,
+Dedupe, plus the frontend — so steps 4–7 below happen once per service, not
+once for the whole product). The GitHub Actions workflows in this same folder
+(`staging-deploy.yml`/`staging-deploy-python.yml`,
+`production-release.yml`/`production-release-python.yml`, picked by whether
+the service is NestJS/TypeScript or Python/FastAPI) are what run on every
+commit afterward.
 
 ## 1. Provision the server
 
@@ -63,7 +69,11 @@ webhook (Coolify keeps deployment history per application) into
 
 ## 6. Add the GitHub secrets
 
-Repo → **Settings → Secrets and variables → Actions**:
+Repo → **Settings → Secrets and variables → Actions**. With one repo hosting
+multiple services, suffix each secret with the service name once a second
+service's workflow is added (e.g. `COOLIFY_STAGING_WEBHOOK_AUTH`,
+`COOLIFY_STAGING_WEBHOOK_JD_GEN`) and update that service's workflow file to
+match — the single unsuffixed names below are fine for the first service:
 
 | Secret | Value |
 |---|---|
@@ -79,12 +89,17 @@ the Release Owner as a required reviewer. This is what makes
 `production-release.yml`'s `environment: production` step actually pause
 for a human go/no-go instead of deploying unattended.
 
-## 8. Fill in the workflow placeholders
+## 8. Workflow commands are filled in — verify they match the real service
 
-Once this product's Technical Stack Charter is confirmed (`phoneme-technical-stack`),
-replace the `<PLACEHOLDER>` lines in `staging-deploy.yml` and
-`production-release.yml` with the real install/build/test commands for that
-stack.
+The Technical Stack Charter is confirmed (`Technical/Teamora_Technical_Stack_Charter_v1.0.md`),
+so `staging-deploy.yml`/`production-release.yml` (NestJS/TypeScript + the React
+frontend) and `staging-deploy-python.yml`/`production-release-python.yml`
+(Python/FastAPI services) already have real install/lint/build/test commands
+instead of placeholders. Before using either pair on an actual service repo,
+confirm its `package.json` scripts (`build`, `test`, `test:regression`, `lint`)
+or `requirements.txt`/pytest markers (`regression`) actually exist and match —
+these commands are the charter's default convention, not yet verified against
+committed code.
 
 ## Dashboard
 

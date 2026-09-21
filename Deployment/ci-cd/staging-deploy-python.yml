@@ -1,28 +1,26 @@
 # Phoneme SOP Section 8.3 — Staging Server Auto-Deploy on Commit
 #
-# NestJS/TypeScript service variant (Auth/AAA, Notification, Requisition, Scoring
-# Matrix per Teamora_Technical_Stack_Charter_v1.0.md) and the React/TypeScript
-# frontend. For a Python/FastAPI service (JD Generation, Resume Parsing, Dedupe),
-# use staging-deploy-python.yml instead.
+# Python/FastAPI service variant (JD Generation, Resume Parsing, Dedupe per
+# Teamora_Technical_Stack_Charter_v1.0.md). For a NestJS/TypeScript service or
+# the React frontend, use staging-deploy.yml instead.
 #
 # Fires on every push/merge into `staging`. Runs the build + automated test
 # suite (SOP Section 5.2); only on a fully green run does it call Coolify's
 # deploy webhook to redeploy the Staging application from this exact commit.
 #
-# One Coolify application per service per environment (Technical Stack Charter,
-# field 6/8) — copy this file per service and scope its `on.push.paths` to that
-# service's folder once the repo layout (monorepo services/<name>/ vs. polyrepo)
-# is settled, and give it its own COOLIFY_STAGING_WEBHOOK_<SERVICE> secret.
+# One Coolify application per service per environment — copy this file per
+# service (scoping `on.push.paths` once the repo layout is settled) with its
+# own COOLIFY_STAGING_WEBHOOK_<SERVICE> secret.
 #
 # SETUP REQUIRED before this workflow can run (see Deployment/ci-cd/COOLIFY_SETUP.md):
 #   1. Coolify installed on Phoneme's own server/VM, with a "Staging" application
 #      created for this service, pointed at this repo's `staging` branch.
 #   2. In Coolify: Staging application -> Webhooks -> copy the deploy webhook URL.
 #   3. In GitHub: Settings -> Secrets and variables -> Actions, add a repo secret
-#      named COOLIFY_STAGING_WEBHOOK with that URL (or COOLIFY_STAGING_WEBHOOK_<SERVICE>
-#      once more than one service's workflow lives in this repo).
+#      named COOLIFY_STAGING_WEBHOOK (or COOLIFY_STAGING_WEBHOOK_<SERVICE>) with
+#      that URL.
 
-name: Staging Deploy
+name: Staging Deploy (Python)
 
 on:
   push:
@@ -35,23 +33,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          node-version: '20'
-          cache: 'npm'
+          python-version: '3.12'
+          cache: 'pip'
 
       - name: Install dependencies
-        run: npm ci
+        run: pip install -r requirements.txt
 
       - name: Lint
-        run: npm run lint
-
-      - name: Build
-        run: npm run build
+        run: ruff check .
 
       - name: Run automated test suite
-        run: npm test -- --ci
+        run: pytest --maxfail=1 --disable-warnings
 
   deploy-to-staging:
     needs: build-and-test
