@@ -140,6 +140,17 @@ function Write-Warn2 { param([string]$Text) Write-Host "  [ACTION NEEDED] $Text"
 function Write-Skip  { param([string]$Text) Write-Host "  [SKIP] $Text" -ForegroundColor DarkGray }
 function Test-CommandExists { param([string]$Name) return [bool](Get-Command $Name -ErrorAction SilentlyContinue) }
 
+function Test-WingetWorks {
+  # A sideloaded App Installer package can be present on PATH but still
+  # throw "No applicable app licenses found" when actually invoked (see
+  # Step 0) -- Get-Command alone can't tell working from broken, so this
+  # actually runs it and checks the exit code (via cmd /c, per the same
+  # PowerShell 5.1 native-stderr-redirection caveat used elsewhere here).
+  if (-not (Test-CommandExists "winget")) { return $false }
+  $null = cmd /c "winget --version" 2>&1
+  return ($LASTEXITCODE -eq 0)
+}
+
 function Update-SessionPath {
   $machinePath = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
   $userPath = [System.Environment]::GetEnvironmentVariable("Path", "User")
@@ -170,7 +181,14 @@ function Get-State {
 function Save-State {
   param($State)
   $State.updatedAt = Get-Date -Format o
-  $State | ConvertTo-Json -Depth 5 | Set-Content -Path $StateFile -Encoding UTF8
+  try {
+    $State | ConvertTo-Json -Depth 5 | Set-Content -Path $StateFile -Encoding UTF8 -ErrorAction Stop
+  } catch {
+    # Never let a locked/inaccessible state file crash the whole run --
+    # resumability degrades to "re-check everything next time," which is
+    # safe (every step re-verifies live state), just not as fast.
+    Write-Host "  [WARN] Could not write state file ($StateFile): $($_.Exception.Message) -- continuing without saving this step's status." -ForegroundColor Yellow
+  }
 }
 
 function Set-StepStatus {
@@ -236,28 +254,75 @@ Write-Host "Elevated session: $IsElevated"
 
 # ---------------------------------------------------------------------------
 Write-Step "Step 0: winget availability"
-if (Test-CommandExists "winget") {
+if (Test-WingetWorks) {
   Set-StepStatus $State "winget" "done"
-  Write-Ok "winget is available."
+  Write-Ok "winget is available and working."
 } elseif ($DryRun) {
   Write-Skip "DryRun -- not attempting winget bootstrap."
 } else {
-  Write-Warn2 "winget not found (expected on Windows Server). Attempting standard bootstrap..."
+  if (Test-CommandExists "winget") {
+    Write-Warn2 "winget.exe is present but not functional (typically 'No applicable app licenses found' -- a sideloaded install outside the Microsoft Store, which Windows Server doesn't have, has no license entitlement). Re-provisioning it with its offline license..."
+  } else {
+    Write-Warn2 "winget not found (expected on Windows Server). Bootstrapping it..."
+  }
   try {
     $ProgressPreference = 'SilentlyContinue'
-    $bundleUrl = "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
-    $bundlePath = Join-Path $env:TEMP "DesktopAppInstaller.msixbundle"
-    Invoke-WebRequest -Uri $bundleUrl -OutFile $bundlePath -UseBasicParsing
-    Add-AppxPackage -Path $bundlePath -ErrorAction Stop
+    Write-Host "  Querying the latest winget-cli release from GitHub..."
+    $Release = Invoke-RestMethod -Uri "https://api.github.com/repos/microsoft/winget-cli/releases/latest" -Headers @{ "User-Agent" = "PhonemeMachineBSetup" } -TimeoutSec 30
+    $BundleAsset  = $Release.assets | Where-Object { $_.name -like "*.msixbundle" } | Select-Object -First 1
+    $DepsAsset    = $Release.assets | Where-Object { $_.name -like "*Dependencies*.zip" } | Select-Object -First 1
+    $LicenseAsset = $Release.assets | Where-Object { $_.name -like "*License*.xml" } | Select-Object -First 1
+    if (-not $BundleAsset) { throw "Could not find a .msixbundle asset on the latest winget-cli GitHub release." }
+
+    $BootstrapDir = Join-Path $env:TEMP "phoneme-winget-bootstrap"
+    if (Test-Path $BootstrapDir) { Remove-Item $BootstrapDir -Recurse -Force }
+    New-Item -ItemType Directory -Path $BootstrapDir -Force | Out-Null
+
+    $BundlePath = Join-Path $BootstrapDir $BundleAsset.name
+    Write-Host "  Downloading $($BundleAsset.name)..."
+    Invoke-WebRequest -Uri $BundleAsset.browser_download_url -OutFile $BundlePath -UseBasicParsing -TimeoutSec 60
+
+    $DepPaths = @()
+    if ($DepsAsset) {
+      $DepsZip = Join-Path $BootstrapDir $DepsAsset.name
+      Write-Host "  Downloading dependency packages ($($DepsAsset.name))..."
+      Invoke-WebRequest -Uri $DepsAsset.browser_download_url -OutFile $DepsZip -UseBasicParsing -TimeoutSec 60
+      $DepsDir = Join-Path $BootstrapDir "deps"
+      Expand-Archive -Path $DepsZip -DestinationPath $DepsDir -Force
+      $DepPaths = @(Get-ChildItem -Path $DepsDir -Recurse -Filter "*.appx" | Where-Object { $_.FullName -match "\\x64\\" } | Select-Object -ExpandProperty FullName)
+    }
+
+    $LicensePath = $null
+    if ($LicenseAsset) {
+      $LicensePath = Join-Path $BootstrapDir $LicenseAsset.name
+      Write-Host "  Downloading offline license ($($LicenseAsset.name))..."
+      Invoke-WebRequest -Uri $LicenseAsset.browser_download_url -OutFile $LicensePath -UseBasicParsing -TimeoutSec 60
+    }
+
+    if (Get-Command Add-AppxProvisionedPackage -ErrorAction SilentlyContinue) {
+      Write-Host "  Provisioning winget via DISM (online, with dependencies + offline license)..."
+      $DismArgs = @{ Online = $true; PackagePath = $BundlePath; ErrorAction = 'Stop' }
+      if ($DepPaths.Count -gt 0) { $DismArgs.DependencyPackagePath = $DepPaths }
+      if ($LicensePath) { $DismArgs.LicensePath = $LicensePath }
+      Add-AppxProvisionedPackage @DismArgs | Out-Null
+    } else {
+      Write-Warn2 "Add-AppxProvisionedPackage (DISM) isn't available on this system -- falling back to a per-user Add-AppxPackage install, which may still hit the licensing issue on Windows Server."
+      if ($DepPaths.Count -gt 0) {
+        Add-AppxPackage -Path $BundlePath -DependencyPath $DepPaths -ErrorAction Stop
+      } else {
+        Add-AppxPackage -Path $BundlePath -ErrorAction Stop
+      }
+    }
     Update-SessionPath
   } catch {
     Write-Warn2 "Automatic winget bootstrap failed: $($_.Exception.Message)"
+    Write-Warn2 "Common causes on Windows Server: no outbound HTTPS path to github.com/api.github.com (corporate proxy/firewall -- this script does not read a proxy config), or this step not running elevated (DISM provisioning needs admin). See MACHINE_A_SETUP_PROCESS.md for the manual fallback."
   }
-  if (Test-CommandExists "winget") {
+  if (Test-WingetWorks) {
     Set-StepStatus $State "winget" "done"
-    Write-Ok "winget bootstrapped."
+    Write-Ok "winget bootstrapped and confirmed working."
   } else {
-    Write-Warn2 "winget still unavailable -- see MACHINE_A_SETUP_PROCESS.md for the manual bootstrap. Steps below that depend on it will report blocked until resolved."
+    Write-Warn2 "winget still not functional after bootstrap -- see MACHINE_A_SETUP_PROCESS.md for the manual fallback. Steps below that depend on it will report blocked until resolved."
   }
 }
 
