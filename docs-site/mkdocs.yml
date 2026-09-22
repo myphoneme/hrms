@@ -1,0 +1,43 @@
+site_name: Teamora HRMS — Requirement Docs
+site_description: Published BRD/PRD and requirement documents for review and sign-off
+repo_url: https://github.com/myphoneme/hrms
+repo_name: myphoneme/hrms
+edit_uri: edit/main/docs-site/docs/
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.top
+    - toc.integrate
+    - content.action.edit
+    - content.code.copy
+    - search.suggest
+
+markdown_extensions:
+  - tables
+  - toc:
+      permalink: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - attr_list
+  - md_in_html
+
+nav:
+  - Home: index.md
+  - BRD / PRD:
+      - "Teamora v2.4 (Module 1 & 2)": brd-prd/teamora-v2.4.md
