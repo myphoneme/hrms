@@ -1,0 +1,9 @@
+# Build context for every backend service image is backend/ (Readiness doc §2, Rule 2).
+**/node_modules
+**/dist
+**/coverage
+**/.env
+**/.env.*
+!**/.env.example
+**/*.log
+db/

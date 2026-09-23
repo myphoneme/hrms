@@ -28,7 +28,7 @@ The full layout rules and per-service Coolify settings are in
 
 ## Local setup
 
-- Node.js **20.20.2** (`nvm use`, reads `.nvmrc`), Python **3.12**.
+- Node.js **24 LTS**, pinned to 24.21.0 in `.nvmrc` (`nvm install 24.21.0`, `nvm use 24.21.0`). Node 20 reached end-of-life in April 2026. Python **3.12**.
 - PostgreSQL **18**, local database named `teamora`. The name is the same in every
   environment; only credentials change (Technical Stack Charter v1.1, "Database rules").
 - Copy each `.env.example` to `.env` with local-only values. Never commit `.env`, and
