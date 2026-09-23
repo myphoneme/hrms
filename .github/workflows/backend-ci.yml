@@ -1,0 +1,158 @@
+# Automatic checks for backend changes on the `staging` code branch.
+# Runs on GitHub-hosted runners, so it does not need to reach Coolify (10.100.60.119 is private).
+#
+#   test         build every workspace and run all unit / e2e tests
+#   integration  per service: real PostgreSQL 18 + pgvector (the staging image), run the DB bootstrap
+#                twice (must be idempotent), build the service's Docker image, run it, and require
+#                GET /health/ready = 200 as the service's own DB role.
+
+name: Backend CI
+
+on:
+  pull_request:
+    branches: [staging]
+    paths:
+      - "backend/**"
+      - ".github/workflows/backend-ci.yml"
+      - ".nvmrc"
+  push:
+    branches: [staging]
+    paths:
+      - "backend/**"
+      - ".github/workflows/backend-ci.yml"
+      - ".nvmrc"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: backend-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: backend
+
+jobs:
+  test:
+    name: Build and test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Test
+        run: npm test
+
+  integration:
+    name: Integration (${{ matrix.service }})
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - service: auth-service
+            port: 3001
+          - service: requisition-service
+            port: 3002
+
+    services:
+      postgres:
+        image: pgvector/pgvector:pg18
+        env:
+          POSTGRES_PASSWORD: ci-only-superuser-password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+
+    # Throwaway credentials for the ephemeral CI database only - never used anywhere else.
+    env:
+      APP_ENV: test
+      PGHOST: localhost
+      PGPORT: "5432"
+      PGUSER: postgres
+      PGPASSWORD: ci-only-superuser-password
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: teamora
+      POSTGRES_MIGRATOR_PASSWORD: ci-only-migrator-password
+      POSTGRES_SVC_AUTH_PASSWORD: ci-only-auth-password
+      POSTGRES_SVC_REQUISITION_PASSWORD: ci-only-requisition-password
+      POSTGRES_SVC_PUBLISH_PASSWORD: ci-only-publish-password
+      POSTGRES_SVC_CANDIDATE_PASSWORD: ci-only-candidate-password
+      POSTGRES_SVC_DEDUPE_PASSWORD: ci-only-dedupe-password
+      POSTGRES_SVC_NOTIFICATION_PASSWORD: ci-only-notification-password
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install PostgreSQL 18 client
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-common
+          sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y
+          sudo apt-get install -y -qq postgresql-client-18
+          psql --version
+
+      - name: Bootstrap database
+        run: sh db/bootstrap.sh
+
+      - name: Re-run bootstrap (must be idempotent)
+        run: sh db/bootstrap.sh
+
+      - name: Verify database, roles and pgvector
+        run: |
+          psql -X -v ON_ERROR_STOP=1 -d teamora -At <<'SQL'
+          SELECT 'owner=' || pg_get_userbyid(datdba) || ' locale=' || datlocale FROM pg_database WHERE datname = 'teamora';
+          SELECT 'extensions=' || string_agg(extname, ',' ORDER BY extname) FROM pg_extension;
+          DO $$
+          BEGIN
+            IF NOT EXISTS (SELECT 1 FROM pg_extension WHERE extname = 'vector') THEN
+              RAISE EXCEPTION 'pgvector missing';
+            END IF;
+            IF (SELECT count(*) FROM pg_roles WHERE rolname = 'teamora_migrator' OR rolname LIKE 'svc\_%') <> 7 THEN
+              RAISE EXCEPTION 'expected 7 Teamora roles';
+            END IF;
+          END $$;
+          SQL
+
+      - name: Build Docker image
+        run: docker build -f services/${{ matrix.service }}/Dockerfile -t teamora-${{ matrix.service }}:ci .
+
+      - name: Run container and check health
+        run: |
+          docker run -d --name svc --network host \
+            -e APP_ENV -e POSTGRES_HOST -e POSTGRES_PORT -e POSTGRES_DB \
+            -e POSTGRES_SVC_AUTH_PASSWORD -e POSTGRES_SVC_REQUISITION_PASSWORD \
+            teamora-${{ matrix.service }}:ci
+          for i in $(seq 1 30); do
+            curl -sf "http://localhost:${{ matrix.port }}/health" > /dev/null && break
+            sleep 1
+          done
+          echo "GET /health";       curl -sf "http://localhost:${{ matrix.port }}/health"; echo
+          echo "GET /health/ready"; curl -sf "http://localhost:${{ matrix.port }}/health/ready"; echo
+          user=$(docker exec svc whoami)
+          test "$user" = "node" || { echo "container runs as '$user', expected 'node'"; exit 1; }
+
+      - name: Service logs
+        if: always()
+        run: docker logs svc 2>&1 || true
