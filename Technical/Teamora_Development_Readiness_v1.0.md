@@ -181,7 +181,7 @@ hrms/  (staging branch — code only)
 ├── .gitattributes                       LF line endings for Linux builds
 ├── .editorconfig
 ├── .pre-commit-config.yaml              ESLint/Prettier + ruff/black, secret scanning
-├── .nvmrc                               20.20.2
+├── .nvmrc                               24.21.0 (Node 24 LTS)
 └── README.md                            how to run frontend and backend locally
 ```
 
@@ -327,7 +327,7 @@ Feature work against REQ-IDs (HR-M1-FR-xxx / HR-M2-FR-xxx) is blocked by the pro
 |---|---|---|
 | Docker | Installed, but the engine isn't running (`dockerDesktopLinuxEngine` pipe missing). Docker Desktop doesn't officially support Windows Server 2022 | Start Docker Desktop and accept its EULA. If it stays unstable, run the dev containers on a separate Linux dev VM instead (never the staging DB) |
 | PostgreSQL | Fresh 18.6 service running; localhost-only in `pg_hba`, but `listen_addresses = '*'`; no pgvector | Kept `listen_addresses = '*'` by decision (§1.1); keep `pg_hba` limited to specific IPs; pgvector later |
-| Node | `node` on PATH is **v24.16.0**; the repo pins **20.20.2** (`.nvmrc`) | `nvm use 20.20.2` |
+| Node | **Decided 2026-09-23: Node 24 LTS**, pinned to 24.21.0 on `staging` (Node 20 reached end-of-life in April 2026). Machine A has 24.16.0 | `nvm install 24.21.0`, then `nvm use 24.21.0` |
 | GitHub CLI | Installed, not logged in | `gh auth login` (you do this yourself) |
 | Local `staging` branch | Points at the review-branch commit (`c6c1592`), not `origin/staging` | Reset the local branch to `origin/staging` before starting code |
 | `origin/staging` contents | An old snapshot of the docs, and every file is also on `main` | In the first code commit, `git rm` the doc folders on `staging` and add the scaffold. That keeps history intact with no force-push |
@@ -347,3 +347,4 @@ Feature work against REQ-IDs (HR-M1-FR-xxx / HR-M2-FR-xxx) is blocked by the pro
 |---|---|---|---|
 | 1.0 | 2026-09-23 | Claude (session with arjun kushwaha) | Initial readiness audit, database decision proposal, and monorepo structure for the `staging` code branch |
 | 1.0 (rev) | 2026-09-23 | Claude (session with arjun kushwaha) | Directory layout changed to `frontend/` + `backend/`; B2 decided (staging and production both deploy from `staging`, production via approved release tags). Database rules confirmed by arjun kushwaha: local DB for development, real remote DB (Coolify) for staging; database name `teamora` identical in every environment, only credentials change; PostgreSQL 18 everywhere (Machine A reinstalled clean) |
+| 1.0 (rev 2) | 2026-09-23 | Claude (session with arjun kushwaha) | Runtime moved to Node 24 LTS (24.21.0); Node 20 is end-of-life. Machine A's `listen_addresses` decision recorded |
