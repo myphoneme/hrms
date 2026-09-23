@@ -1,0 +1,26 @@
+{
+  "name": "@teamora/auth-service",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Teamora Auth / AAA service: SSO, local login, sessions, RBAC (TDD §3). Owns the `identity` schema.",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/main.js",
+    "start:local": "npm run build && node --env-file=../../.env dist/main.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.0.0",
+    "@nestjs/core": "^11.0.0",
+    "@nestjs/platform-express": "^11.0.0",
+    "@teamora/platform": "*",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testRegex": "test/.*\\.e2e-spec\\.ts$"
+  }
+}
