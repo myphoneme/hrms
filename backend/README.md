@@ -30,7 +30,7 @@ Services are added only when a REQ-ID needs them.
 
 ## Run locally (Windows, Machine A)
 
-Prerequisites: Node **20.20.2** (`nvm use`), PostgreSQL 18 with the database bootstrapped
+Prerequisites: Node **24 LTS** (`.nvmrc` pins 24.21.0; `nvm install 24.21.0` then `nvm use 24.21.0`), PostgreSQL 18 with the database bootstrapped
 (`db/README.md`), and `backend/.env` created from `.env.example`.
 
 ```powershell

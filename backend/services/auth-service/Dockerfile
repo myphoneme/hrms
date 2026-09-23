@@ -3,19 +3,19 @@
 # Coolify: Base Directory /backend, Dockerfile services/auth-service/Dockerfile,
 # watch paths backend/services/auth-service/**, backend/packages/**, backend/package-lock.json
 
-FROM node:20.20.2-alpine AS build
+FROM node:24.21.0-alpine AS build
 WORKDIR /app
 COPY . .
 RUN npm ci \
  && npm run build -w @teamora/platform \
  && npm run build -w @teamora/auth-service
 
-FROM node:20.20.2-alpine AS deps
+FROM node:24.21.0-alpine AS deps
 WORKDIR /app
 COPY . .
 RUN npm ci --omit=dev
 
-FROM node:20.20.2-alpine AS runtime
+FROM node:24.21.0-alpine AS runtime
 ENV NODE_ENV=production
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
