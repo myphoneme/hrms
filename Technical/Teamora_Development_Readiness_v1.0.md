@@ -181,14 +181,43 @@ hrms/  (staging branch — code only)
 └── README.md                            how to run frontend and backend locally
 ```
 
-How this layout deploys on Coolify:
+### Layout rules (follow these for every change)
 
-- `frontend/` is one Coolify application: Base Directory `/frontend`, watch path `frontend/**`.
-- `backend/` isn't a single deployable. **Each service is its own Coolify application** with Base Directory `/backend` and its own Dockerfile (e.g. `services/auth-service/Dockerfile`).
-  The build context has to be `backend/`, not the service folder, so the image can include `backend/packages/` or `backend/python-libs/`.
-- Watch paths keep deploys independent. For example, auth-service rebuilds only on changes under `backend/services/auth-service/**` or `backend/packages/**`,
-  so a frontend-only change never redeploys the backend.
-- Frontend and backend never import each other's code. The contract between them is the OpenAPI specs in `backend/packages/contracts`.
+**Rule 1: only these stay at the repo root.** Everything else goes inside `frontend/` or `backend/`.
+
+| Root item | Why it has to be at the root |
+|---|---|
+| `.github/workflows/` | GitHub Actions only reads workflow files from this exact path |
+| `.gitignore` | Applies to the whole repository |
+| `README.md` | GitHub shows it on the repo's front page |
+| `.editorconfig`, `.pre-commit-config.yaml`, `.nvmrc` | Repo-wide editor, commit-hook and Node-version settings |
+
+A new top-level folder beside `frontend/` and `backend/` needs an explicit decision recorded in the charter first.
+
+**Rule 2: each backend service deploys separately, and builds from `backend/`.**
+`backend/` isn't one deployable; each service in `backend/services/` is its own Coolify application.
+Every service's build context is `backend/`, not the service's own folder, because the image has to include the shared code in `backend/packages/` (TypeScript) or `backend/python-libs/` (Python).
+Each service has its own Dockerfile at `backend/services/<service>/Dockerfile`, written with paths relative to `backend/`.
+
+**Rule 3: watch paths decide what a change rebuilds.** Each Coolify application only redeploys when files under its own watch paths change:
+
+| Coolify application | Base Directory | Dockerfile | Watch paths |
+|---|---|---|---|
+| frontend | `/frontend` | `Dockerfile` | `frontend/**` |
+| auth-service | `/backend` | `services/auth-service/Dockerfile` | `backend/services/auth-service/**`, `backend/packages/**`, `backend/package-lock.json` |
+| requisition-service | `/backend` | `services/requisition-service/Dockerfile` | `backend/services/requisition-service/**`, `backend/packages/**`, `backend/package-lock.json` |
+| notification / publish / candidate-service (NestJS) | `/backend` | `services/<service>/Dockerfile` | `backend/services/<service>/**`, `backend/packages/**`, `backend/package-lock.json` |
+| jd-generation / resume-parsing / dedupe-service (FastAPI) | `/backend` | `services/<service>/Dockerfile` | `backend/services/<service>/**`, `backend/python-libs/**` |
+
+So a frontend-only change never redeploys the backend, and a change inside one service never redeploys the others.
+A change to shared code (`backend/packages/**` or `backend/python-libs/**`) rebuilds every service that uses it, which is intended.
+The same Base Directory, Dockerfile and watch paths apply to the staging and production applications of each service.
+
+**Rule 4: frontend and backend never import each other's code.**
+The only contract between them is the OpenAPI specs in `backend/packages/contracts/`.
+The frontend generates its typed API client from those specs into `frontend/src/api/`, and never imports backend code.
+When an API changes, update the spec in `backend/packages/contracts/` first, then regenerate the frontend client.
+This is what keeps the two folders independent and each one deployable by itself.
 
 ### 2.1 Inside a NestJS service
 
