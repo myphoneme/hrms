@@ -1,0 +1,12 @@
+# Store text files with LF line endings in the repo. Developers work on Windows, but
+# every image builds on Linux (Coolify): a CRLF shell script or Dockerfile breaks there.
+* text=auto eol=lf
+
+*.ps1 text eol=crlf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff2 binary

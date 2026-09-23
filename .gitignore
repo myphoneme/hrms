@@ -1,0 +1,45 @@
+# --- Secrets: never commit real credentials (Charter v1.1, Database rules 4) ---
+.env
+.env.*
+!.env.example
+
+# --- Node / TypeScript ---
+node_modules/
+dist/
+build/
+coverage/
+.turbo/
+*.tsbuildinfo
+npm-debug.log*
+
+# --- Frontend (Vite) ---
+frontend/dist/
+frontend/playwright-report/
+frontend/test-results/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+
+# --- Local tooling caches ---
+.tools/
+node-v*-win-x64/
+
+# --- OS / editors ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+
+# --- Logs ---
+logs/
+*.log
