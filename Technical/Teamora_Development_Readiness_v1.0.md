@@ -48,7 +48,10 @@ Because every environment uses the same name, a mistaken connection string no lo
 was installed as a native Windows service (`postgresql-x64-18`). It's fine to use for local dev, with these points:
 
 - Harden it. `pg_hba.conf` already only accepts `127.0.0.1` / `::1` with `scram-sha-256`, but `postgresql.conf` has
-  `listen_addresses = '*'`, which leaves port 5432 open on every network interface. Set `listen_addresses = 'localhost'` and restart the service.
+  `listen_addresses = '*'`, which leaves port 5432 reachable on every network interface. **Decision (2026-09-23, arjun kushwaha): keep `'*'`.**
+  The VM is on a private IP (not internet-reachable), and a colleague may need access. `pg_hba.conf` is therefore the main control, so keep it strict:
+  allow only specific colleague IPs (`/32`) with `scram-sha-256`, give each person their own role (never `postgres` or `teamora_migrator`),
+  and restrict the Windows firewall rule for 5432 to those IPs. Shared use is for reading/testing; each developer still runs migrations on their own local DB (§1.1).
   Given this machine's history, keep 5432 closed at the firewall and use a strong password for the `postgres` superuser.
   Never use that superuser from application code; use the roles in §1.4.
 - `citext` and `pgcrypto` are available. **pgvector isn't installed** (`vector.control` is missing). It's only needed
@@ -323,7 +326,7 @@ Feature work against REQ-IDs (HR-M1-FR-xxx / HR-M2-FR-xxx) is blocked by the pro
 | Item | Found (2026-09-23) | Fix |
 |---|---|---|
 | Docker | Installed, but the engine isn't running (`dockerDesktopLinuxEngine` pipe missing). Docker Desktop doesn't officially support Windows Server 2022 | Start Docker Desktop and accept its EULA. If it stays unstable, run the dev containers on a separate Linux dev VM instead (never the staging DB) |
-| PostgreSQL | Fresh 18.6 service running; localhost-only in `pg_hba`, but `listen_addresses = '*'`; no pgvector | Set `listen_addresses = 'localhost'` and restart; pgvector later (§1.1) |
+| PostgreSQL | Fresh 18.6 service running; localhost-only in `pg_hba`, but `listen_addresses = '*'`; no pgvector | Kept `listen_addresses = '*'` by decision (§1.1); keep `pg_hba` limited to specific IPs; pgvector later |
 | Node | `node` on PATH is **v24.16.0**; the repo pins **20.20.2** (`.nvmrc`) | `nvm use 20.20.2` |
 | GitHub CLI | Installed, not logged in | `gh auth login` (you do this yourself) |
 | Local `staging` branch | Points at the review-branch commit (`c6c1592`), not `origin/staging` | Reset the local branch to `origin/staging` before starting code |
