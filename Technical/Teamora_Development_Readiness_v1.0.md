@@ -175,6 +175,7 @@ hrms/  (staging branch — code only)
 │
 ├── .github/workflows/                   must stay at the repo root: GitHub only reads workflows from here
 ├── .gitignore
+├── .gitattributes                       LF line endings for Linux builds
 ├── .editorconfig
 ├── .pre-commit-config.yaml              ESLint/Prettier + ruff/black, secret scanning
 ├── .nvmrc                               20.20.2
@@ -189,6 +190,7 @@ hrms/  (staging branch — code only)
 |---|---|
 | `.github/workflows/` | GitHub Actions only reads workflow files from this exact path |
 | `.gitignore` | Applies to the whole repository |
+| `.gitattributes` | Forces LF line endings so files edited on Windows still build on Linux (Coolify) |
 | `README.md` | GitHub shows it on the repo's front page |
 | `.editorconfig`, `.pre-commit-config.yaml`, `.nvmrc` | Repo-wide editor, commit-hook and Node-version settings |
 
