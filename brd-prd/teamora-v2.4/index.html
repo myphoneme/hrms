@@ -1,0 +1,1698 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Published BRD/PRD and requirement documents for review and sign-off">
+      
+      
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Teamora v2.4 (Module 1 & 2) - Teamora HRMS — Requirement Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Teamora HRMS — Requirement Docs" class="md-header__button md-logo" aria-label="Teamora HRMS — Requirement Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Teamora HRMS — Requirement Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Teamora v2.4 (Module 1 & 2)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/myphoneme/hrms" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    myphoneme/hrms
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  BRD / PRD
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Teamora HRMS — Requirement Docs" class="md-nav__button md-logo" aria-label="Teamora HRMS — Requirement Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Teamora HRMS — Requirement Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/myphoneme/hrms" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    myphoneme/hrms
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BRD / PRD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BRD / PRD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teamora v2.4 (Module 1 & 2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/myphoneme/hrms/edit/main/docs-site/docs/brd-prd/teamora-v2.4.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+  <h1>Teamora v2.4 (Module 1 & 2)</h1>
+
+<p><img alt="Teamora" src="../../assets/img/teamora-logo.png" width="220" /></p>
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><p><strong>Teamora</strong></p>
+<p><em>People. Potential. Progress.</em></p>
+<p>Candidate Search to Onboarding Module</p></td>
+</tr>
+<tr class="even">
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>BRD / PRD</strong></p>
+<p><strong>PROJECT CODE: PHN-HR-2026-01</strong></p>
+<p>September 2026</p>
+<p>Submitted by: Phoneme Solutions Pvt. Ltd.</p>
+<p><em>Security Classification: Confidential — Internal</em></p>
+<p><strong>Document Control</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Field</strong></th>
+<th><strong>Value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document Description</td>
+<td>Business Requirements Document / Product Requirements Document (BRD/PRD) — Teamora: Candidate Search to Onboarding Module</td>
+</tr>
+<tr>
+<td>Identification</td>
+<td>PHN-HR-2026-01-BRDPRD, Version 2.4 (Draft — pending Reviewed/Approved sign-off, see Authorization below)</td>
+</tr>
+<tr>
+<td>Security Classification</td>
+<td>Confidential — Internal</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>HR Management project workspace</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Authorization</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Name of the Person</strong></th>
+<th><strong>Date</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prepared by</td>
+<td>Anuj (with drafting support)</td>
+<td>10-Sep-2026</td>
+</tr>
+<tr>
+<td>Reviewed by</td>
+<td>Pending</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>Approved by</td>
+<td>Pending</td>
+<td>Pending</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Change Log</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Version</strong></th>
+<th><strong>Date</strong></th>
+<th><strong>Section</strong></th>
+<th><strong>A/M/D</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Reviewed By</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.1–0.2</td>
+<td>03-Sep-2026</td>
+<td>All</td>
+<td>A</td>
+<td>Initial BRD/PRD draft; Module 1 &amp; 2 requirements locked</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>1.0</td>
+<td>10-Sep-2026</td>
+<td>All</td>
+<td>M</td>
+<td>Rebuilt on the standard Phoneme corporate template; renamed to BRD/PRD; trimmed to requirements-only scope — pricing, commercial terms, project management, and infrastructure sizing moved out to the Technical Design and consolidated Proposal documents</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>2.0</td>
+<td>15-Sep-2026</td>
+<td>1, 3, 4, 5, 6</td>
+<td>A/M</td>
+<td>Resolved critical/high review findings: replaced "locked" language with a formal Draft/Reviewed/Approved Baseline/Superseded status lifecycle (Section 1.2); stated the Release 1 boundary as Modules 1-2 only, with Modules 3-10 marked as roadmap (Section 1.3, 3, 4.3); added the staffing-agency/multi-client tenant model as an in-scope Release 1 requirement and resolved the corresponding open dependency; excluded soft-skill/behavioral signals entirely from the screening-stage scoring matrix per business decision, removing the prior contradiction with the locked no-numeric-soft-skill-scoring rule (Section 4.1); reworked the JD-freeze process flow to reflect a draft-then-freeze scoring matrix rather than a matrix generated only at the freeze moment; added requirement IDs (HR-M1-FR-xxx / HR-M2-FR-xxx) and an Acceptance Scenarios table to both Module 1 and Module 2 (Section 4.1, 4.2); corrected the resume-format claim to PDF/DOCX only, matching the Technical Design (Section 4.2); added measurable, testable acceptance thresholds and a traceability-register requirement (Section 5); updated Naukri RMS/LinkedIn Talent Solutions references to reflect their proposed-adapter-contract status pending vendor confirmation</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>2.1</td>
+<td>15-Sep-2026</td>
+<td>1.2, 3, 4.1, 4.2, 5, 6</td>
+<td>A/M</td>
+<td>Resolved second-pass review findings: relabeled module and document status from "Approved Baseline" to "Draft, pending Reviewed/Approved sign-off" throughout, since no actual approver/date was recorded — status now requires an actual Authorization-table entry, not just build-ready content (Section 1.2, 3, 4.1, 4.2, 5); fixed the HR-M1-FR-007 inconsistency with the Technical Design by stating a direct-employer requisition with a client selected is rejected (422), not silently ignored, and added the corresponding scenario; extended Acceptance Scenarios coverage from 8 to all 16 requirement IDs across both modules; added concrete (provisional, pending Product/Engineering sign-off) measurable targets for duplicate-detection precision, resume-parsing accuracy/time, search latency/volume, upload limits, and availability/RPO/RTO (Section 5); added dependencies for sign-off on those provisional targets and for scheduling the formal document review/approval itself (Section 6); aligned the Client Stakeholder dependency wording with the Technical Design's explicit Release 1 deferral rather than leaving it open-ended</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>2.2</td>
+<td>15-Sep-2026</td>
+<td>1.2, 8, 9</td>
+<td>A</td>
+<td>Added new Section 8, Competitive Landscape &amp; USP Analysis: a feature cross-matrix benchmarking Module 1/2 capabilities against six Indian (Darwinbox, Keka, greytHR, Zoho Recruit, PeopleStrong, Turbohire) and five global (Workday Recruiting, BambooHR, Greenhouse, Lever, SmartRecruiters) ATS/HRMS providers, drawn from each provider's public product/help/pricing pages (Sep 2026), plus the resulting six USPs; renumbered the former Section 8 (Road Ahead) to Section 9 and updated its cross-references</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>2.3</td>
+<td>17-Sep-2026</td>
+<td>1.1, 2, 6, 8</td>
+<td>A/M</td>
+<td>Product/brand name confirmed and applied throughout: renamed from the working name "Phoneme HR Suite" to "Teamora" (by Phoneme, tagline "One place for your people.") on the cover page, running footer, Document Control, and every in-body reference (Section 1.1, 2.2, 8); removed the now-resolved brand-name-confirmation item from Section 6 Dependencies. Phoneme Solutions Pvt. Ltd. remains the submitting company; "Teamora" is the product/customer-facing name only.</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>2.4</td>
+<td>18-Sep-2026</td>
+<td>1.1, Document Control</td>
+<td>M</td>
+<td>Brand finalization: dropped the "by Phoneme" line from the product lockup (cover, running footer, Document Description) — Phoneme remains the submitting company via the Authorization/cover fields only, not as part of the product name; replaced the working tagline "One place for your people." with the finalized tagline "People. Potential. Progress." everywhere it appears. No requirement content changed.</td>
+<td>Pending</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Client Sign Off</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Stakeholder Name</strong></th>
+<th><strong>Role</strong></th>
+<th><strong>Sign Off Date</strong></th>
+<th><strong>Communication</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Confidentiality Agreement</strong></p>
+<p>This document is copyrighted, and all rights are reserved. This document may not, in whole or in part, be copied, photocopied, reproduced, translated, or reduced to any electronic medium or machine-readable form without prior consent, in writing. This document is for internal use only and may, in whole or in part, be provided to anyone outside of the Company, including customers, clients, or prospects after taking an approval from an authorized representative.</p>
+<p><strong>Table of Contents</strong></p>
+<p><strong>1. Introduction</strong></p>
+<blockquote>
+<p>1.1 Overview</p>
+<p>1.2 Purpose</p>
+<p>1.3 Scope</p>
+<p>1.4 References</p>
+<p>1.5 Abbreviations</p>
+</blockquote>
+<p><strong>2. Overall Description / Background</strong></p>
+<blockquote>
+<p>2.1 Background &amp; Problem Statement</p>
+<p>2.2 Business Objectives</p>
+<p>2.3 Target Market &amp; Personas</p>
+</blockquote>
+<p><strong>3. Proposed Solution — Overview</strong></p>
+<p><strong>4. Specific Requirements</strong></p>
+<blockquote>
+<p>4.1 Module 1 — Job Description (JD) Intake &amp; Freezing — Status: Draft v2.1, pending Reviewed/Approved sign-off (supersedes v1.0)</p>
+<p>4.2 Module 2 — Candidate Sourcing &amp; Resume Aggregation — Status: Draft v2.1, pending Reviewed/Approved sign-off (supersedes v1.0)</p>
+<p>4.3 Modules 3–10 — Requirement-Level Scope (Draft, roadmap — not part of Release 1)</p>
+</blockquote>
+<p><strong>5. Acceptance Criteria</strong></p>
+<p><strong>6. Dependencies from Stakeholder Side</strong></p>
+<p><strong>7. Key Risks</strong></p>
+<p><strong>8. Competitive Landscape &amp; USP Analysis</strong></p>
+<blockquote>
+<p>8.1 Indian HRMS/ATS Providers</p>
+<p>8.2 Global ATS/HRMS Providers</p>
+<p>8.3 Resulting USPs for Teamora</p>
+</blockquote>
+<p><strong>9. Road Ahead — SDLC Sequence</strong></p>
+<p><strong>1. Introduction</strong></p>
+<p><strong>1.1 Overview</strong></p>
+<p>Teamora — "People. Potential. Progress." — is a B2B, multi-tenant SaaS HR module being scoped to automate the full talent lifecycle — from candidate search through onboarding completion — for companies with 50–2,000 employees and recruitment/staffing agencies, in India first. Today, HR and talent teams run this process across a disconnected set of spreadsheets, inboxes, and 2–3 unconnected point tools; Teamora replaces that patchwork with a single system of record covering ten connected process modules under one candidate record, one audit trail, and one set of role-based permissions per tenant company.</p>
+<p><strong>1.2 Purpose</strong></p>
+<p>This is a living Business Requirements Document (BRD) and Product Requirements Document (PRD) — requirements only. It carries no pricing, commercial terms, or delivery-plan detail; those belong to the Technical Design documents and the consolidated Proposal that follow once every module's requirements are frozen (see Section 9). Each module's requirement set moves through a formal status lifecycle — Draft → Reviewed → Approved Baseline → (on later revision) Superseded — rather than a single informal "locked" label; a status of Approved Baseline is recorded only once an actual Reviewed-by/Approved-by name and date appear in this document's own Authorization table, never inferred from requirement detail alone. Two of the ten process modules — JD Intake &amp; Freezing, and Candidate Sourcing &amp; Resume Aggregation — carry Draft v2.1 requirement detail in Section 4, build-ready in content but pending that formal review/approval step; the remaining eight are scoped at requirement level (Draft) and will follow the same path in sequence.</p>
+<p><strong>1.3 Scope</strong></p>
+<p>Release 1 boundary: the build-ready scope of this document, and of the companion Technical Design Document, is Module 1 (JD Intake &amp; Freezing) and Module 2 (Sourcing &amp; Resume Aggregation) only. Modules 3–10 remain requirement-level roadmap content (Section 4.3) and are explicitly out of scope for Release 1 build work — they are not implied to ship alongside Modules 1–2. Release 1 also includes, as an in-scope (not deferred) requirement, the staffing-agency / multi-client tenant model: a tenant may operate as a direct employer or as a staffing agency managing requisitions and candidates on behalf of multiple end-client companies, and this distinction is reflected throughout the Module 1 and Module 2 requirements below.</p>
+<p>In scope for requirements across the full ten-module roadmap: JD intake and freezing (AI-generated variants, auto-generated weighted scoring matrix), multi-channel candidate sourcing, automated screening and scoring, candidate pre-interview data capture, multi-round interview management, selection and background verification, offer management with KRA/KPI generation and e-signature, onboarding, and the downstream payroll and appraisal modules the hiring record feeds into. Explicitly out of scope for this document: architecture/API design (Technical Design stage), pricing and commercial terms (Proposal stage), and project timeline/resourcing (Project Management stage).</p>
+<p><strong>1.4 References</strong></p>
+<ul>
+<li>
+<p>Digital Personal Data Protection Act, 2023 (India) — governs candidate and employee personal data handling throughout this product.</p>
+</li>
+<li>
+<p>Naukri RMS, LinkedIn Talent Solutions, and equivalent official job-board employer integrations — the sourcing-channel standard adopted in Section 4.2, pending vendor/product-tier confirmation (Section 6).</p>
+</li>
+<li>
+<p>India's RBI Account Aggregator framework and licensed income-verification providers (e.g. Perfios, HyperVerge) — the compliant alternative adopted for candidate income verification in the future Background Verification module.</p>
+</li>
+<li>
+<p>Industry benchmarking of current ATS/HRMS platforms (Darwinbox, Keka, Zoho Recruit, Zimyo, NeoRecruit, greytHR) — informing the differentiators noted throughout Section 4.</p>
+</li>
+</ul>
+<p><strong>1.5 Abbreviations</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Term</strong></th>
+<th><strong>Meaning</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ATS</td>
+<td>Applicant Tracking System</td>
+</tr>
+<tr>
+<td>BGV</td>
+<td>Background Verification</td>
+</tr>
+<tr>
+<td>JD</td>
+<td>Job Description</td>
+</tr>
+<tr>
+<td>KRA / KPI</td>
+<td>Key Result Area / Key Performance Indicator</td>
+</tr>
+<tr>
+<td>DPDP Act</td>
+<td>Digital Personal Data Protection Act, 2023 (India)</td>
+</tr>
+<tr>
+<td>SLA</td>
+<td>Service Level Agreement</td>
+</tr>
+<tr>
+<td>MVP</td>
+<td>Minimum Viable Product</td>
+</tr>
+<tr>
+<td>RMS</td>
+<td>Recruiter Management System (job-board employer integration)</td>
+</tr>
+<tr>
+<td>BRD / PRD</td>
+<td>Business Requirements Document / Product Requirements Document</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2. Overall Description / Background</strong></p>
+<p><strong>2.1 Background &amp; Problem Statement</strong></p>
+<p>HR and talent teams at small-to-mid-size companies currently run recruitment and onboarding across a disconnected set of tools: spreadsheets or free ATS tiers for pipeline tracking, WhatsApp/email for interview coordination, a separate e-sign tool for offer letters, and manual checklists for onboarding. This produces four recurring problems: no single source of truth on candidate status; slow, manually-chased handoffs between offer acceptance and day-one readiness; compliance exposure from candidate PII scattered across personal inboxes with no consistent retention trail; and no structured hiring analytics for leadership to act on.</p>
+<p><strong>2.2 Business Objectives</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Objective</strong></th>
+<th><strong>How Teamora addresses it</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reduce time-to-hire</td>
+<td>Single pipeline with automated stage transitions, scheduling, and reminders removes manual chase-up delay</td>
+</tr>
+<tr>
+<td>Reduce time-to-productive</td>
+<td>Automated onboarding checklists and cross-team task assignment starting the moment an offer is accepted</td>
+</tr>
+<tr>
+<td>Reduce compliance risk</td>
+<td>Centralised, access-controlled candidate records with consent capture, retention policy, and audit trail, aligned to the DPDP Act 2023</td>
+</tr>
+<tr>
+<td>Create a defensible data moat</td>
+<td>Every pipeline event captured as structured data from day one, supporting future AI-matching features</td>
+</tr>
+<tr>
+<td>Land-and-expand within accounts</td>
+<td>Positioned as the first module of a broader Phoneme HR suite (payroll, performance) sharing one tenant and employee record</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2.3 Target Market &amp; Personas</strong></p>
+<p>Primary segment: companies with 50–2,000 employees in India, plus recruitment/staffing agencies managing multiple client pipelines. Primary buyer and daily user: the HR Manager / Talent Acquisition Lead. Day-to-day users span Recruiters, Hiring Managers, Interview Panelists, HR Ops/Onboarding Coordinators, and — on the candidate-facing side — the applicant and new hire themselves, interacting through a token-based portal with no account creation required.</p>
+<p><strong>3. Proposed Solution — Overview</strong></p>
+<p>The solution is structured as ten sequential, connected process modules, each owning a distinct stage of the talent lifecycle and handing structured data — not free text — to the next. Full architecture and technology decisions for each module are captured in that module's Technical Design document, not here. Modules 1 and 2 are the Release 1 build scope (Section 1.3); Modules 3–10 are roadmap content, not part of Release 1.</p>
+<ol>
+<li>
+<p>Job Description (JD) Intake &amp; Freezing — Draft v2.1, pending approval, Release 1 (Section 4.1)</p>
+</li>
+<li>
+<p>Candidate Sourcing &amp; Resume Aggregation — Draft v2.1, pending approval, Release 1 (Section 4.2)</p>
+</li>
+<li>
+<p>Screening &amp; Shortlisting — roadmap; scored against the Module 1 matrix, threshold-gated auto-advancement</p>
+</li>
+<li>
+<p>Candidate Pre-Interview Data Capture — roadmap; token-based portal, expected CTC, project write-ups</p>
+</li>
+<li>
+<p>Interview Management — roadmap; multi-round, structured interviewer scorecards, panel decision rollup</p>
+</li>
+<li>
+<p>Selection &amp; Background Verification — roadmap; consent-gated identity/employment/income verification via licensed vendors</p>
+</li>
+<li>
+<p>Offer Management, KRA/KPI &amp; E-Sign — roadmap; auto-generated offer letter and compensation breakup, e-signature, hire-to-payroll handoff</p>
+</li>
+<li>
+<p>Onboarding — roadmap; cross-team asset/IT/documentation checklist, day-one readiness dashboard</p>
+</li>
+<li>
+<p>Payroll &amp; Compensation — roadmap; salary slips, full-and-final settlement, loans, employee expenses</p>
+</li>
+<li>
+<p>Appraisal — roadmap; continuous KRA/KPI tracking feeding the annual review cycle</p>
+</li>
+</ol>
+<p><strong>4. Specific Requirements</strong></p>
+<p>This section carries full requirement detail for the two modules built out to build-ready depth to date, followed by the current requirement-level (Draft) scope for the remaining eight modules.</p>
+<p><strong>4.1 Module 1 — Job Description (JD) Intake &amp; Freezing — Status: Draft v2.1, pending Reviewed/Approved sign-off (supersedes v1.0)</strong></p>
+<p>A hiring manager sends a rough, free-text brief (by email or portal); the system converts it into structured JD data, generates multiple polished JD variants alongside an editable draft weighted scoring matrix, routes them for manager review and sign-off, and — at freeze — approves the JD version and its then-current matrix together, becoming the baseline every downstream module scores against. Release 1 includes the staffing-agency / multi-client tenant model: for an agency tenant, every requisition is raised against one of its end-client companies (Section 1.3); for a direct-employer tenant, no client selection applies.</p>
+<p><strong>Process Flow</strong></p>
+<ol>
+<li>
+<p>Manager submits a rough brief — by email to a dedicated intake address, or directly in the portal.</p>
+</li>
+<li>
+<p>System runs NLP extraction on the brief into the structured JD Intake Schema; low-confidence fields are flagged for manager confirmation rather than silently guessed.</p>
+</li>
+<li>
+<p>System generates 2–3 JD variants — a formal/corporate version, a candidate-friendly version, and a condensed job-board version.</p>
+</li>
+<li>
+<p>All variants are emailed to the manager (with a portal link) and appear in the portal's Pending JD Approval queue.</p>
+</li>
+<li>
+<p>Manager reviews by replying on the email in plain text (NLP-parsed back into structured diffs) or editing directly in the portal — both are first-class review paths.</p>
+</li>
+<li>
+<p>A configurable SLA (e.g. 3 business days) triggers a reminder, then an HR escalation, if the manager does not respond.</p>
+</li>
+<li>
+<p>Manager reviews and, once satisfied, adjusts the auto-generated draft scoring matrix (weights per category) directly in the portal — the draft matrix is generated alongside the JD variants in step 3 and remains editable through every review round, not only at the final moment.</p>
+</li>
+<li>
+<p>Manager freezes: the currently Pending-Approval JD version and its bound draft matrix are approved together in one action. The newly Approved version becomes JobRequisition's current version; if an earlier version was previously Approved, it is marked Superseded (its content retained, never deleted or overwritten) rather than replaced in place.</p>
+</li>
+<li>
+<p>A JD may be revised after an initial freeze (e.g. a role's requirements change): the same review/adjustment/freeze loop (steps 5–8) runs again and produces a new Approved version, superseding the one before it — this is a normal, supported path, not an exception.</p>
+</li>
+</ol>
+<p><strong>Scoring Matrix — Default Weight Bands</strong></p>
+<p>Business decision (Release 1): soft-skill / behavioral signals are excluded entirely from the scoring matrix at JD-freeze and screening stage — no numeric weight, band, or proxy score is generated for them at this stage. They are captured as free text on the JD brief where relevant, and are assessed only qualitatively, by a human interviewer, at the structured interview stage (Module 5). The weight bands below cover only the categories that are numerically scored at screening; a matrix's weights must sum to exactly 100% before it can be approved.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Category</strong></th>
+<th><strong>Default weight band</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Core tool/technical skills</td>
+<td>35–55%</td>
+</tr>
+<tr>
+<td>Experience &amp; seniority</td>
+<td>25–40%</td>
+</tr>
+<tr>
+<td>Domain/analytical competency</td>
+<td>15–30%</td>
+</tr>
+<tr>
+<td>Education fit</td>
+<td>0–10%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Feature List</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Req ID</strong></th>
+<th><strong>Feature</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Priority</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HR-M1-FR-001</td>
+<td>Free-text brief ingestion (email + portal)</td>
+<td>NLP extraction into the structured JD Intake Schema, with low-confidence fields flagged for manager confirmation</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>HR-M1-FR-002</td>
+<td>Multi-variant JD generation</td>
+<td>Auto-generate 2–3 JD versions (formal, candidate-friendly, condensed) from structured data</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>HR-M1-FR-003</td>
+<td>Email + portal review loop</td>
+<td>Manager approves/edits via direct email reply (NLP-parsed) or in-portal editor — both converge on the same draft</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>HR-M1-FR-004</td>
+<td>JD versioning &amp; audit trail</td>
+<td>Every edit stored as a version with author and timestamp; an Approved version is immutable and only ever superseded, never overwritten</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>HR-M1-FR-005</td>
+<td>Approval SLA &amp; escalation</td>
+<td>Configurable reminder/escalation timer if a manager doesn't respond to a pending JD</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>HR-M1-FR-006</td>
+<td>Draft-then-freeze weighted scoring matrix</td>
+<td>Matrix generated as an editable draft alongside the JD variants (not only at freeze), weights adjustable by the manager through every review round, approved atomically with the JD version at freeze; weights must sum to exactly 100% to approve</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>HR-M1-FR-007</td>
+<td>Staffing-agency / multi-client requisitions</td>
+<td>An agency-tenant requisition is raised against a specific end-client company; a direct-employer tenant has no client selection</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>HR-M1-FR-008</td>
+<td>JD templates</td>
+<td>Save an Approved JD + matrix as a reusable template for recurring roles</td>
+<td>Should-have</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Approved Decisions</strong></p>
+<ul>
+<li>
+<p>An Approved JD version and its matrix are immutable; any further change creates a new version through the same review/approval loop and, on its own approval, supersedes the prior Approved version rather than overwriting it.</p>
+</li>
+<li>
+<p>Manager can approve/edit by direct email reply (parsed by NLP) or in-portal — both are first-class; a low-confidence email parse always routes to a portal confirmation step rather than auto-applying.</p>
+</li>
+<li>
+<p>The scoring matrix is generated as an editable draft alongside the JD variants and remains editable by the manager through every review round; freezing approves the JD version and its then-current draft matrix together in one action — no matrix goes live without a human setting eyes on the weights, and the weights must sum to exactly 100%.</p>
+</li>
+<li>
+<p>Soft skills are captured as text at JD/resume stage only and are excluded entirely from the numeric screening-stage scoring matrix; they are assessed solely through qualitative human judgment at the structured interview stage (Module 5).</p>
+</li>
+<li>
+<p>Release 1 includes the staffing-agency / multi-client tenant model: an agency tenant's requisition must specify an end-client company; a direct-employer tenant's does not.</p>
+</li>
+</ul>
+<p><strong>Acceptance Scenarios</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Req ID</strong></th>
+<th><strong>Scenario</strong></th>
+<th><strong>Expected outcome</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HR-M1-FR-006</td>
+<td>Manager submits matrix weights that sum to 100%</td>
+<td>Freeze succeeds; new JD version and matrix set to Approved; prior Approved version (if any) set to Superseded</td>
+</tr>
+<tr>
+<td>HR-M1-FR-006</td>
+<td>Manager submits matrix weights that do not sum to 100%</td>
+<td>Freeze request rejected with the offending total returned; no state change to the requisition</td>
+</tr>
+<tr>
+<td>HR-M1-FR-006</td>
+<td>Two managers attempt to freeze the same requisition simultaneously</td>
+<td>Exactly one freeze succeeds atomically; the second is rejected against the now-current state, not silently overwritten</td>
+</tr>
+<tr>
+<td>HR-M1-FR-004</td>
+<td>Manager edits a JD after it has already been Approved (frozen)</td>
+<td>Direct edit to the Approved version is rejected; the edit instead opens a new Draft/Revising version through the standard review loop</td>
+</tr>
+<tr>
+<td>HR-M1-FR-004</td>
+<td>Manager repeats an identical freeze request already applied</td>
+<td>Second request is a no-op against the same Approved version — no duplicate version or duplicate matrix is created</td>
+</tr>
+<tr>
+<td>HR-M1-FR-007</td>
+<td>An agency-tenant manager submits a brief without selecting a client</td>
+<td>Rejected at intake with an explicit validation error (422); a client selection is required before the brief is accepted</td>
+</tr>
+<tr>
+<td>HR-M1-FR-007</td>
+<td>A direct-employer-tenant manager submits a brief with a client selected</td>
+<td>Rejected at intake with an explicit validation error (422) — a direct-employer tenant has no client to select, and the field must be left unset rather than populated; consistent with agency-without-client-selected being rejected the same way, not silently ignored</td>
+</tr>
+<tr>
+<td>HR-M1-FR-001</td>
+<td>Manager submits a brief with a field the NLP extraction cannot confidently identify</td>
+<td>Field is flagged low-confidence and manager_confirmed is forced false; the field cannot feed an Approved JD until the manager explicitly confirms or corrects it</td>
+</tr>
+<tr>
+<td>HR-M1-FR-002</td>
+<td>Structured brief data is complete enough to generate variants</td>
+<td>System produces all three JD variants (formal, candidate-friendly, condensed); none is silently skipped</td>
+</tr>
+<tr>
+<td>HR-M1-FR-003</td>
+<td>Manager replies to the review email with a low-confidence or ambiguous instruction</td>
+<td>Reply is not auto-applied; routed to a portal confirmation step for the manager to confirm the intended change before it is applied</td>
+</tr>
+<tr>
+<td>HR-M1-FR-005</td>
+<td>Manager does not respond within the configured SLA window</td>
+<td>A reminder fires at the configured threshold, followed by an HR escalation if still unresolved; both fire on a scheduled check, not only when the manager next opens a request</td>
+</tr>
+<tr>
+<td>HR-M1-FR-008</td>
+<td>Manager saves an Approved JD + matrix as a template and later reuses it for a new requisition</td>
+<td>New requisition pre-populates from the template; the template itself is unaffected by later edits to the requisition created from it</td>
+</tr>
+</tbody>
+</table>
+<p><strong>4.2 Module 2 — Candidate Sourcing &amp; Resume Aggregation — Status: Draft v2.1, pending Reviewed/Approved sign-off (supersedes v1.0)</strong></p>
+<p>Once a JD is frozen (Approved), it is published to sourcing channels and resumes begin flowing into the system — via job-board integration, direct email, or manual upload — into one unified, deduplicated candidate pool scoped to the owning tenant and, for an agency tenant, its specific end-client.</p>
+<p><strong>Approved decision:</strong> resumes are ingested only through official, contracted integrations — job-board recruiter APIs / RMS partnerships (Naukri RMS, LinkedIn Talent Solutions, and equivalent) — plus direct email intake and manual upload. Unauthorized scraping of job-board pages is explicitly out of scope, since it violates most job boards' terms of service and creates an ongoing legal and account-suspension risk. Where a target board has no official API, the fallback is manual upload — never scraping. Naukri RMS and LinkedIn Talent Solutions are, as of this baseline, proposed adapter contracts pending vendor/product-tier confirmation (Section 6) — not yet confirmed vendor capabilities.</p>
+<p><strong>Sourcing Channels</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Channel</strong></th>
+<th><strong>Ingestion method (Approved)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Naukri</td>
+<td>Naukri RMS (Recruiter Management System) API integration — pending vendor confirmation, Section 6</td>
+</tr>
+<tr>
+<td>LinkedIn</td>
+<td>LinkedIn Talent Solutions API integration — exact product pending confirmation, Section 6</td>
+</tr>
+<tr>
+<td>Niche job boards (e.g. iimjobs)</td>
+<td>Official employer API where available; manual upload otherwise</td>
+</tr>
+<tr>
+<td>Direct email intake</td>
+<td>Automated inbox parsing — attachment extraction + resume parsing</td>
+</tr>
+<tr>
+<td>Manual upload</td>
+<td>Recruiter-driven single/bulk upload — universal fallback</td>
+</tr>
+<tr>
+<td>Employee referral</td>
+<td>Referral link/form tied to the referring employee, attributed at intake</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Feature List</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Req ID</strong></th>
+<th><strong>Feature</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Priority</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HR-M2-FR-001</td>
+<td>Multi-channel job posting</td>
+<td>Publish an Approved requisition to the careers page and contracted job-board integrations from one action</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>HR-M2-FR-002</td>
+<td>Job-board API integration (not scraping)</td>
+<td>Naukri RMS / LinkedIn Talent Solutions / equivalent official integrations only</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>HR-M2-FR-003</td>
+<td>Email intake parsing</td>
+<td>Dedicated per-(tenant, client) inbox auto-parses incoming resumes/attachments</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>HR-M2-FR-004</td>
+<td>Resume parsing</td>
+<td>Extract structured fields (contact, experience, skills, education) from PDF and DOCX resumes, Release 1's supported formats</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>HR-M2-FR-005</td>
+<td>Unified resume inbox</td>
+<td>One consolidated view across all channels, scoped to (tenant, client), instead of separate per-source screens</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>HR-M2-FR-006</td>
+<td>Duplicate detection with conflict handling</td>
+<td>Flag likely-duplicate candidates on intake and link rather than duplicate; conflicting evidence routes to a recruiter for manual review rather than an automatic decision, and every resolution (linked, rejected, or later reversed) is retained for audit</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>HR-M2-FR-007</td>
+<td>Candidate database search</td>
+<td>Full-text and filtered search across the caller's (tenant, client)-scoped candidate pool</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>HR-M2-FR-008</td>
+<td>Referral capture &amp; attribution</td>
+<td>Referral link/form tied to the referring employee, captured at intake</td>
+<td>Should-have</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Approved Decisions</strong></p>
+<ul>
+<li>
+<p>No unauthorized scraping of any job-board site, under any circumstance — sourcing channels ship only via official, contracted API/RMS integrations, direct email intake, or manual upload.</p>
+</li>
+<li>
+<p>A job board with no official API integration path falls back to manual upload/email intake rather than being scraped.</p>
+</li>
+<li>
+<p>Every incoming resume, regardless of channel, lands in one unified resume inbox scoped to its owning (tenant, client) and tagged by source.</p>
+</li>
+<li>
+<p>Duplicate detection runs at intake, before a candidate reaches the screening queue, scoped within (tenant, client) — the same person applying through two different agency clients is not treated as a duplicate, by design.</p>
+</li>
+<li>
+<p>Release 1 supports PDF and DOCX resumes only; other formats (.doc, .rtf, .pages, scanned images) are rejected at intake with an explicit unsupported-format error and routed to a manual structured-entry fallback rather than silently dropped or misparsed — this corrects an earlier, broader "any resume format" claim.</p>
+</li>
+</ul>
+<p><strong>Acceptance Scenarios</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Req ID</strong></th>
+<th><strong>Scenario</strong></th>
+<th><strong>Expected outcome</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HR-M2-FR-002</td>
+<td>A vendor confirms the exact contracted integration product</td>
+<td>Section 6 open dependency closes; Naukri RMS / LinkedIn Talent Solutions status in this document is updated from proposed to confirmed</td>
+</tr>
+<tr>
+<td>HR-M2-FR-004</td>
+<td>Candidate uploads a scanned (image-only) or password-protected PDF</td>
+<td>File is detected as unparseable rather than silently producing an empty or garbled parse; routed to the manual structured-entry fallback</td>
+</tr>
+<tr>
+<td>HR-M2-FR-006</td>
+<td>Two resumes match on email but disagree on candidate name</td>
+<td>Routed to a recruiter review queue as a conflict, not auto-linked and not auto-rejected</td>
+</tr>
+<tr>
+<td>HR-M2-FR-006</td>
+<td>Recruiter finds an auto-link was incorrect</td>
+<td>Recruiter can reverse the link; the original decision is retained for audit and the two candidate records are split back apart</td>
+</tr>
+<tr>
+<td>HR-M2-FR-005</td>
+<td>An agency recruiter searches the unified inbox</td>
+<td>Results are limited to the recruiter's authorized (tenant, client) scope; client is resolved from the recruiter's session, never accepted as a caller-supplied filter</td>
+</tr>
+<tr>
+<td>HR-M2-FR-001</td>
+<td>A requisition is published for an agency's end-client</td>
+<td>The requisition's channel adapters use that end-client's own configured vendor credentials, not the agency's default or another client's</td>
+</tr>
+<tr>
+<td>HR-M2-FR-003</td>
+<td>An email arrives at the intake address with no attachment</td>
+<td>Body is retained for audit but not treated as a resume; no Candidate/Application record is created from a bodiless or attachment-less email</td>
+</tr>
+<tr>
+<td>HR-M2-FR-007</td>
+<td>A recruiter filters candidate search by a requisition the caller is not authorized to view</td>
+<td>Filter is rejected or returns no results rather than exposing candidates for a requisition outside the caller's authorized scope</td>
+</tr>
+<tr>
+<td>HR-M2-FR-008</td>
+<td>A referred candidate applies via the referral link</td>
+<td>Application is tagged with the referring employee's attribution at intake, retained through the full candidate record, not only shown at the point of submission</td>
+</tr>
+</tbody>
+</table>
+<p><strong>4.3 Modules 3–10 — Requirement-Level Scope (Draft, roadmap — not part of Release 1)</strong></p>
+<p>The remaining modules are scoped to product-requirement level below and will each be elaborated to Approved Baseline detail, following the same process demonstrated for Modules 1–2, as they are brought into a future release.</p>
+<p><strong>Module 3 — Screening &amp; Shortlisting</strong></p>
+<ul>
+<li>
+<p>Candidates are scored against the Module 1 weighted matrix as they enter the pipeline; knockout criteria reject automatically, others are ranked with visible score reasoning.</p>
+</li>
+<li>
+<p>Configurable per-requisition threshold moves a candidate to Screened status and triggers an automatic notification email.</p>
+</li>
+</ul>
+<p><strong>Module 4 — Candidate Pre-Interview Data Capture</strong></p>
+<ul>
+<li>
+<p>Token/magic-link portal login (no account creation); role-configurable form (expected CTC, reason for change, project write-ups).</p>
+</li>
+<li>
+<p>Submission triggers interview scheduling and candidate notification of interview details.</p>
+</li>
+</ul>
+<p><strong>Module 5 — Interview Management</strong></p>
+<ul>
+<li>
+<p>Multi-round (typically 2–3) structured interviews with scorecards tied to JD competencies; panel decision rollup before advancing to the next round.</p>
+</li>
+<li>
+<p>Candidate portal status updates in step with internal round outcomes.</p>
+</li>
+</ul>
+<p><strong>Module 6 — Selection &amp; Background Verification</strong></p>
+<ul>
+<li>
+<p>Triggered at SELECTED status. Consent capture is a hard gate before any check begins.</p>
+</li>
+<li>
+<p>Identity, address, education, and employment checks via a licensed BGV vendor integration.</p>
+</li>
+<li>
+<p>Income verification via India's Account Aggregator framework or a consented provider (e.g. Perfios, HyperVerge) — candidate-authorized data pull, not inbox scanning.</p>
+</li>
+</ul>
+<p><strong>Module 7 — Offer Management, KRA/KPI &amp; E-Sign</strong></p>
+<ul>
+<li>
+<p>Offer letter and compensation breakup auto-populated from candidate, role, and approved comp data; role-based KRA/KPI template attached automatically.</p>
+</li>
+<li>
+<p>E-signature integration with tracked status; accepted offer auto-closes the requisition and copies the comp structure into the Payroll module.</p>
+</li>
+</ul>
+<p><strong>Module 8 — Onboarding</strong></p>
+<ul>
+<li>
+<p>Cross-team checklist (IT provisioning, ID card, facilities, HR paperwork) auto-assigned on offer signature, with a day-one readiness dashboard.</p>
+</li>
+<li>
+<p>Onboarding completion converts the candidate record into an employee record — the seam into Modules 9 and 10.</p>
+</li>
+</ul>
+<p><strong>Module 9 — Payroll &amp; Compensation</strong></p>
+<ul>
+<li>Monthly salary slip generation, full-and-final settlement, loan/advance tracking, and employee expense reimbursement, with India statutory compliance (PF, ESI, professional tax, TDS).</li>
+</ul>
+<p><strong>Module 10 — Appraisal</strong></p>
+<ul>
+<li>Continuous tracking against the KRA/KPIs set at offer stage, feeding an annual appraisal cycle rather than a once-a-year reconstruction exercise.</li>
+</ul>
+<p><strong>5. Acceptance Criteria</strong></p>
+<p>Measurable, testable targets — a qualitative statement such as "search should be fast" is not acceptance-testable on its own and is avoided below in favor of a stated threshold.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Criterion</strong></th>
+<th><strong>Threshold</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data isolation (tenant)</td>
+<td>No cross-tenant data access under automated isolation testing, across the database, message-queue, search-index, object-storage, and webhook layers (TDD Section 5.3)</td>
+</tr>
+<tr>
+<td>Data isolation (agency client)</td>
+<td>For an agency tenant, no cross-client data access within the same tenant under the same automated isolation testing — a Client Stakeholder or agency recruiter scoped to one client never sees another client's requisitions or candidates</td>
+</tr>
+<tr>
+<td>Security</td>
+<td>Role-based access control, encryption at rest and in transit, full audit log of candidate-PII access</td>
+</tr>
+<tr>
+<td>Compliance</td>
+<td>DPDP Act 2023 alignment verified at each module baseline — consent gates, retention policy, data-principal rights workflow</td>
+</tr>
+<tr>
+<td>Scoring-matrix integrity</td>
+<td>A matrix cannot reach Approved status with weights that do not sum to exactly 100%; 100% of freeze attempts with an invalid total are rejected, not silently normalized (HR-M1-FR-006)</td>
+</tr>
+<tr>
+<td>Duplicate-detection precision</td>
+<td>Target: false-positive auto-link rate ≤ 1% on exact-key (email/phone) matches, measured against a labeled sample of resolved DuplicateMatch decisions each quarter — provisional target pending Product/Engineering sign-off (Section 6); any conflicting-evidence case routes to manual review rather than auto-linking regardless (HR-M2-FR-006)</td>
+</tr>
+<tr>
+<td>Resume parsing</td>
+<td>100% of PDF/DOCX uploads either parse successfully or are routed to the manual fallback — none silently dropped or left in an unknown state. Target: ≥ 90% of successfully-routed PDF/DOCX uploads parse with all required fields (name, contact, one work-history entry) at ≥ 0.75 confidence, within 30 seconds of upload — provisional target pending Product/Engineering sign-off (Section 6) (HR-M2-FR-004)</td>
+</tr>
+<tr>
+<td>Candidate search performance</td>
+<td>Target: p95 query latency ≤ 2 seconds at a reference load of 100,000 candidates and 50,000 applications per tenant, 20 concurrent searching users per tenant — provisional target pending Product/Engineering sign-off (Section 6) (HR-M2-FR-007)</td>
+</tr>
+<tr>
+<td>Resume upload limits</td>
+<td>Target: single-file upload accepted up to 10 MB; bulk upload up to 200 files or 200 MB per batch, whichever is reached first — provisional target pending Product/Engineering sign-off (Section 6)</td>
+</tr>
+<tr>
+<td>Availability &amp; recovery</td>
+<td>Target: 99.5% monthly availability for Module 1 and Module 2 read/write paths; Recovery Point Objective (RPO) ≤ 15 minutes and Recovery Time Objective (RTO) ≤ 4 hours for the primary datastore — provisional targets pending Product/Engineering sign-off (Section 6); full operational/DR detail is a Section 9 roadmap deliverable, not restated here</td>
+</tr>
+<tr>
+<td>Module acceptance</td>
+<td>A module's requirements reach Approved Baseline only once (a) its Feature List, Approved Decisions, and Acceptance Scenarios (Section 4.1/4.2) are unambiguous enough for the Technical Design stage to begin without open questions, AND (b) an actual Reviewed-by/Approved-by name and date are recorded in this document's Authorization table — content readiness alone does not constitute approval</td>
+</tr>
+<tr>
+<td>Traceability</td>
+<td>Every requirement ID in Section 4.1/4.2 has a corresponding row in the Requirement Traceability Register (a companion living document), linking it to its Technical Design reference(s) and test coverage before the module is considered build-ready</td>
+</tr>
+</tbody>
+</table>
+<p><strong>6. Dependencies from Stakeholder Side</strong></p>
+<p>The following decisions are needed from Phoneme leadership/stakeholders before remaining modules can reach Approved Baseline. The staffing-agency multi-client priority question from the prior baseline is resolved — it is in scope for Release 1 (Section 1.3) — and is removed from this list.</p>
+<ol>
+<li>
+<p>Target launch timeline and team size for the Release 1 build.</p>
+</li>
+<li>
+<p>Pricing/packaging model (per-seat, per-employee, or per-tenant flat fee) — to be resolved before the consolidated Proposal document (Section 9) is generated.</p>
+</li>
+<li>
+<p>First 2–3 design-partner customers to validate the workflow before general availability.</p>
+</li>
+<li>
+<p>Naukri RMS contracted-plan confirmation (push vs. poll availability) and LinkedIn Talent Solutions product-tier confirmation (Recruiter System Connect, Apply Connect, or another) — both integrations are proposed adapter contracts pending this vendor-feasibility gate (Section 4.2).</p>
+</li>
+<li>
+<p>Client Stakeholder read-only portal role for agency end-clients is explicitly deferred out of Release 1 (Section 4.2) — what such a role would see is a fast-follow decision, not a Release 1 blocker.</p>
+</li>
+<li>
+<p>Preferred e-signature and background-verification vendors — informs the Module 6 and Module 7 Technical Design.</p>
+</li>
+<li>
+<p>Confirmation of the Module 6 income-verification approach (Account Aggregator framework vs. a specific licensed vendor).</p>
+</li>
+<li>
+<p>Sign-off on the provisional measurable acceptance targets in Section 5 (duplicate-detection precision, resume-parsing accuracy/time, search latency/volume, upload limits, availability/RPO/RTO) with the actual Product and Engineering owners — these are placeholder-but-explicit values pending that review, not yet committed targets.</p>
+</li>
+<li>
+<p>Formal Reviewed-by/Approved-by sign-off on this BRD/PRD and the companion Technical Design Document — both currently carry Draft v2.1 status with build-ready content but no recorded approver; scheduling this review is itself a stakeholder-side dependency before Module 1/2 development can proceed on an Approved Baseline.</p>
+</li>
+</ol>
+<p><strong>7. Key Risks</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Risk</strong></th>
+<th><strong>Impact</strong></th>
+<th><strong>Mitigation</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scope creep across ten modules</td>
+<td>Delays first shippable release</td>
+<td>Module-by-module requirement locking and a firm MVP scope boundary</td>
+</tr>
+<tr>
+<td>Third-party integration availability/cost (BGV, e-sign, job boards)</td>
+<td>Blocks specific module features if a vendor contract stalls</td>
+<td>Common adapter layer (defined at Technical Design stage) so a vendor swap is cheap; shortlist two vendors per category early</td>
+</tr>
+<tr>
+<td>DPDP Act compliance gaps found late</td>
+<td>Legal/reputational risk with enterprise customers</td>
+<td>Compliance checklist reviewed at every module lock, not deferred to a pre-launch audit</td>
+</tr>
+<tr>
+<td>Multi-tenant data leakage</td>
+<td>Catastrophic trust failure for a B2B SaaS product</td>
+<td>Tenant-scoping enforced at the data-access layer plus a standing automated cross-tenant isolation test suite</td>
+</tr>
+</tbody>
+</table>
+<p><strong>8. Competitive Landscape &amp; USP Analysis</strong></p>
+<p>This section benchmarks Teamora's Module 1 (JD Intake &amp; Freezing) and Module 2 (Sourcing &amp; Resume Aggregation) feature set against eleven Indian and global ATS/HRMS providers, and draws out the resulting Unique Selling Propositions (USPs). Methodology: findings are drawn from each provider's own public product pages, help-center documentation, and pricing pages as of September 2026 — not from live demos or trials. "Yes"/"Partial"/"No" reflect what is publicly confirmed; "Unconfirmed" means the capability could not be verified either way from public sources and should not be read as "absent" — a materially different competitive position could emerge from a live demo. This matrix should be re-validated before use in external sales collateral.</p>
+<p><strong>8.1 Indian HRMS/ATS Providers</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Capability</strong></th>
+<th><strong>Teamora</strong></th>
+<th><strong>Darwinbox</strong></th>
+<th><strong>Keka</strong></th>
+<th><strong>greytHR</strong></th>
+<th><strong>Zoho Recruit</strong></th>
+<th><strong>PeopleStrong</strong></th>
+<th><strong>Turbohire</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AI-generated JD variants (multiple drafts, not just a template)</td>
+<td>Yes — 2–3 AI variants per brief (HR-M1-FR-002)</td>
+<td>Unconfirmed</td>
+<td>No — JD is an uploaded attachment or external link only</td>
+<td>Unconfirmed</td>
+<td>Partial — skillset fields only, not full JD text</td>
+<td>Partial — skill recommendations only</td>
+<td>Unconfirmed</td>
+</tr>
+<tr>
+<td>Structured JD schema (queryable fields, not a file attachment)</td>
+<td>Yes</td>
+<td>Unconfirmed</td>
+<td>No</td>
+<td>Unconfirmed</td>
+<td>Partial</td>
+<td>Partial</td>
+<td>Unconfirmed</td>
+</tr>
+<tr>
+<td>Formal role-based JD/requisition approval workflow</td>
+<td>Yes — manager review with SLA/escalation</td>
+<td>Unconfirmed</td>
+<td>Yes — configurable universal or rule-based approval chain</td>
+<td>Unconfirmed</td>
+<td>Partial — general workflow/blueprint automation</td>
+<td>Yes — configurable approval hierarchies</td>
+<td>Partial — Approver role in workflow</td>
+</tr>
+<tr>
+<td>Hard, immutable JD-freeze state (version-locked)</td>
+<td>Yes — DB-trigger-enforced immutability on freeze (unique)</td>
+<td>Not found</td>
+<td>Not found</td>
+<td>Not found</td>
+<td>Not found</td>
+<td>Not found</td>
+<td>Not found</td>
+</tr>
+<tr>
+<td>Manager approval via native email-reply NLP parsing</td>
+<td>Yes — no portal login required (unique)</td>
+<td>Not found</td>
+<td>Not found</td>
+<td>Not found</td>
+<td>Not found</td>
+<td>Not found</td>
+<td>Not found</td>
+</tr>
+<tr>
+<td>Unified, deduplicated multi-channel resume inbox</td>
+<td>Yes (HR-M2-FR-003)</td>
+<td>Unconfirmed</td>
+<td>Unconfirmed</td>
+<td>Partial — undetailed "centralized inbox" claim</td>
+<td>Yes — Resume Inbox</td>
+<td>Partial</td>
+<td>Unconfirmed</td>
+</tr>
+<tr>
+<td>Native resume parsing (no third-party add-on)</td>
+<td>Yes</td>
+<td>No — marketplace add-on only</td>
+<td>Unconfirmed</td>
+<td>Unconfirmed</td>
+<td>Yes — Resume Extractor/Formatted Resume</td>
+<td>Yes</td>
+<td>Unconfirmed</td>
+</tr>
+<tr>
+<td>Cross-channel duplicate-candidate detection with audit trail</td>
+<td>Yes — append-only reversal model (HR-M2-FR-006, unique)</td>
+<td>Not confirmed by any provider researched</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Multi-tenant + multi-client (agency) isolation architecture</td>
+<td>Yes — 5-layer enforcement (TDD Section 5.3)</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Yes — Client Portal + Vendor Portal (Staffing Edition)</td>
+<td>Partial — multi-stakeholder interfaces, no explicit agency edition</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Sourcing restricted to official APIs/RMS + email + manual upload (no job-board scraping)</td>
+<td>Yes — explicit locked decision (legal/ToS risk avoidance)</td>
+<td>Not stated publicly</td>
+<td>Not stated publicly</td>
+<td>Not stated publicly</td>
+<td>Not stated publicly</td>
+<td>Not stated publicly</td>
+<td>Not stated publicly</td>
+</tr>
+</tbody>
+</table>
+<p><strong>8.2 Global ATS/HRMS Providers</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Capability</strong></th>
+<th><strong>Teamora</strong></th>
+<th><strong>Workday Recruiting</strong></th>
+<th><strong>BambooHR</strong></th>
+<th><strong>Greenhouse</strong></th>
+<th><strong>Lever</strong></th>
+<th><strong>SmartRecruiters</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AI-generated JD variants (multiple drafts, not just a template)</td>
+<td>Yes — 2–3 AI variants per brief</td>
+<td>Yes — generative AI to jumpstart JD creation</td>
+<td>No — template library only</td>
+<td>Yes — "Job Post Description Suggestions"</td>
+<td>Unconfirmed</td>
+<td>Unconfirmed</td>
+</tr>
+<tr>
+<td>Structured JD schema (queryable fields, not a file attachment)</td>
+<td>Yes</td>
+<td>Partial</td>
+<td>Partial — template library</td>
+<td>Partial</td>
+<td>Unconfirmed</td>
+<td>Unconfirmed</td>
+</tr>
+<tr>
+<td>Formal role-based JD/requisition approval workflow</td>
+<td>Yes — manager review with SLA/escalation</td>
+<td>Unconfirmed</td>
+<td>Unconfirmed</td>
+<td>Partial — Slack-integration recipe, native depth unconfirmed</td>
+<td>Yes — dedicated job-posting, requisition, and proxy approval workflows (best documented)</td>
+<td>Unconfirmed</td>
+</tr>
+<tr>
+<td>Hard, immutable JD-freeze state (version-locked)</td>
+<td>Yes — DB-trigger-enforced immutability on freeze (unique)</td>
+<td>Not found</td>
+<td>Not found</td>
+<td>Not found</td>
+<td>Not found</td>
+<td>Not found</td>
+</tr>
+<tr>
+<td>Manager approval via native email-reply NLP parsing</td>
+<td>Yes — no portal login required (unique)</td>
+<td>Not found</td>
+<td>Not found</td>
+<td>Not found</td>
+<td>Not found</td>
+<td>Not found</td>
+</tr>
+<tr>
+<td>Unified, deduplicated multi-channel resume inbox</td>
+<td>Yes</td>
+<td>Unconfirmed</td>
+<td>Unconfirmed</td>
+<td>Partial — LinkedIn RSC+ gives a unified applicant view</td>
+<td>Unconfirmed</td>
+<td>Partial — matches across internal and external databases</td>
+</tr>
+<tr>
+<td>Native resume parsing (no third-party add-on)</td>
+<td>Yes</td>
+<td>Yes — AI reads resumes for latent skills</td>
+<td>Unconfirmed</td>
+<td>Yes — Talent Matching</td>
+<td>Unconfirmed</td>
+<td>Yes — SmartAssistant matching</td>
+</tr>
+<tr>
+<td>Cross-channel duplicate-candidate detection with audit trail</td>
+<td>Yes — append-only reversal model (unique)</td>
+<td>Not confirmed by any provider researched</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Multi-tenant + multi-client (agency) isolation architecture</td>
+<td>Yes — 5-layer enforcement (TDD Section 5.3)</td>
+<td>No</td>
+<td>No</td>
+<td>No — multi-brand job boards only, single company</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Public, transparent per-seat pricing</td>
+<td>To be finalized (Section 6 dependency)</td>
+<td>No — custom enterprise quotes</td>
+<td>Yes — \$10/\$17/\$25 per employee/month</td>
+<td>No — custom quotes</td>
+<td>No — custom quotes</td>
+<td>No — custom quotes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>8.3 Resulting USPs for Teamora</strong></p>
+<p>Six differentiators recur across both benchmarks — each a Module 1/2 decision already locked in this document (Section 4.1/4.2), not an aspirational claim:</p>
+<ol>
+<li>
+<p>Hard, immutable JD-freeze state: the JDVersion state machine locks content at the database-trigger level the instant a version is Approved. No provider researched, Indian or global, publicly documents an equivalent formal version-lock — most treat the JD as a mutable field or a plain file attachment (Keka confirmed attachment-only).</p>
+</li>
+<li>
+<p>Manager approval by native email-reply NLP parsing, with no portal login required — not found in any of the eleven providers' public documentation, all of which assume in-portal approval.</p>
+</li>
+<li>
+<p>An explicit, ToS-safe sourcing architecture — official job-board APIs/RMS integrations plus email intake and manual upload only, with no scraping — combined with a single deduplicated resume inbox. No competitor publicly states an equivalent no-scraping guarantee; the closest partial matches (Zoho Recruit's Resume Inbox, greytHR's undetailed "centralized inbox") do not document the dedup layer.</p>
+</li>
+<li>
+<p>Cross-channel duplicate-candidate detection with an append-only reversal audit trail (HR-M2-FR-006). Zero of the eleven providers researched had this publicly confirmed — the single cleanest gap found across the entire competitive set.</p>
+</li>
+<li>
+<p>True multi-tenant plus multi-client (agency) isolation enforced independently at five layers — database, message queue, search index, object storage, and webhooks (TDD Section 5.3). Only Zoho Recruit's Staffing Edition (Client Portal + Vendor Portal) offers a comparable agency-facing model among the eleven, and its isolation depth is not publicly documented to this level.</p>
+</li>
+<li>
+<p>A weighted scoring matrix auto-generated from the frozen JD, with a hard validation rule that weights must sum to exactly 100% before freeze (HR-M1-FR-006) — not found in any provider researched.</p>
+</li>
+</ol>
+<p><strong>9. Road Ahead — SDLC Sequence</strong></p>
+<p>This BRD/PRD is the first of a set of documents produced per module as the SDLC proceeds. The sequence for each module is: (1) BRD/PRD — this document, requirements only; (2) Technical Design — data schema, API contracts, and integration specs, produced once a module's requirements reach Approved Baseline; (3) UX/screen specification, where a module has a significant user-facing surface; (4) Test/acceptance plan, developed alongside the Technical Design rather than only after it. Once every module has cleared all applicable stages, a single consolidated Proposal document — carrying pricing, commercial terms, and delivery plan — is generated from this material for presentation to B2B customers. A Requirement Traceability Register (Section 5) is maintained as a living companion document from this baseline onward, linking each requirement ID through design, build, and test evidence.</p>
+<ul>
+<li>
+<p>Modules 1 &amp; 2: Draft v2.1, build-ready in content and pending formal Reviewed/Approved sign-off (this document) — Technical Design v2.1, same status, in progress alongside (see the companion Technical Design Document); Release 1 build scope.</p>
+</li>
+<li>
+<p>Module 3 onward: requirements to reach Approved Baseline in sequence, following the same process demonstrated for Modules 1 &amp; 2, as they are brought into a future release.</p>
+</li>
+<li>
+<p>Final Proposal document: generated only once all module-level documents across all applicable stages are frozen, incorporating the pricing and commercial-terms decisions from Section 6.</p>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.top", "toc.integrate", "content.action.edit", "content.code.copy", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
