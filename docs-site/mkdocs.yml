@@ -41,3 +41,5 @@ nav:
   - Home: index.md
   - BRD / PRD:
       - "Teamora v2.4 (Module 1 & 2)": brd-prd/teamora-v2.4.md
+  - Technical Design:
+      - "Teamora TDD v4.2 (Module 1 & 2)": tdd/teamora-tdd-m1m2-v4.2.md

@@ -47,11 +47,19 @@ No separate signature tool is needed for this internal review loop — the PR
 approval **is** the audit trail (reviewer identity, timestamp, and exact diff
 reviewed are all permanently recorded in GitHub).
 
+## Technical Design review roles
+
+For a Technical Design (SOP 8.7.2), the **Technical Reviewer is mandatory** and also checks that the
+design traces 1:1 to the BRD/PRD requirement IDs; the **Approver** is the Release Owner or senior
+technical authority. The review and sign-off steps are the same as above: inline PR comments,
+fold-back commits, then approve + merge.
+
 ## Current documents
 
 | Document | Version | Status | Requirement IDs |
 |---|---|---|---|
-| [Teamora BRD/PRD — Module 1 & 2](brd-prd/teamora-v2.4.md) | v2.4 | Draft — pending Reviewed/Approved sign-off | HR-M1-FR-001…008, HR-M2-FR-001…008 |
+| [Teamora BRD/PRD — Module 1 & 2](brd-prd/teamora-v2.4.md) | v2.4 (approval recorded in v2.5 .docx) | **Approved Baseline** — signed off 24-Sep-2026 (PR #1) | HR-M1-FR-001…008, HR-M2-FR-001…008 |
+| [Teamora Technical Design — Module 1 & 2](tdd/teamora-tdd-m1m2-v4.2.md) | v4.2 | Draft — in review | Implements HR-M1-FR-001…008, HR-M2-FR-001…008 |
 
 See the [Teamora HRMS - SDLC Tracker](https://github.com/users/myphoneme/projects/5)
 project board for the live status of this review against the wider development
