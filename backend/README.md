@@ -44,13 +44,45 @@ npm run start:requisition    # http://localhost:3002/health  (second terminal)
 
 Both services read `backend/.env`. Don't set `PORT` there; each service uses its own default port.
 
+## Database migrations
+
+Each service owns the migrations for its own schema, as plain SQL in `services/<service>/db/migrations/`
+(`NNNN_description.sql`, applied in order, each in its own transaction). They run as `teamora_migrator`,
+never as the service role, so service roles never own a table and cannot bypass Row-Level Security.
+
+```powershell
+npm run migrate:local        # applies pending migrations to the database in backend/.env
+```
+
+Rules for every migration that creates a multi-tenant table: `ENABLE` **and** `FORCE ROW LEVEL SECURITY`,
+and a policy on `current_setting('app.tenant_id', true)`. Service code queries those tables only through
+`withTenant(pool, { tenantId, clientId }, fn)` from `@teamora/platform`.
+
+## Database tests
+
+`npm run test:db` runs the tenant-isolation tests against a real, bootstrapped and migrated database, logged
+in as each service's own role. Use a separate test instance, never your dev data (Charter v1.1, Database
+rules): for example a throwaway container on port 5433.
+
+```powershell
+docker run -d --name teamora-test-db -e POSTGRES_PASSWORD=<test-only> -p 5433:5432 pgvector/pgvector:pg18
+# then, with PGPORT/POSTGRES_PORT=5433, APP_ENV=test and test-only passwords set in the shell:
+sh db/bootstrap.sh
+npm run migrate
+npm run test:db
+```
+
+CI runs the same steps on every PR (`.github/workflows/backend-ci.yml`, job "Database tests").
+
 ## Every service provides
 
 | Endpoint | Meaning |
 |---|---|
 | `GET /health` | Liveness: 200 while the process runs. Coolify health-check path. |
 | `GET /health/ready` | Readiness: 200 if the service can query its database as its own role, else 503 (no error details). |
-| `/api/v1/...` | Business APIs (none yet). |
+| `/api/v1/...` | Business APIs. Require `Authorization: Bearer <access token>` (`AuthGuard`). |
+
+Errors always come back as `{ "reason", "message", "details"? }`.
 
 At startup each service logs its `APP_ENV` and database target, e.g.
 `listening on :3001 | APP_ENV=local | DB=svc_auth@localhost:5432/teamora`, and refuses to start,

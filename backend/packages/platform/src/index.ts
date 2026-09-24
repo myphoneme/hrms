@@ -4,3 +4,7 @@ export { createPool } from './db';
 export { HealthController } from './health.controller';
 export { PlatformModule } from './platform.module';
 export { configureApp, runService } from './run-service';
+export { isUuid, TenantScope, withTenant } from './tenancy';
+export { MigrationOptions, runMigrations, runMigrationsCli } from './migrations';
+export { Auth, AuthContext, AuthGuard, signAccessToken, USER_ROLES, UserRole, verifyAccessToken } from './auth';
+export { ErrorBody, HttpErrorFilter } from './errors';

@@ -10,6 +10,7 @@ const config: ServiceConfig = {
   appEnv: 'test',
   port: 0,
   db: { host: 'unused', port: 5432, database: 'teamora', user: SERVICE.dbRole, password: 'unused' },
+  authJwtSecret: 'e2e-test-secret-e2e-test-secret-000001',
 };
 
 describe(`${SERVICE.serviceName} health endpoints`, () => {
@@ -53,5 +54,10 @@ describe(`${SERVICE.serviceName} health endpoints`, () => {
 
   it('keeps health outside the /api/v1 prefix', async () => {
     await request(app.getHttpServer()).get('/api/v1/health').expect(404);
+  });
+
+  it('returns the standard error body for an unknown route', async () => {
+    const res = await request(app.getHttpServer()).get('/api/v1/does-not-exist').expect(404);
+    expect(res.body).toEqual({ reason: 'not_found', message: 'Cannot GET /api/v1/does-not-exist' });
   });
 });

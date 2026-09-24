@@ -23,6 +23,7 @@ COPY --from=build /app/packages/platform/package.json ./packages/platform/packag
 COPY --from=build /app/packages/platform/dist ./packages/platform/dist
 COPY --from=build /app/services/auth-service/package.json ./services/auth-service/package.json
 COPY --from=build /app/services/auth-service/dist ./services/auth-service/dist
+COPY --from=build /app/services/auth-service/db ./services/auth-service/db
 USER node
 EXPOSE 3001
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \

@@ -2,6 +2,8 @@
 # Runs on GitHub-hosted runners, so it does not need to reach Coolify (10.100.60.119 is private).
 #
 #   test         build every workspace and run all unit / e2e tests
+#   db-tests     real PostgreSQL 18 + pgvector: DB bootstrap, migrations (run twice), then the
+#                database tests (tenant isolation / Row-Level Security) as each service's own role
 #   integration  per service: real PostgreSQL 18 + pgvector (the staging image), run the DB bootstrap
 #                twice (must be idempotent), build the service's Docker image, run it, and require
 #                GET /health/ready = 200 as the service's own DB role.
@@ -57,6 +59,74 @@ jobs:
       - name: Test
         run: npm test
 
+  db-tests:
+    name: Database tests
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    services:
+      postgres:
+        image: pgvector/pgvector:pg18
+        env:
+          POSTGRES_PASSWORD: ci-only-superuser-password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+
+    # Throwaway credentials for the ephemeral CI database only - never used anywhere else.
+    env:
+      APP_ENV: test
+      PGHOST: localhost
+      PGPORT: "5432"
+      PGUSER: postgres
+      PGPASSWORD: ci-only-superuser-password
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: teamora
+      POSTGRES_MIGRATOR_PASSWORD: ci-only-migrator-password
+      POSTGRES_SVC_AUTH_PASSWORD: ci-only-auth-password
+      POSTGRES_SVC_REQUISITION_PASSWORD: ci-only-requisition-password
+      POSTGRES_SVC_PUBLISH_PASSWORD: ci-only-publish-password
+      POSTGRES_SVC_CANDIDATE_PASSWORD: ci-only-candidate-password
+      POSTGRES_SVC_DEDUPE_PASSWORD: ci-only-dedupe-password
+      POSTGRES_SVC_NOTIFICATION_PASSWORD: ci-only-notification-password
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install PostgreSQL 18 client
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-common
+          sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y
+          sudo apt-get install -y -qq postgresql-client-18
+
+      - name: Install and build
+        run: npm ci && npm run build
+
+      - name: Bootstrap database
+        run: sh db/bootstrap.sh
+
+      - name: Migrate
+        run: npm run migrate
+
+      - name: Re-run migrations (must be a no-op)
+        run: npm run migrate
+
+      - name: Database tests
+        run: npm run test:db
+
   integration:
     name: Integration (${{ matrix.service }})
     needs: test
@@ -101,6 +171,7 @@ jobs:
       POSTGRES_SVC_CANDIDATE_PASSWORD: ci-only-candidate-password
       POSTGRES_SVC_DEDUPE_PASSWORD: ci-only-dedupe-password
       POSTGRES_SVC_NOTIFICATION_PASSWORD: ci-only-notification-password
+      AUTH_JWT_SECRET: ci-only-jwt-secret-ci-only-jwt-secret-0001
 
     steps:
       - uses: actions/checkout@v7
@@ -142,7 +213,7 @@ jobs:
         run: |
           docker run -d --name svc --network host \
             -e APP_ENV -e POSTGRES_HOST -e POSTGRES_PORT -e POSTGRES_DB \
-            -e POSTGRES_SVC_AUTH_PASSWORD -e POSTGRES_SVC_REQUISITION_PASSWORD \
+            -e POSTGRES_SVC_AUTH_PASSWORD -e POSTGRES_SVC_REQUISITION_PASSWORD -e AUTH_JWT_SECRET \
             teamora-${{ matrix.service }}:ci
           for i in $(seq 1 30); do
             curl -sf "http://localhost:${{ matrix.port }}/health" > /dev/null && break

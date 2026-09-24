@@ -1,4 +1,5 @@
 import { DynamicModule, Inject, Injectable, Module, OnApplicationShutdown } from '@nestjs/common';
+import { AuthGuard } from './auth';
 import { ServiceConfig } from './config';
 import { createPool } from './db';
 import { HealthController } from './health.controller';
@@ -15,7 +16,7 @@ class PoolShutdown implements OnApplicationShutdown {
 
 /**
  * Foundation every Teamora NestJS service imports once, in its root module:
- * provides SERVICE_CONFIG and DB_POOL to the whole app and serves GET /health and GET /health/ready.
+ * provides SERVICE_CONFIG, DB_POOL and AuthGuard to the whole app and serves GET /health and GET /health/ready.
  */
 @Module({})
 export class PlatformModule {
@@ -28,8 +29,9 @@ export class PlatformModule {
         { provide: SERVICE_CONFIG, useValue: config },
         { provide: DB_POOL, useFactory: () => createPool(config) },
         PoolShutdown,
+        AuthGuard,
       ],
-      exports: [SERVICE_CONFIG, DB_POOL],
+      exports: [SERVICE_CONFIG, DB_POOL, AuthGuard],
     };
   }
 }

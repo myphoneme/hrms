@@ -2,11 +2,13 @@ import 'reflect-metadata';
 import { DynamicModule, INestApplication, Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { ConfigError, loadServiceConfig, ServiceConfig, ServiceDefinition } from './config';
+import { HttpErrorFilter } from './errors';
 
 /** App-wide settings shared by every service; also applied in tests so they match production. */
 export function configureApp(app: INestApplication): INestApplication {
   // Business APIs live under /api/v1 (Readiness doc §2.3); health endpoints stay at the root for Coolify.
   app.setGlobalPrefix('api/v1', { exclude: ['health', 'health/ready'] });
+  app.useGlobalFilters(new HttpErrorFilter());
   app.enableShutdownHooks();
   return app;
 }
