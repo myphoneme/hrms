@@ -84,6 +84,12 @@ CI runs the same steps on every PR (`.github/workflows/backend-ci.yml`, job "Dat
 
 Errors always come back as `{ "reason", "message", "details"? }`.
 
+## APIs
+
+| Service | Endpoint | Requirement | Notes |
+|---|---|---|---|
+| requisition-service | `POST /api/v1/requisitions/intake` | HR-M1-FR-007 (TDD §8) | Body `{ tenant_id, client_id, department_id?, raw_brief_text, source: "email" \| "portal" }` → `201 { requisition_id, status: "Draft" }`. `client_id` must always be present: a staffing-agency tenant must name one of its own clients (`422 client_required` / `unknown_client`), a direct employer must send `null` (`422 client_not_allowed`). `tenant_id` must match the token (`403 tenant_mismatch`). |
+
 At startup each service logs its `APP_ENV` and database target, e.g.
 `listening on :3001 | APP_ENV=local | DB=svc_auth@localhost:5432/teamora`, and refuses to start,
 listing every problem, if `APP_ENV`, `POSTGRES_HOST` or its role password is missing, or if
