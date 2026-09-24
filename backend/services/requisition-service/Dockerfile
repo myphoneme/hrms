@@ -23,6 +23,7 @@ COPY --from=build /app/packages/platform/package.json ./packages/platform/packag
 COPY --from=build /app/packages/platform/dist ./packages/platform/dist
 COPY --from=build /app/services/requisition-service/package.json ./services/requisition-service/package.json
 COPY --from=build /app/services/requisition-service/dist ./services/requisition-service/dist
+COPY --from=build /app/services/requisition-service/db ./services/requisition-service/db
 USER node
 EXPOSE 3002
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \

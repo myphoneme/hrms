@@ -14,8 +14,8 @@
     "test": "npm run test --workspaces --if-present",
     "start:auth": "npm run build -w @teamora/platform && npm run start:local -w @teamora/auth-service",
     "start:requisition": "npm run build -w @teamora/platform && npm run start:local -w @teamora/requisition-service",
-    "migrate": "npm run migrate -w @teamora/auth-service",
-    "migrate:local": "npm run build -w @teamora/platform && npm run migrate:local -w @teamora/auth-service",
+    "migrate": "npm run migrate -w @teamora/auth-service && npm run migrate -w @teamora/requisition-service",
+    "migrate:local": "npm run build -w @teamora/platform && npm run migrate:local -w @teamora/auth-service && npm run migrate:local -w @teamora/requisition-service",
     "test:db": "npm run test:db --workspaces --if-present"
   },
   "devDependencies": {
