@@ -89,6 +89,10 @@ Errors always come back as `{ "reason", "message", "details"? }`.
 | Service | Endpoint | Requirement | Notes |
 |---|---|---|---|
 | requisition-service | `POST /api/v1/requisitions/intake` | HR-M1-FR-007 (TDD §8) | Body `{ tenant_id, client_id, department_id?, raw_brief_text, source: "email" \| "portal" }` → `201 { requisition_id, status: "Draft" }`. `client_id` must always be present: a staffing-agency tenant must name one of its own clients (`422 client_required` / `unknown_client`), a direct employer must send `null` (`422 client_not_allowed`). `tenant_id` must match the token (`403 tenant_mismatch`). |
+| requisition-service | `GET /api/v1/requisitions/{id}/jd-versions` | HR-M1-FR-004 (TDD §8) | Full version history in version order, including Approved / Superseded / Rejected. |
+| requisition-service | `POST /api/v1/requisitions/{id}/jd-versions` | HR-M1-FR-004 | Every edit is a new version: `{ content, variant_type?, based_on_version_id? }` → `201`. First draft = `Draft`; a revision of an existing version = `Revising`. `409 requisition_not_editable` when OnHold/Closed. |
+| requisition-service | `POST /api/v1/requisitions/{id}/jd-versions/{versionId}/submit` | HR-M1-FR-004 | Draft/Revising → `PendingApproval`; anything else `409 version_not_submittable`. |
+| requisition-service | `PATCH /api/v1/requisitions/{id}/jd-versions/{versionId}` | HR-M1-FR-004 (TDD §15) | Always `409 version_immutable`: versions are never edited in place; create a new version based on it. The database enforces this too (content immutable, allowed status transitions only, no deletes). |
 
 At startup each service logs its `APP_ENV` and database target, e.g.
 `listening on :3001 | APP_ENV=local | DB=svc_auth@localhost:5432/teamora`, and refuses to start,
