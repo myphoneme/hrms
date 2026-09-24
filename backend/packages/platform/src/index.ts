@@ -8,3 +8,4 @@ export { isUuid, TenantScope, withTenant } from './tenancy';
 export { MigrationOptions, runMigrations, runMigrationsCli } from './migrations';
 export { Auth, AuthContext, AuthGuard, signAccessToken, USER_ROLES, UserRole, verifyAccessToken } from './auth';
 export { ErrorBody, HttpErrorFilter } from './errors';
+export { API_DOCS_PATH, setupApiDocs } from './api-docs';

@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import { DynamicModule, INestApplication, Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { ConfigError, loadServiceConfig, ServiceConfig, ServiceDefinition } from './config';
+import { API_DOCS_PATH, setupApiDocs } from './api-docs';
 import { HttpErrorFilter } from './errors';
 
 /** App-wide settings shared by every service; also applied in tests so they match production. */
@@ -34,9 +35,11 @@ export async function runService(
   }
 
   const app = configureApp(await NestFactory.create(buildModule(config)));
+  const docs = setupApiDocs(app, config);
   await app.listen(config.port, '0.0.0.0');
   const { db } = config;
   logger.log(
     `listening on :${config.port} | APP_ENV=${config.appEnv} | DB=${db.user}@${db.host}:${db.port}/${db.database}`,
   );
+  if (docs) logger.log(`API docs (local/test only): http://localhost:${config.port}/${API_DOCS_PATH}`);
 }

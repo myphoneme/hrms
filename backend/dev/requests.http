@@ -1,0 +1,151 @@
+### Teamora — manual API walkthrough (local only)
+# Open in VS Code with the "REST Client" extension (humao.rest-client) and click "Send Request"
+# above each request, top to bottom. Each request reuses ids from the ones before it.
+#
+# 1. npm run start:requisition        (service on http://localhost:3002)
+# 2. npm run dev:seed                 (demo tenants/clients/users + demo requisitions)
+# 3. npm run dev:token                (copy the printed token into @token below)
+#    npm run dev:token -- employer    (token for the direct-employer demo manager)
+
+@base = http://localhost:3002/api/v1
+@token = PASTE_TOKEN_FROM_npm_run_dev:token
+@agencyTenant = 11111111-1111-4111-8111-111111111111
+@retailClient = 22222222-2222-4222-8222-222222222222
+
+### Health (no token needed)
+GET http://localhost:3002/health/ready
+
+
+### HR-M1-FR-007 — agency brief WITHOUT a client -> 422 client_required
+POST {{base}}/requisitions/intake
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "tenant_id": "{{agencyTenant}}", "client_id": null, "raw_brief_text": "Need a data analyst", "source": "portal" }
+
+
+### HR-M1-FR-007 — client_id omitted entirely -> 422 (null would be valid, missing never is)
+POST {{base}}/requisitions/intake
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "tenant_id": "{{agencyTenant}}", "raw_brief_text": "Need a data analyst", "source": "portal" }
+
+
+### HR-M1-FR-007 — agency brief for its own client -> 201 Draft
+# @name intake
+POST {{base}}/requisitions/intake
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "tenant_id": "{{agencyTenant}}", "client_id": "{{retailClient}}", "raw_brief_text": "Senior data analyst: Power BI, SQL, 5+ years, retail.", "source": "portal" }
+
+@req = {{intake.response.body.requisition_id}}
+
+
+### HR-M1-FR-004 — first JD version (Draft)
+# @name v1
+POST {{base}}/requisitions/{{req}}/jd-versions
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "content": "Senior Data Analyst - own Power BI dashboards for retail sales.", "variant_type": "formal" }
+
+@v1 = {{v1.response.body.id}}
+
+
+### HR-M1-FR-004 — version history
+GET {{base}}/requisitions/{{req}}/jd-versions
+Authorization: Bearer {{token}}
+
+
+### HR-M1-FR-006 — open the draft matrix (revision 1, total 0)
+# @name draft
+GET {{base}}/requisitions/{{req}}/jd-versions/{{v1}}/scoring-matrix/draft
+Authorization: Bearer {{token}}
+
+
+### HR-M1-FR-006 — add criterion 1 of 4 (45%)
+# @name c1
+POST {{base}}/requisitions/{{req}}/jd-versions/{{v1}}/scoring-matrix/draft/criteria
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "matrix_revision": {{draft.response.body.matrix_revision}}, "category": "core_skills", "criterion_name": "Power BI and SQL", "weight_percent": 45 }
+
+
+### HR-M1-FR-006 — add criterion 2 of 4 (30%)
+# @name c2
+POST {{base}}/requisitions/{{req}}/jd-versions/{{v1}}/scoring-matrix/draft/criteria
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "matrix_revision": {{c1.response.body.matrix_revision}}, "category": "experience_seniority", "criterion_name": "5+ years analytics", "weight_percent": 30 }
+
+
+### HR-M1-FR-006 — add criterion 3 of 4 (20%)
+# @name c3
+POST {{base}}/requisitions/{{req}}/jd-versions/{{v1}}/scoring-matrix/draft/criteria
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "matrix_revision": {{c2.response.body.matrix_revision}}, "category": "domain_competency", "criterion_name": "Retail domain", "weight_percent": 20 }
+
+
+### HR-M1-FR-004 — send v1 for approval (PendingApproval)
+POST {{base}}/requisitions/{{req}}/jd-versions/{{v1}}/submit
+Authorization: Bearer {{token}}
+
+
+### HR-M1-FR-006 — freeze with only 95% -> 409 matrix_total_invalid (total returned, nothing changes)
+POST {{base}}/requisitions/{{req}}/freeze
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "approved_version_id": "{{v1}}", "expected_active_version_id": null }
+
+
+### HR-M1-FR-006 — add criterion 4 of 4 (5%) -> total 100
+# @name c4
+POST {{base}}/requisitions/{{req}}/jd-versions/{{v1}}/scoring-matrix/draft/criteria
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "matrix_revision": {{c3.response.body.matrix_revision}}, "category": "education_fit", "criterion_name": "Graduate degree", "weight_percent": 5 }
+
+
+### HR-M1-FR-006 — freeze -> 200 Frozen_Open (version + matrix approved together)
+POST {{base}}/requisitions/{{req}}/freeze
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "approved_version_id": "{{v1}}", "expected_active_version_id": null }
+
+
+### HR-M1-FR-004 — identical freeze again -> 200, same response, nothing changes
+POST {{base}}/requisitions/{{req}}/freeze
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "approved_version_id": "{{v1}}", "expected_active_version_id": null }
+
+
+### HR-M1-FR-004 — edit the Approved JD in place -> 409 version_immutable
+PATCH {{base}}/requisitions/{{req}}/jd-versions/{{v1}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "content": "changed" }
+
+
+### HR-M1-FR-004 — the correct way: a new version based on it -> 201 Revising (v1 stays Approved)
+POST {{base}}/requisitions/{{req}}/jd-versions
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "content": "Senior Data Analyst - revised: adds Python.", "based_on_version_id": "{{v1}}" }
+
+
+### HR-M1-FR-006 — the Approved matrix of the active version
+GET {{base}}/requisitions/{{req}}/scoring-matrix
+Authorization: Bearer {{token}}
