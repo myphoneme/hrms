@@ -50,17 +50,19 @@ this status; it does not generate the scaffold itself.
 
 ## Checklist (SOP Section 8.1, in order)
 1. **Runtime** — install the exact language runtime/package manager version pinned
-   in the Technical Stack Charter. Never "whatever is newest." (Teamora: Node.js
-   20.x + npm for NestJS/React services, Python 3.12 + pip for FastAPI services —
-   confirm which service(s) this developer is assigned before picking.) Automated
-   by the script above.
+   in the Technical Stack Charter. Never "whatever is newest." (Teamora, Charter
+   v1.2: **Python 3.12** + pip for the backend — every backend service is FastAPI —
+   and **Node.js 24 LTS** (24.21.0, `.nvmrc`) + npm for the React frontend. If
+   several Pythons are installed, create the venv with `py -3.12 -m venv .venv`.)
+   Automated by the script above.
 2. **Git & GitHub access** — configure git identity (`user.name`/`user.email`
    matching their Phoneme email), add their SSH key to GitHub, clone the product
    repository. Deliberately manual — the script only reports SSH key presence,
    never generates or registers one; this is a personal-identity/security-trust
    decision for the developer to make, not to inherit from a script default.
-3. **Dependencies** — install from the committed lockfile only (`npm ci`, not
-   `npm install`; `pip install -r requirements.txt` pinned, not a fresh resolve).
+3. **Dependencies** — install from the committed pins only (backend:
+   `pip install -c constraints.txt -r requirements-dev.txt`, not a fresh resolve;
+   frontend: `npm ci`, not `npm install`).
    An unpinned install can silently drift from what CI and staging actually run.
    Requires the Phase 2 scaffold (see above) — the script reports whether it's
    present, not automated further here.
