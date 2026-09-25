@@ -13,15 +13,17 @@ export function tenantScopeOf(auth: AuthContext): TenantScope & { tenantId: stri
 }
 
 /** A path id that isn't a UUID can't identify anything, so it is a 404 rather than a 422. */
-export function requireIdParam(value: string, what: 'requisition' | 'version'): string {
+export function requireIdParam(value: string, what: 'requisition' | 'version' | 'criterion'): string {
   if (!isUuid(value)) throw notFound(what);
   return value;
 }
 
-export function notFound(what: 'requisition' | 'version'): NotFoundException {
-  return new NotFoundException(
-    what === 'requisition'
-      ? { reason: 'requisition_not_found', message: 'No such requisition in your tenant.' }
-      : { reason: 'version_not_found', message: 'No such JD version on this requisition.' },
-  );
+const NOT_FOUND = {
+  requisition: { reason: 'requisition_not_found', message: 'No such requisition in your tenant.' },
+  version: { reason: 'version_not_found', message: 'No such JD version on this requisition.' },
+  criterion: { reason: 'criterion_not_found', message: 'No such criterion in this matrix.' },
+};
+
+export function notFound(what: 'requisition' | 'version' | 'criterion'): NotFoundException {
+  return new NotFoundException(NOT_FOUND[what]);
 }
