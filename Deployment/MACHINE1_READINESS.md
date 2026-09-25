@@ -1,5 +1,7 @@
 # Teamora Machine1 / Machine A Readiness
 
+> **Historical snapshot (2026-09-21, old VM).** Superseded: development moved to a local Windows 11 machine on 2026-09-25, and the backend is Python/FastAPI only (`Technical/Teamora_Technical_Stack_Charter_v1.2.md`). Current setup and run instructions: `backend/README.md` on the `staging` branch and the `phoneme-dev-machine-setup` Skill.
+
 ## Scope
 
 This workstation is the developer environment defined by `Phoneme_SDLC_SOP_v1.2` Section 8.1. QA Machine B remains an independent environment and must test the deployed staging build, not this workstation.

@@ -1,8 +1,12 @@
 # Phoneme SOP Section 8.5 — Production CI/CD Pipeline
 #
-# NestJS/TypeScript service variant (Auth/AAA, Notification, Requisition, Scoring
-# Matrix per Teamora_Technical_Stack_Charter_v1.0.md) and the React/TypeScript
-# frontend. For a Python/FastAPI service, use production-release-python.yml.
+# Node variant: the React/TypeScript frontend only. Every backend service is
+# Python/FastAPI (Teamora_Technical_Stack_Charter_v1.2.md) — use
+# production-release-python.yml for those.
+#
+# NOTE (2026-09-25): production now deploys from an approved release tag `vX.Y.Z` on
+# the `staging` branch, not from `main` (decided 2026-09-23). Change the trigger below
+# to `on: push: tags: ['v*']` when this template is adopted (COOLIFY_SETUP.md).
 #
 # Fires only on a merge into `main`. That merge is itself gated by the
 # `production` GitHub Environment's required reviewer(s) below — this is the

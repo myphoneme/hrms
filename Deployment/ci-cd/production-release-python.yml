@@ -1,8 +1,13 @@
 # Phoneme SOP Section 8.5 — Production CI/CD Pipeline
 #
-# Python/FastAPI service variant (JD Generation, Resume Parsing, Dedupe per
-# Teamora_Technical_Stack_Charter_v1.0.md). For a NestJS/TypeScript service or
-# the React frontend, use production-release.yml instead.
+# Python/FastAPI variant: every Teamora backend service (Auth/AAA, Notification,
+# Requisition, JD Generation, Publish, Candidate, Resume Parsing, Dedupe per
+# Teamora_Technical_Stack_Charter_v1.2.md). For the React frontend, use
+# production-release.yml instead. Verified commands: .github/workflows/backend-ci.yml on `staging`.
+#
+# NOTE (2026-09-25): production now deploys from an approved release tag `vX.Y.Z` on
+# the `staging` branch, not from `main` (decided 2026-09-23). Change the trigger below
+# to `on: push: tags: ['v*']` when this template is adopted (COOLIFY_SETUP.md).
 #
 # Fires only on a merge into `main`. That merge is itself gated by the
 # `production` GitHub Environment's required reviewer(s) below — this is the

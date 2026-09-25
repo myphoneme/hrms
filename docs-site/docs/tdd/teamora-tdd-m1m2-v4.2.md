@@ -1,3 +1,5 @@
+> **Decision note added after approval (2026-09-25):** the backend framework split in §17.2 (below) (NestJS for Auth, Notification, Requisition, Scoring Matrix, Publish; FastAPI for the rest) is superseded by `Technical/Teamora_Technical_Stack_Charter_v1.2.md`: **every backend service is Python/FastAPI**. Also recorded on PR #7 (B3–B5, accepted 2026-09-24): requisition-service owns all Module 1 tables, a candidate-service owns Module 2 candidate upload/search, and Release 1 has no Kong gateway and no Go services. Service boundaries, APIs, data model and isolation rules in this document are unchanged.
+
 ![](tdd-v4.2-media/media/1edd248455318f3da3f5928023b32e5fc6c76574.png){ style="max-width:100%" }
 
 <table style="width:93%;">
@@ -606,6 +608,9 @@ The JobRequisition entity is the central object driving Module 1; its state mach
 10. Directory-level detail for federated SSO (Section 3.1) — whether domain-restricted sign-in is enforced per tenant from day one or added as a fast-follow, and which Google Workspace / Microsoft 365 Entra ID group or org-unit claims (if any) map onto the Manager/Recruiter/HR role distinction versus requiring a Tenant Admin to assign that role manually after first SSO login.
 
 ## 17. Microservices Decomposition & Per-Service Technology Stack
+
+> **Decision note added after approval (2026-09-25):** the backend framework split in §17.2 (NestJS for Auth, Notification, Requisition, Scoring Matrix, Publish; FastAPI for the rest) is superseded by `Technical/Teamora_Technical_Stack_Charter_v1.2.md`: **every backend service is Python/FastAPI**. Also recorded on PR #7 (B3–B5, accepted 2026-09-24): requisition-service owns all Module 1 tables, a candidate-service owns Module 2 candidate upload/search, and Release 1 has no Kong gateway and no Go services. Service boundaries, APIs, data model and isolation rules in this document are unchanged.
+
 The BRD/PRD's proposed architecture direction left the backend framework as an open choice ("FastAPI or NestJS"). This section resolves that ambiguity: the platform is built as a set of independently deployable microservices, each on the stack best suited to its own workload shape, communicating through the Kafka event backbone and the tenant-aware API Gateway rather than in-process calls. This finalizes and supersedes the BRD/PRD's placeholder stack language.
 
 ### 17.1 Decomposition Principles

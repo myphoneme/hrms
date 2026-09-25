@@ -81,7 +81,7 @@ This gives the same isolation as a database per service, but needs only one Cool
 | `sourcing` | publish-service | sourcing_channel_config, publish_job |
 | `candidate` | candidate-service | candidate, application |
 | `dedupe` | dedupe-service | duplicate_match, candidate_embedding (`vector` column) |
-| `notification` | notification-service | template, delivery_log (the job queue itself is in Redis/BullMQ) |
+| `notification` | notification-service | template, delivery_log (the job queue itself is in Redis) |
 
 Roles:
 
@@ -93,10 +93,9 @@ Roles:
 
 ### 1.5 Migrations
 
-Each service owns the migrations for its own schema and keeps them in its own folder. Two migration tools are therefore acceptable:
+Each service owns the migrations for its own schema and keeps them inside its own package.
 
-- NestJS services: **Drizzle ORM + drizzle-kit**. It handles `SET LOCAL` in transactions cleanly, which RLS needs. Prisma is awkward here.
-- FastAPI services: **SQLAlchemy 2 + Alembic**, with `version_table_schema` set to the service's own schema.
+- **Plain SQL, no ORM** (decided 2026-09-24, kept for the FastAPI backend 2026-09-25): `services/<service>/src/<package>/migrations/NNNN_description.sql`, applied in order by `python -m <package>.migrate` as `teamora_migrator`, each file in its own transaction and recorded in `<schema>.schema_migrations`. Plain SQL is what the RLS policies, triggers and `SET LOCAL` tenant context need.
 - Shared bootstrap (create database, schemas, roles, extensions): plain SQL in `backend/db/init/`. The same scripts run everywhere: once with `psql` on the local native install, once on the staging/production instances, and automatically by the CI container. Passwords are passed in as variables and never written into the scripts.
 - The same migrations run in every environment, in the same order. Staging and production run them as a deploy step, never by hand from a developer machine.
 
@@ -107,7 +106,7 @@ Start with what Module 1 needs and add the rest through Compose profiles as feat
 | Store | Local image | Needed from |
 |---|---|---|
 | PostgreSQL 18 (+ pgvector for M2) | Native service on Machine A, or `pgvector/pgvector:pg18` | Day 1 |
-| Redis (sessions, BullMQ) | `redis:7` | Day 1 (auth sessions, TDD §3.3) |
+| Redis (sessions, job queue) | `redis:7` | Day 1 (auth sessions, TDD §3.3) |
 | Mailpit (catches outbound and test email) | `axllent/mailpit` | M1 notifications / SLA reminders |
 | Kafka (KRaft, single node) | `apache/kafka` | `requisition.frozen` → Publish (M2) |
 | MinIO | `minio/minio` | Resume upload (M2) |
@@ -135,7 +134,7 @@ REDIS_URL=redis://localhost:6379/0
 
 **Decided 2026-09-23 (arjun kushwaha):** the code on `staging` is split into two top-level folders, **`frontend/`** and **`backend/`**.
 Every service, shared library, database script and test belongs to one of them. Only the files GitHub or Git need at the root stay there.
-TypeScript uses **npm workspaces** inside `backend/` (charter: npm). Each Python service has its own `pyproject.toml` (charter: pip).
+**Backend language (decided 2026-09-25, Charter v1.2): Python/FastAPI for every service.** Each service is a Python package with its own `pyproject.toml`; exact dependency versions are pinned in `backend/constraints.txt`.
 
 ```
 hrms/  (staging branch — code only)
@@ -153,35 +152,32 @@ hrms/  (staging branch — code only)
 │   └── .env.example
 │
 ├── backend/
-│   ├── services/
-│   │   ├── auth-service/                NestJS — SSO (Google/Microsoft OIDC), local login (Argon2id + TOTP), sessions, RBAC   [platform]
-│   │   ├── requisition-service/         NestJS — requisitions, JD versions, scoring matrix, freeze, SLA scheduler              [M1]
-│   │   ├── notification-service/        NestJS + BullMQ — email/SMS/WhatsApp                                                  [platform]
-│   │   ├── jd-generation-service/       FastAPI — NLP extraction + JD variants via LLM API (stateless worker)                [M1]
-│   │   ├── publish-service/             NestJS + BullMQ — fan-out to channel adapters                                        [M2]
-│   │   ├── candidate-service/           NestJS — manual/bulk upload, unified inbox, search (see Blocker B4)                 [M2]
-│   │   ├── resume-parsing-service/      FastAPI — PDF/DOCX parsing                                                           [M2]
-│   │   └── dedupe-service/              FastAPI — exact + pgvector similarity matching                                      [M2]
-│   ├── packages/                        shared TypeScript libraries (npm workspaces)
-│   │   ├── contracts/                   OpenAPI specs + event schemas (requisition.frozen, candidate.parsed); the frontend generates its client from these
-│   │   ├── tenancy/                     tenant/client context, RLS SET LOCAL helper, 422 on missing client_id
-│   │   ├── auth-guards/                 JWT verification + RBAC guards shared by NestJS services
-│   │   └── config/                      shared ESLint, Prettier, tsconfig bases
+│   ├── services/                        every service is Python/FastAPI (Charter v1.2)
+│   │   ├── auth-service/                SSO (Google/Microsoft OIDC), local login (Argon2id + TOTP), sessions, RBAC   [platform]  built: skeleton
+│   │   ├── requisition-service/         requisitions, JD versions, scoring matrix, freeze, SLA scheduler              [M1]        built: FR-007/004/006
+│   │   ├── notification-service/        email/SMS/WhatsApp (job queue on Redis)                                      [platform]
+│   │   ├── jd-generation-service/       NLP extraction + JD variants via LLM API                                     [M1]
+│   │   ├── publish-service/             fan-out to channel adapters                                                  [M2]
+│   │   ├── candidate-service/           manual/bulk upload, unified inbox, search (B4)                               [M2]
+│   │   ├── resume-parsing-service/      PDF/DOCX parsing                                                             [M2]
+│   │   └── dedupe-service/              exact + pgvector similarity matching                                         [M2]
 │   ├── python-libs/
-│   │   └── teamora_common/              FastAPI equivalents: tenancy, auth verification, health, logging
-│   ├── gateway/                         API gateway config (Kong declarative kong.yml, or deferred — see Blocker B5)
-│   ├── db/init/                         00_roles.sql, 01_schemas.sql, 02_extensions.sql (same scripts in every environment, §1.5)
-│   ├── tests/isolation/                 standing cross-tenant / cross-client isolation suite (BRD §5, TDD §5.3)
-│   ├── docker-compose.dev.yml           local Redis (+ profiles for Kafka, MinIO, OpenSearch, Vault, Mailpit, test Postgres on 5433)
-│   ├── package.json                     npm workspaces root for services/* (NestJS) and packages/*
+│   │   └── teamora_common/              shared: config checks, DB pool, with_tenant (RLS), access tokens, error format,
+│   │                                    migration runner, health endpoints, app factory, request-field types
+│   ├── db/init/                         bootstrap SQL: roles, database, extensions, schemas (same scripts in every environment, §1.5)
+│   ├── dev/                             local manual-testing kit: seed.py, make_token.py, requests.http
+│   ├── constraints.txt                  exact versions of every Python dependency (local, CI, Docker)
+│   ├── requirements-dev.txt             editable installs of all packages + pytest, ruff
+│   ├── pyproject.toml                   pytest and ruff settings
+│   ├── .python-version                  3.12
 │   └── .env.example
 │
 ├── .github/workflows/                   must stay at the repo root: GitHub only reads workflows from here
 ├── .gitignore
 ├── .gitattributes                       LF line endings for Linux builds
 ├── .editorconfig
-├── .pre-commit-config.yaml              ESLint/Prettier + ruff/black, secret scanning
-├── .nvmrc                               24.21.0 (Node 24 LTS)
+├── .pre-commit-config.yaml              (planned) ruff + frontend ESLint/Prettier, secret scanning
+├── .nvmrc                               24.21.0 (Node 24 LTS, for the frontend)
 └── README.md                            how to run frontend and backend locally
 ```
 
@@ -195,13 +191,13 @@ hrms/  (staging branch — code only)
 | `.gitignore` | Applies to the whole repository |
 | `.gitattributes` | Forces LF line endings so files edited on Windows still build on Linux (Coolify) |
 | `README.md` | GitHub shows it on the repo's front page |
-| `.editorconfig`, `.pre-commit-config.yaml`, `.nvmrc` | Repo-wide editor, commit-hook and Node-version settings |
+| `.editorconfig`, `.pre-commit-config.yaml`, `.nvmrc` | Repo-wide editor, commit-hook and Node-version (frontend) settings |
 
 A new top-level folder beside `frontend/` and `backend/` needs an explicit decision recorded in the charter first.
 
 **Rule 2: each backend service deploys separately, and builds from `backend/`.**
 `backend/` isn't one deployable; each service in `backend/services/` is its own Coolify application.
-Every service's build context is `backend/`, not the service's own folder, because the image has to include the shared code in `backend/packages/` (TypeScript) or `backend/python-libs/` (Python).
+Every service's build context is `backend/`, not the service's own folder, because the image has to include the shared code in `backend/python-libs/` and the pinned versions in `backend/constraints.txt`.
 Each service has its own Dockerfile at `backend/services/<service>/Dockerfile`, written with paths relative to `backend/`.
 
 **Rule 3: watch paths decide what a change rebuilds.** Each Coolify application only redeploys when files under its own watch paths change:
@@ -209,68 +205,44 @@ Each service has its own Dockerfile at `backend/services/<service>/Dockerfile`, 
 | Coolify application | Base Directory | Dockerfile | Watch paths |
 |---|---|---|---|
 | frontend | `/frontend` | `Dockerfile` | `frontend/**` |
-| auth-service | `/backend` | `services/auth-service/Dockerfile` | `backend/services/auth-service/**`, `backend/packages/**`, `backend/package-lock.json` |
-| requisition-service | `/backend` | `services/requisition-service/Dockerfile` | `backend/services/requisition-service/**`, `backend/packages/**`, `backend/package-lock.json` |
-| notification / publish / candidate-service (NestJS) | `/backend` | `services/<service>/Dockerfile` | `backend/services/<service>/**`, `backend/packages/**`, `backend/package-lock.json` |
-| jd-generation / resume-parsing / dedupe-service (FastAPI) | `/backend` | `services/<service>/Dockerfile` | `backend/services/<service>/**`, `backend/python-libs/**` |
+| every backend service (e.g. auth-service, requisition-service) | `/backend` | `services/<service>/Dockerfile` | `backend/services/<service>/**`, `backend/python-libs/**`, `backend/constraints.txt` |
 
 So a frontend-only change never redeploys the backend, and a change inside one service never redeploys the others.
-A change to shared code (`backend/packages/**` or `backend/python-libs/**`) rebuilds every service that uses it, which is intended.
+A change to shared code (`backend/python-libs/**`) or to the pinned versions rebuilds every service, which is intended.
 The same Base Directory, Dockerfile and watch paths apply to the staging and production applications of each service.
 
 **Rule 4: frontend and backend never import each other's code.**
-The only contract between them is the OpenAPI specs in `backend/packages/contracts/`.
+The only contract between them is each service's OpenAPI spec, which FastAPI generates from the code (request models included).
 The frontend generates its typed API client from those specs into `frontend/src/api/`, and never imports backend code.
-When an API changes, update the spec in `backend/packages/contracts/` first, then regenerate the frontend client.
+When an API changes, regenerate the frontend client from the updated spec.
 This is what keeps the two folders independent and each one deployable by itself.
 
-### 2.1 Inside a NestJS service
+### 2.1 Inside a service (FastAPI)
 
 ```
 backend/services/requisition-service/
-├── src/
-│   ├── main.ts
-│   ├── app.module.ts
-│   ├── modules/
-│   │   ├── requisitions/            controller, service, dto/, requisitions.repository.ts
-│   │   ├── jd-versions/
-│   │   ├── scoring-matrix/
-│   │   └── sla-scheduler/
-│   ├── common/                      guards, filters (error format), interceptors, tenancy wiring
-│   └── health/                      GET /health  (Coolify health check, SOP §8.3)
-├── db/
-│   ├── schema.ts                    Drizzle table definitions (requisition schema)
-│   └── migrations/
-├── test/                            unit/ and integration/ (against the test Postgres on port 5433, §1.1)
-├── Dockerfile
-├── .env.example
-├── package.json
-└── tsconfig.json
+├── src/requisition_service/
+│   ├── __init__.py                  SERVICE (name, port, DB role) + build_app()
+│   ├── __main__.py                  python -m requisition_service   -> runs the service
+│   ├── migrate.py                   python -m requisition_service.migrate
+│   ├── migrations/                  0001_requisition_intake.sql, ... (plain SQL, shipped in the image)
+│   ├── common.py                    tenant scope, 404 helpers
+│   ├── intake.py                    one module per feature: Pydantic request models, router and SQL together
+│   ├── jd_versions.py
+│   ├── scoring_matrix.py
+│   └── freeze.py
+├── tests/                           pytest; test_db_*.py run against a real database (pytest -m db)
+├── Dockerfile                       python:3.12-slim, non-root user `app`
+└── pyproject.toml
 ```
 
-### 2.2 Inside a FastAPI service
+Full guide (running, testing, adding a service): `backend/README.md` on `staging`.
 
-```
-backend/services/jd-generation-service/
-├── app/
-│   ├── main.py
-│   ├── api/v1/                      routers
-│   ├── core/                        config, tenancy, security
-│   ├── services/                    business logic (LLM client, extraction)
-│   ├── schemas/                     Pydantic models
-│   └── workers/                     queue/Kafka consumers
-├── migrations/                      Alembic (only if the service owns a schema)
-├── tests/
-├── Dockerfile
-├── pyproject.toml
-└── .env.example
-```
-
-### 2.3 Conventions to settle before the first commit
+### 2.2 Conventions
 
 - Branches: `feature/REQ-TMR-<id>-<slug>` off `staging`, PR back into `staging` (SOP §4.1).
-- Ports: web 5173, auth 3001, requisition 3002, notification 3003, publish 3004, candidate 3005, jd-generation 8001, resume-parsing 8002, dedupe 8003.
-- API: `/api/v1/...` REST, OpenAPI spec per service kept in `backend/packages/contracts`. One JSON error body shape everywhere (`{ "reason", "message", "details" }`), which matches the TDD's `reason` fields.
+- Ports: web 5173, auth 3001, requisition 3002, notification 3003, publish 3004, candidate 3005, jd-generation 3006, resume-parsing 3007, dedupe 3008.
+- API: `/api/v1/...` REST, OpenAPI spec per service generated by FastAPI (served at `/api/openapi.json` in local/test). One JSON error body shape everywhere (`{ "reason", "message", "details" }`), which matches the TDD's `reason` fields.
 - Every service exposes `GET /health`, returns 200, and has its own `Dockerfile`.
 - Don't build every service on day one. The first milestone is a **walking skeleton**: `frontend` + `auth-service` + `requisition-service` + Postgres + Redis, deployed to Coolify staging by the pipeline. Add the other services only when a REQ-ID needs them.
 
@@ -285,6 +257,8 @@ Sprint 0 covers the repo skeleton, local Docker environment, DB bootstrap, auth/
 Feature work against REQ-IDs (HR-M1-FR-xxx / HR-M2-FR-xxx) is blocked by the project's own SOP until B1 is closed, and needs B2–B5 decided so the scaffold isn't redone.
 
 ### 3.1 Blockers (close before feature coding)
+
+> **Status 2026-09-25:** B1 closed (BRD/PRD Modules 1–2 approved in PR #1, TDD v4.2 in PR #7). B2 decided (staging and production both deploy from `staging`; production from approved release tags). B3–B5 accepted on PR #7: requisition-service owns all Module 1 tables, a candidate-service for Module 2, no Kong/Go in Release 1; the backend is now Python/FastAPI only (Charter v1.2). **B6 still open.** The findings below are kept as recorded on 2026-09-23.
 
 | # | Finding | Evidence | Action |
 |---|---|---|---|
@@ -348,3 +322,4 @@ Feature work against REQ-IDs (HR-M1-FR-xxx / HR-M2-FR-xxx) is blocked by the pro
 | 1.0 | 2026-09-23 | Claude (session with arjun kushwaha) | Initial readiness audit, database decision proposal, and monorepo structure for the `staging` code branch |
 | 1.0 (rev) | 2026-09-23 | Claude (session with arjun kushwaha) | Directory layout changed to `frontend/` + `backend/`; B2 decided (staging and production both deploy from `staging`, production via approved release tags). Database rules confirmed by arjun kushwaha: local DB for development, real remote DB (Coolify) for staging; database name `teamora` identical in every environment, only credentials change; PostgreSQL 18 everywhere (Machine A reinstalled clean) |
 | 1.0 (rev 2) | 2026-09-23 | Claude (session with arjun kushwaha) | Runtime moved to Node 24 LTS (24.21.0); Node 20 is end-of-life. Machine A's `listen_addresses` decision recorded |
+| 1.0 (rev 3) | 2026-09-25 | Claude (session with arjun kushwaha) | Backend is Python/FastAPI only (Charter v1.2): §1.5 migrations are plain SQL per service package (no ORM); §2 layout, watch paths, Rule 4 and the per-service layout updated to the code on `staging`; ports for jd-generation / resume-parsing / dedupe aligned to 3006-3008. |

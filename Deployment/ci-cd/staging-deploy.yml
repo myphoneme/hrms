@@ -1,9 +1,8 @@
 # Phoneme SOP Section 8.3 — Staging Server Auto-Deploy on Commit
 #
-# NestJS/TypeScript service variant (Auth/AAA, Notification, Requisition, Scoring
-# Matrix per Teamora_Technical_Stack_Charter_v1.0.md) and the React/TypeScript
-# frontend. For a Python/FastAPI service (JD Generation, Resume Parsing, Dedupe),
-# use staging-deploy-python.yml instead.
+# Node variant: the React/TypeScript frontend only. Every backend service is
+# Python/FastAPI (Teamora_Technical_Stack_Charter_v1.2.md) — use
+# staging-deploy-python.yml for those.
 #
 # Fires on every push/merge into `staging`. Runs the build + automated test
 # suite (SOP Section 5.2); only on a fully green run does it call Coolify's
