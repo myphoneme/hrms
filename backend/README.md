@@ -44,6 +44,9 @@ npm run start:requisition    # http://localhost:3002/health  (second terminal)
 
 Both services read `backend/.env`. Don't set `PORT` there; each service uses its own default port.
 
+**Manual checks in a browser:** see [`dev/README.md`](dev/README.md): demo data (`npm run dev:seed`), a token
+(`npm run dev:token`) and the interactive API page at http://localhost:3002/api/docs (local/test only).
+
 ## Database migrations
 
 Each service owns the migrations for its own schema, as plain SQL in `services/<service>/db/migrations/`

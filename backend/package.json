@@ -16,7 +16,9 @@
     "start:requisition": "npm run build -w @teamora/platform && npm run start:local -w @teamora/requisition-service",
     "migrate": "npm run migrate -w @teamora/auth-service && npm run migrate -w @teamora/requisition-service",
     "migrate:local": "npm run build -w @teamora/platform && npm run migrate:local -w @teamora/auth-service && npm run migrate:local -w @teamora/requisition-service",
-    "test:db": "npm run test:db --workspaces --if-present"
+    "test:db": "npm run test:db --workspaces --if-present",
+    "dev:seed": "node --env-file=.env dev/seed.js",
+    "dev:token": "node --env-file=.env dev/token.js"
   },
   "devDependencies": {
     "@nestjs/testing": "^11.0.0",
