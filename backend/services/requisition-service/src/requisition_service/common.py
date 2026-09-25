@@ -41,6 +41,12 @@ def tenant_scope_of(auth: AuthContext) -> TenantScope:
     return TenantScope(tenant_id=auth.tenant_id)
 
 
+def require_role(auth: AuthContext, *roles: str) -> None:
+    """403 unless the caller has one of ``roles`` (TDD §3.2 RBAC)."""
+    if auth.role not in roles:
+        raise ApiError(403, "role_not_allowed", f"This action needs one of these roles: {', '.join(roles)}.")
+
+
 def get_pool(request: Request) -> ConnectionPool:
     return request.app.state.pool
 

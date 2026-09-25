@@ -36,6 +36,11 @@ Or open `dev/requests.http` in VS Code with the **REST Client** extension, paste
 | Demo Staffing Agency | Fintech Co | Backend Engineer | **Draft**: v1 draft, empty matrix |
 | Demo Direct Employer | - | HR Executive | **PendingApproval**: matrix 100%, ready for you to freeze |
 
+**Approval SLA (FR-005):** sending a version for approval (`.../submit`) starts its SLA clock; see it with
+`GET /api/v1/requisitions/{id}/sla`. The service checks every 5 minutes; run a check yourself with
+`python -m requisition_service.sla --env-file .env`. Demo versions created before migration 0004 have no
+clock (re-submit a new version, or `python dev/seed.py --force`).
+
 Tokens: `python dev/make_token.py` = agency manager; `python dev/make_token.py employer` = direct-employer
 manager. A token only sees its own tenant's data (try it: the employer token gets 404 on agency requisitions).
 

@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import logging
 import sys
-from collections.abc import Iterable
+import threading
+from collections.abc import Callable, Iterable
 from contextlib import asynccontextmanager
 from typing import Any
 
@@ -44,23 +45,39 @@ def _health_router() -> APIRouter:
     return router
 
 
-def create_app(config: ServiceConfig, routers: Iterable[APIRouter], pool: Any = None) -> FastAPI:
+#: A background worker: runs for the app's lifetime in its own thread and returns once ``stop`` is set.
+Worker = Callable[[FastAPI, threading.Event], None]
+
+
+def create_app(config: ServiceConfig, routers: Iterable[APIRouter], pool: Any = None, workers: Iterable[Worker] = ()) -> FastAPI:
     """Builds a service app: health endpoints at the root, business routers under /api/v1, the standard
-    error format, and the database pool (opened on startup, closed on shutdown).
+    error format, the database pool (opened on startup, closed on shutdown) and any background workers
+    (e.g. a scheduled check), each started in its own thread after the pool opens and stopped before it closes.
 
     ``pool`` replaces the real connection pool in tests. The interactive API page (Swagger UI) is served
     only when APP_ENV is local or test, never on staging or production.
     """
     owns_pool = pool is None
     pool = create_pool(config) if owns_pool else pool
+    workers = list(workers)
 
     @asynccontextmanager
-    async def lifespan(_: FastAPI):
+    async def lifespan(app: FastAPI):
         if owns_pool:
             pool.open(wait=False)
+        stop = threading.Event()
+        threads = [
+            threading.Thread(target=worker, args=(app, stop), name=getattr(worker, "__name__", "worker"), daemon=True)
+            for worker in workers
+        ]
+        for thread in threads:
+            thread.start()
         try:
             yield
         finally:
+            stop.set()
+            for thread in threads:
+                thread.join(timeout=10)
             if owns_pool:
                 pool.close()
 
@@ -99,6 +116,7 @@ def run_service(definition: ServiceDefinition, build_app) -> None:
     apply_env_file_arg(sys.argv[1:])
     try:
         config = load_service_config(definition)
+        app = build_app(config)
     except ConfigError as exc:
         logger.error(str(exc))
         sys.exit(1)
@@ -116,4 +134,4 @@ def run_service(definition: ServiceDefinition, build_app) -> None:
     )
     if config.app_env in ("local", "test"):
         logger.info("API docs (local/test only): http://localhost:%s%s", config.port, API_DOCS_PATH)
-    uvicorn.run(build_app(config), host="0.0.0.0", port=config.port, log_config=None)
+    uvicorn.run(app, host="0.0.0.0", port=config.port, log_config=None)
