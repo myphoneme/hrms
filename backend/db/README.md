@@ -34,10 +34,10 @@ on every multi-tenant table; with FORCE, a connection with no `app.tenant_id` se
 Every password must be at least 12 characters. The bootstrap stops with a clear error if any
 variable is missing or invalid, or if the server isn't PostgreSQL 18.
 
-## Local (Windows, Machine A)
+## Local (Windows)
 
 ```powershell
-cd E:\Arjun-kushwaha\projects\hrms\staging\backend
+cd D:\arjun\hrms\staging\backend
 Copy-Item .env.example .env      # then set your own local passwords in .env
 .\db\bootstrap.ps1               # prompts for the postgres superuser password
 ```

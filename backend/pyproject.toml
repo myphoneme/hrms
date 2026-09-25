@@ -1,0 +1,24 @@
+# Tool settings for the whole backend (not a package itself; see python-libs/ and services/).
+
+[tool.pytest.ini_options]
+testpaths = ["python-libs", "services"]
+# Several services have tests with the same file names; importlib mode keeps them apart.
+addopts = ["--import-mode=importlib", "-m", "not db", "--strict-markers"]
+markers = [
+  "db: needs a real bootstrapped + migrated `teamora` database (run with: pytest -m db)",
+]
+
+[tool.ruff]
+line-length = 130
+target-version = "py311"
+extend-exclude = [".venv"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "BLE"]
+ignore = ["B008"]  # FastAPI dependencies are declared as call defaults by design
+
+[tool.ruff.lint.isort]
+known-first-party = ["teamora_common", "auth_service", "requisition_service"]
+
+[tool.ruff.lint.per-file-ignores]
+"**/tests/**" = ["E501"]  # test data and expectations read better on one line

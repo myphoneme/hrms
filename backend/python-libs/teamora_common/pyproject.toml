@@ -1,0 +1,19 @@
+[project]
+name = "teamora-common"
+version = "0.1.0"
+description = "Shared foundation for Teamora FastAPI services: config, DB pool, tenancy, auth, errors, migrations, health."
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi",
+  "uvicorn",
+  "psycopg[binary]",
+  "psycopg-pool",
+  "pyjwt",
+]
+
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

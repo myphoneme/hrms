@@ -9,7 +9,7 @@ src/
   pages/
   components/
   features/     requisitions, jd-review, scoring-matrix, candidates, admin
-  api/          typed API client generated from backend/packages/contracts (never import backend code)
+  api/          typed API client generated from each service's OpenAPI spec (never import backend code)
   theme/        Teamora brand tokens
 public/
 e2e/            Playwright end-to-end tests

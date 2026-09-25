@@ -1,0 +1,10 @@
+# Local development and CI: every backend Python package (editable) plus test and lint tools.
+#   python -m venv .venv
+#   .venv\Scripts\python -m pip install -c constraints.txt -r requirements-dev.txt     (Windows)
+#   .venv/bin/python -m pip install -c constraints.txt -r requirements-dev.txt         (Linux)
+-e python-libs/teamora_common
+-e services/auth-service
+-e services/requisition-service
+pytest
+httpx2
+ruff

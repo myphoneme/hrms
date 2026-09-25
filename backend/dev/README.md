@@ -5,18 +5,20 @@ run anywhere else. Nothing here needs Docker.
 
 | File | What it does |
 |---|---|
-| `seed.js` (`npm run dev:seed`) | Demo tenants, clients and managers, then demo requisitions created **through the API** |
-| `token.js` (`npm run dev:token`) | Prints an access token for a demo manager (there is no login screen yet) |
+| `seed.py` (`python dev/seed.py`) | Demo tenants, clients and managers, then demo requisitions created **through the API** |
+| `make_token.py` (`python dev/make_token.py`) | Prints an access token for a demo manager (there is no login screen yet) |
 | `requests.http` | Step-by-step walkthrough of FR-007 → FR-004 → FR-006 for VS Code's REST Client |
-| `demo.js` | The fixed demo ids used by all of the above |
+| `demo.py` | The fixed demo ids used by all of the above |
 
-## Quick start (PowerShell, from `backend/`)
+The scripts read `backend/.env` themselves.
+
+## Quick start (PowerShell, from `backend/`, with the venv active)
 
 ```powershell
-npm install; npm run build; npm run migrate:local
-npm run start:requisition          # window 1 - leave running
-npm run dev:seed                   # window 2
-npm run dev:token                  # copy the token it prints
+python -m auth_service.migrate --env-file .env; python -m requisition_service.migrate --env-file .env
+python -m requisition_service --env-file .env      # window 1 - leave running
+python dev/seed.py                                  # window 2
+python dev/make_token.py                            # copy the token it prints
 ```
 
 Then open **http://localhost:3002/api/docs** (the interactive API page, local/test only), click
@@ -34,8 +36,8 @@ Or open `dev/requests.http` in VS Code with the **REST Client** extension, paste
 | Demo Staffing Agency | Fintech Co | Backend Engineer | **Draft**: v1 draft, empty matrix |
 | Demo Direct Employer | - | HR Executive | **PendingApproval**: matrix 100%, ready for you to freeze |
 
-Tokens: `npm run dev:token` = agency manager; `npm run dev:token -- employer` = direct-employer manager.
-A token only sees its own tenant's data (try it: the employer token gets 404 on agency requisitions).
+Tokens: `python dev/make_token.py` = agency manager; `python dev/make_token.py employer` = direct-employer
+manager. A token only sees its own tenant's data (try it: the employer token gets 404 on agency requisitions).
 
-`npm run dev:seed` is safe to re-run; `npm run dev:seed -- --force` adds another set of requisitions.
+`python dev/seed.py` is safe to re-run; `python dev/seed.py --force` adds another set of requisitions.
 To look at the tables directly: `psql -h localhost -U postgres -d teamora`.
