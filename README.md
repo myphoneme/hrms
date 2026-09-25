@@ -12,8 +12,8 @@ This `staging` branch holds **all application code** for Teamora. Project docume
 
 ```
 frontend/   React + TypeScript SPA
-backend/    NestJS and FastAPI services, shared libraries, DB scripts, isolation tests
-.github/    CI/CD workflows (added once the pipeline runner is in place)
+backend/    Python FastAPI services, shared library, DB scripts
+.github/    CI workflows (backend checks on every PR; deploy workflows follow with the pipeline runner)
 ```
 
 Only repo-wide files live at the root. Everything else goes inside `frontend/` or `backend/`.
@@ -28,10 +28,11 @@ The full layout rules and per-service Coolify settings are in
 
 ## Local setup
 
-- Node.js **24 LTS**, pinned to 24.21.0 in `.nvmrc` (`nvm install 24.21.0`, `nvm use 24.21.0`). Node 20 reached end-of-life in April 2026. Python **3.12**.
+- Backend: Python **3.12** (`backend/.python-version`), FastAPI. See `backend/README.md`.
+- Frontend: Node.js **24 LTS**, pinned to 24.21.0 in `.nvmrc`. Node 20 reached end-of-life in April 2026.
 - PostgreSQL **18**, local database named `teamora`. The name is the same in every
   environment; only credentials change (Technical Stack Charter v1.1, "Database rules").
 - Copy each `.env.example` to `.env` with local-only values. Never commit `.env`, and
   never put staging or production credentials on a developer machine.
 
-Step-by-step run instructions will be added here as the first services are scaffolded.
+Step-by-step run instructions: `backend/README.md` and `backend/dev/README.md`.

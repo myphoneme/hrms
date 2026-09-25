@@ -1,0 +1,16 @@
+[project]
+name = "teamora-auth-service"
+version = "0.1.0"
+description = "Teamora Auth / AAA service: SSO, local login, sessions, RBAC (TDD §3). Owns the `identity` schema."
+requires-python = ">=3.11"
+dependencies = ["teamora-common"]
+
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+auth_service = ["migrations/*.sql"]

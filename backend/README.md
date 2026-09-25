@@ -1,81 +1,95 @@
 # backend
 
-Teamora backend services and shared code. Each service in `services/` deploys as its **own**
-Coolify application with Base Directory `/backend`, so its image can include the shared code below.
+Teamora backend: Python **FastAPI** services and their shared library. Each service in `services/`
+deploys as its **own** Coolify application with Base Directory `/backend`, so its image can include the
+shared code below. (Decision 2026-09-25: one backend language, FastAPI everywhere; replaces the earlier
+NestJS + FastAPI split.)
 
 ## Layout
 
 ```
 services/
-  auth-service/              NestJS    [platform]  port 3001   role svc_auth          ✅ skeleton
-  requisition-service/       NestJS    [M1]        port 3002   role svc_requisition   ✅ skeleton
-  notification-service/      NestJS    [platform]  (planned)
-  jd-generation-service/     FastAPI   [M1]        (planned)
-  publish-service/           NestJS    [M2]        (planned)
-  candidate-service/         NestJS    [M2]        (planned)
-  resume-parsing-service/    FastAPI   [M2]        (planned)
-  dedupe-service/            FastAPI   [M2]        (planned)
-packages/
-  platform/                  @teamora/platform: config validation, DB pool, /health endpoints, startup
-  (planned) contracts/, tenancy/, auth-guards/
-python-libs/teamora_common/  (planned) shared Python: tenancy, auth, health, logging
-db/                          database bootstrap — see db/README.md
-tests/isolation/             (planned) cross-tenant / cross-client isolation suite
-package.json                 npm workspaces: packages/* then services/*
-tsconfig.base.json           shared TypeScript settings
+  auth-service/              [platform]  port 3001   role svc_auth          schema identity      ✅ skeleton
+  requisition-service/       [M1]        port 3002   role svc_requisition   schema requisition   ✅ FR-007, FR-004, FR-006
+  notification-service/      [platform]  (planned)
+  jd-generation-service/     [M1]        (planned)
+  publish-service/           [M2]        (planned)
+  candidate-service/         [M2]        (planned)
+  resume-parsing-service/    [M2]        (planned)
+  dedupe-service/            [M2]        (planned)
+python-libs/teamora_common/  shared: config checks, DB pool, with_tenant, access tokens, error format,
+                             migrations runner, health endpoints, app factory
+db/                          database bootstrap (roles, database, schemas) — see db/README.md
+dev/                         local manual-testing kit — see dev/README.md
+constraints.txt              exact versions of every Python dependency (local, CI and Docker)
+requirements-dev.txt         editable installs of all packages + pytest / ruff
+pyproject.toml               pytest and ruff settings for the whole backend
 .env.example                 variable names shared by every environment
+```
+
+Each service is a small Python package, `services/<service>/src/<package>/`:
+
+```
+__init__.py        SERVICE (name, port, DB role) and build_app()
+__main__.py        python -m <package>            -> runs the service
+migrate.py         python -m <package>.migrate    -> applies its schema migrations
+migrations/        NNNN_description.sql (plain SQL, shipped inside the image)
+<feature>.py       one module per feature: request models, router and SQL together
+tests/             pytest; files named test_db_*.py need a real database
 ```
 
 Services are added only when a REQ-ID needs them.
 
-## Run locally (Windows, Machine A)
+## Run locally (Windows)
 
-Prerequisites: Node **24 LTS** (`.nvmrc` pins 24.21.0; `nvm install 24.21.0` then `nvm use 24.21.0`), PostgreSQL 18 with the database bootstrapped
+Prerequisites: Python **3.12** (3.11 also works locally), PostgreSQL 18 with the database bootstrapped
 (`db/README.md`), and `backend/.env` created from `.env.example`.
 
 ```powershell
-cd E:\Arjun-kushwaha\projects\hrms\staging\backend
-npm install
-npm run build
-npm test
-npm run start:auth           # http://localhost:3001/health
-npm run start:requisition    # http://localhost:3002/health  (second terminal)
+cd D:\arjun\hrms\staging\backend
+python -m venv .venv
+.venv\Scripts\python -m pip install -c constraints.txt -r requirements-dev.txt
+.venv\Scripts\Activate.ps1
+
+python -m auth_service.migrate --env-file .env            # identity first...
+python -m requisition_service.migrate --env-file .env     # ...then the schemas that reference it
+python -m requisition_service --env-file .env             # http://localhost:3002/health
+python -m auth_service --env-file .env                    # http://localhost:3001/health (second terminal)
 ```
 
-Both services read `backend/.env`. Don't set `PORT` there; each service uses its own default port.
+Every service reads the same `backend/.env`. Don't set `PORT` there; each service uses its own default port.
 
-**Manual checks in a browser:** see [`dev/README.md`](dev/README.md): demo data (`npm run dev:seed`), a token
-(`npm run dev:token`) and the interactive API page at http://localhost:3002/api/docs (local/test only).
+**Manual checks in a browser:** see [`dev/README.md`](dev/README.md): demo data (`python dev/seed.py`), a
+token (`python dev/make_token.py`) and the interactive API page at http://localhost:3002/api/docs
+(local/test only).
+
+## Tests and lint
+
+```powershell
+ruff check .; ruff format --check .      # lint + formatting
+pytest                                   # unit / API tests (no database)
+pytest -m db                             # database tests (see below)
+```
+
+`pytest -m db` runs the tenant-isolation and business-rule tests against a real, bootstrapped and migrated
+database, logged in as each service's own role. Use a separate test database, never your dev data
+(Charter, Database rules): for example a throwaway server on another port, with `APP_ENV=test`,
+`POSTGRES_PORT`/`PGPORT` pointing at it and test-only passwords set in the shell; then
+`sh db/bootstrap.sh`, run both migrations, and `pytest -m db`.
+
+CI runs all of this on every PR (`.github/workflows/backend-ci.yml`): lint + tests, database tests on
+PostgreSQL 18 + pgvector, and per service a Docker build, migrations from the image and a health check.
 
 ## Database migrations
 
-Each service owns the migrations for its own schema, as plain SQL in `services/<service>/db/migrations/`
-(`NNNN_description.sql`, applied in order, each in its own transaction). They run as `teamora_migrator`,
-never as the service role, so service roles never own a table and cannot bypass Row-Level Security.
-
-```powershell
-npm run migrate:local        # applies pending migrations to the database in backend/.env
-```
+Each service owns the migrations for its own schema, as plain SQL in `src/<package>/migrations/`
+(`NNNN_description.sql`, applied in order, each in its own transaction, recorded in
+`<schema>.schema_migrations`). They run as `teamora_migrator`, never as the service role, so service roles
+never own a table and cannot bypass Row-Level Security.
 
 Rules for every migration that creates a multi-tenant table: `ENABLE` **and** `FORCE ROW LEVEL SECURITY`,
-and a policy on `current_setting('app.tenant_id', true)`. Service code queries those tables only through
-`withTenant(pool, { tenantId, clientId }, fn)` from `@teamora/platform`.
-
-## Database tests
-
-`npm run test:db` runs the tenant-isolation tests against a real, bootstrapped and migrated database, logged
-in as each service's own role. Use a separate test instance, never your dev data (Charter v1.1, Database
-rules): for example a throwaway container on port 5433.
-
-```powershell
-docker run -d --name teamora-test-db -e POSTGRES_PASSWORD=<test-only> -p 5433:5432 pgvector/pgvector:pg18
-# then, with PGPORT/POSTGRES_PORT=5433, APP_ENV=test and test-only passwords set in the shell:
-sh db/bootstrap.sh
-npm run migrate
-npm run test:db
-```
-
-CI runs the same steps on every PR (`.github/workflows/backend-ci.yml`, job "Database tests").
+and a policy on `current_setting('app.tenant_id', true)`. Service code queries those tables only inside
+`with with_tenant(pool, TenantScope(tenant_id)) as db:` from `teamora_common`.
 
 ## Every service provides
 
@@ -83,9 +97,11 @@ CI runs the same steps on every PR (`.github/workflows/backend-ci.yml`, job "Dat
 |---|---|
 | `GET /health` | Liveness: 200 while the process runs. Coolify health-check path. |
 | `GET /health/ready` | Readiness: 200 if the service can query its database as its own role, else 503 (no error details). |
-| `/api/v1/...` | Business APIs. Require `Authorization: Bearer <access token>` (`AuthGuard`). |
+| `/api/v1/...` | Business APIs. Require `Authorization: Bearer <access token>` (`auth: Auth` parameter). |
+| `GET /api/docs` | Interactive API page (Swagger UI) — only when `APP_ENV` is `local` or `test`. |
 
-Errors always come back as `{ "reason", "message", "details"? }`.
+Errors always come back as `{ "reason", "message", "details"? }`; invalid request bodies as
+`422 validation_failed` with `details: [{ field, problem }]` listing every problem at once.
 
 ## APIs
 
@@ -103,21 +119,25 @@ Errors always come back as `{ "reason", "message", "details"? }`.
 | requisition-service | `GET /api/v1/requisitions/{id}/scoring-matrix` | HR-M1-FR-006 (TDD §8) | The Approved matrix of the active version. |
 
 At startup each service logs its `APP_ENV` and database target, e.g.
-`listening on :3001 | APP_ENV=local | DB=svc_auth@localhost:5432/teamora`, and refuses to start,
-listing every problem, if `APP_ENV`, `POSTGRES_HOST` or its role password is missing, or if
-`POSTGRES_DB` isn't `teamora`.
+`requisition-service listening on :3002 | APP_ENV=local | DB=svc_requisition@localhost:5432/teamora`, and
+refuses to start, listing every problem, if `APP_ENV`, `POSTGRES_HOST`, `AUTH_JWT_SECRET` or its role
+password is missing, or if `POSTGRES_DB` isn't `teamora`.
 
-## Adding a new NestJS service
+## Adding a new service
 
-1. Copy `services/auth-service/` to `services/<name>/`.
-2. In `package.json`, `src/service.ts`, `Dockerfile` and `test/`, replace the service name, port, DB role
-   (`svc_<name>`) and password variable (`POSTGRES_SVC_<NAME>_PASSWORD`).
-3. If the service owns a schema, add its role and schema to `db/init/` first.
+1. Copy `services/auth-service/` to `services/<name>/` and rename the package folder to `<name_with_underscores>`.
+2. In `pyproject.toml`, `__init__.py` (`SERVICE`), `migrate.py` and the `Dockerfile`, replace the service
+   name, port, DB role (`svc_<name>`), password variable (`POSTGRES_SVC_<NAME>_PASSWORD`) and schema.
+3. Add it to `requirements-dev.txt`, the `known-first-party` list in `pyproject.toml`, and the CI matrix.
+4. If the service owns a schema, add its role and schema to `db/init/` first.
 
 ## Docker
 
 Build context is `backend/`:
 
 ```
-docker build -f services/auth-service/Dockerfile -t teamora-auth-service .
+docker build -f services/requisition-service/Dockerfile -t teamora-requisition-service .
 ```
+
+The image runs as a non-root user (`app`) and contains the service's migrations: run
+`python -m <package>.migrate` from the same image as a deploy step before starting the new version.
