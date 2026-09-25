@@ -10,7 +10,7 @@ NestJS + FastAPI split.)
 ```
 services/
   auth-service/              [platform]  port 3001   role svc_auth          schema identity      ✅ skeleton
-  requisition-service/       [M1]        port 3002   role svc_requisition   schema requisition   ✅ FR-007, FR-004, FR-006
+  requisition-service/       [M1]        port 3002   role svc_requisition   schema requisition   ✅ FR-007, FR-004, FR-006, FR-005
   notification-service/      [platform]  (planned)
   jd-generation-service/     [M1]        (planned)
   publish-service/           [M2]        (planned)
@@ -117,11 +117,24 @@ Errors always come back as `{ "reason", "message", "details"? }`; invalid reques
 | requisition-service | `PATCH .../scoring-matrix/draft` | HR-M1-FR-006 (TDD §8) | `{ matrix_revision, criteria: [{ criterion_id, weight_percent }] }`; weights 0–100; the total is checked only at freeze. Stale `matrix_revision` → `409 revision_mismatch` with the current state. |
 | requisition-service | `POST /api/v1/requisitions/{id}/freeze` | HR-M1-FR-006 (TDD §8) | `{ approved_version_id, expected_active_version_id }` → approves the PendingApproval version **and** its matrix in one transaction, supersedes the previous one → `Frozen_Open`. Exact repeat → 200 no-op; `409 stale_expected_version` / `version_not_approvable` / `matrix_total_invalid` (with the total). |
 | requisition-service | `GET /api/v1/requisitions/{id}/scoring-matrix` | HR-M1-FR-006 (TDD §8) | The Approved matrix of the active version. |
+| requisition-service | `GET` / `PUT /api/v1/sla-policy` | HR-M1-FR-005 (TDD §16.5) | The tenant's approval SLA: `{ reminder_after_business_days, escalate_after_business_days, timezone }` (defaults 3 / 5 / Asia/Kolkata; reminder 1–20, escalation 2–30 and later than the reminder). `PUT` is `tenant_admin` only (`403 role_not_allowed`). Business days are Mon–Fri in that time zone; public holidays aren't counted in Release 1. |
+| requisition-service | `GET /api/v1/requisitions/{id}/sla` | HR-M1-FR-005 | The requisition's SLA clock (`pending_since`, `reminder_due_at`, `escalation_due_at`, open/resolved and why) and its reminders/escalations. |
+| requisition-service | `GET /api/v1/sla-events?kind=&delivery_status=` | HR-M1-FR-005 | Reminders and escalations: `recruiter_hr` / `tenant_admin` see the whole tenant, a manager only their own reminders. Events wait with `delivery_status: pending` for the Notification Service. |
 
 At startup each service logs its `APP_ENV` and database target, e.g.
 `requisition-service listening on :3002 | APP_ENV=local | DB=svc_requisition@localhost:5432/teamora`, and
 refuses to start, listing every problem, if `APP_ENV`, `POSTGRES_HOST`, `AUTH_JWT_SECRET` or its role
 password is missing, or if `POSTGRES_DB` isn't `teamora`.
+
+## Approval SLA check (HR-M1-FR-005)
+
+Sending a JD version for approval starts an SLA clock (database trigger). A scheduled check records a
+**reminder** for the manager once the tenant's reminder threshold has passed, then an **escalation** for HR
+once the escalation threshold has passed — unless the manager has responded (freeze, a new version, rejection)
+or the requisition is OnHold/Closed, which stops the clock. The check runs inside requisition-service every
+`SLA_CHECK_INTERVAL_SECONDS` (default 300; `0` turns it off), and can be run once by hand or from a scheduled
+task: `python -m requisition_service.sla --env-file .env`. Running it twice at once is safe (each reminder and
+escalation is recorded at most once). Delivery by email/portal comes with the Notification Service.
 
 ## Adding a new service
 

@@ -3,7 +3,7 @@ name = "teamora-requisition-service"
 version = "0.1.0"
 description = "Teamora Requisition service (Module 1): requisitions, JD versions, scoring matrix, freeze (TDD §6, §8). Owns the `requisition` schema."
 requires-python = ">=3.11"
-dependencies = ["teamora-common"]
+dependencies = ["teamora-common", "tzdata"]  # tzdata: IANA time zones on Windows and slim images
 
 [build-system]
 requires = ["setuptools>=75"]

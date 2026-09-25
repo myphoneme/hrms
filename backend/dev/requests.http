@@ -150,3 +150,29 @@ Content-Type: application/json
 ### HR-M1-FR-006 — the Approved matrix of the active version
 GET {{base}}/requisitions/{{req}}/scoring-matrix
 Authorization: Bearer {{token}}
+
+
+### ================= HR-M1-FR-005 — approval SLA =================
+
+### The tenant's SLA policy (defaults: reminder after 3, escalation after 5 business days)
+GET {{base}}/sla-policy
+Authorization: Bearer {{token}}
+
+
+### Change it — tenant_admin only: with a manager token this is 403 role_not_allowed
+PUT {{base}}/sla-policy
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "reminder_after_business_days": 2, "escalate_after_business_days": 4, "timezone": "Asia/Kolkata" }
+
+
+### SLA clock of the requisition from the walkthrough above (its version was submitted, so the clock is running)
+GET {{base}}/requisitions/{{req}}/sla
+Authorization: Bearer {{token}}
+
+
+### Reminders / escalations you can see (HR: whole tenant; manager: own reminders)
+GET {{base}}/sla-events
+Authorization: Bearer {{token}}
+

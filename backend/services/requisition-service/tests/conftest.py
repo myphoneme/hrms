@@ -62,7 +62,8 @@ def req_pool() -> Iterator[ConnectionPool]:
 def client() -> Iterator[TestClient]:
     """The real app with its real pool (svc_requisition)."""
     config = _config(SERVICE.service_name, SERVICE.db_role, SERVICE.db_password_var)
-    with TestClient(build_app(config)) as c:
+    # The scheduled SLA check is triggered explicitly by the tests (run_sla_check), not in the background.
+    with TestClient(build_app(config, sla_interval_seconds=0)) as c:
         yield c
 
 
