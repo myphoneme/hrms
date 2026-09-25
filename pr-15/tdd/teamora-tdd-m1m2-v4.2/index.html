@@ -1,0 +1,2918 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Published BRD/PRD and requirement documents for review and sign-off">
+      
+      
+      
+      
+        <link rel="prev" href="../../brd-prd/teamora-v2.4/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Teamora TDD v4.2 (Module 1 & 2) - Teamora HRMS — Requirement Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#document-control" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Teamora HRMS — Requirement Docs" class="md-header__button md-logo" aria-label="Teamora HRMS — Requirement Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Teamora HRMS — Requirement Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Teamora TDD v4.2 (Module 1 & 2)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/myphoneme/hrms" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    myphoneme/hrms
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../brd-prd/teamora-v2.4/" class="md-tabs__link">
+          
+  
+  
+  BRD / PRD
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Technical Design
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Teamora HRMS — Requirement Docs" class="md-nav__button md-logo" aria-label="Teamora HRMS — Requirement Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Teamora HRMS — Requirement Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/myphoneme/hrms" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    myphoneme/hrms
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BRD / PRD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BRD / PRD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../brd-prd/teamora-v2.4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teamora v2.4 (Module 1 & 2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Technical Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teamora TDD v4.2 (Module 1 & 2)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teamora TDD v4.2 (Module 1 & 2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#document-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Document Control
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authorization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#change-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Change Log
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#client-sign-off" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client Sign Off
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#confidentiality-agreement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confidentiality Agreement
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introduction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Scope
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 References
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-abbreviations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Abbreviations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-system-context-architecture-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. System Context &amp; Architecture Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-aaa-authentication-authorization-session-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. AAA — Authentication, Authorization &amp; Session Management
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. AAA — Authentication, Authorization &amp; Session Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Authentication
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-authorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Authorization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-session-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Session Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-key-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Key Management
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Key Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#40-native-vs-cloud-kms-on-prem-hosting-decision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.0 Native vs. Cloud KMS — On-Prem Hosting Decision
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#41-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Principles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-rotation-audit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Rotation &amp; Audit
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-tenant-organization-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Tenant &amp; Organization Model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Tenant &amp; Organization Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Entities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-scoping-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Scoping Rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-isolation-enforcement-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Isolation Enforcement Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-data-model-module-1-jd-intake-freezing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Data Model — Module 1 (JD Intake &amp; Freezing)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Data Model — Module 1 (JD Intake &amp; Freezing)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#60-authoritative-state-model-jobrequisition-vs-jdversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.0 Authoritative State Model — JobRequisition vs. JDVersion
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-data-model-module-2-sourcing-resume-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Data Model — Module 2 (Sourcing &amp; Resume Aggregation)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Data Model — Module 2 (Sourcing &amp; Resume Aggregation)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Entities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-consolidated-data-schema-module-1-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Consolidated Data Schema (Module 1 &amp; 2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-api-contracts-module-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. API Contracts — Module 1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-api-contracts-module-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. API Contracts — Module 2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-integration-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Integration Specifications
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Integration Specifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-naukri-rms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Naukri RMS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-linkedin-talent-solutions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 LinkedIn Talent Solutions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-email-intake" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Email Intake
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-resume-parsing-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 Resume Parsing Service
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-data-flow-diagrams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Data Flow Diagrams
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-sequence-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Sequence Flows
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Sequence Flows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-module-1-jd-intake-to-freeze" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Module 1 — JD Intake to Freeze
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-module-2-publish-to-unified-candidate-record" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Module 2 — Publish to Unified Candidate Record
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-object-flow-diagram-jobrequisition-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Object Flow Diagram — JobRequisition Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-non-functional-technical-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Non-Functional / Technical Considerations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-error-handling-edge-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Error Handling &amp; Edge Cases
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-open-technical-decisions-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Open Technical Decisions / Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-microservices-decomposition-per-service-technology-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Microservices Decomposition &amp; Per-Service Technology Stack
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17. Microservices Decomposition &amp; Per-Service Technology Stack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#171-decomposition-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1 Decomposition Principles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#172-per-service-technology-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.2 Per-Service Technology Stack
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-deployment-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Deployment Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18. Deployment Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#181-node-pools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.1 Node Pools
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#182-on-prem-data-centre-disaster-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.2 On-Prem Data Centre &amp; Disaster Recovery
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-cicd-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. CI/CD Pipeline
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="19. CI/CD Pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#191-pipeline-stages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.1 Pipeline Stages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#192-environment-promotion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.2 Environment Promotion
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/myphoneme/hrms/edit/main/docs-site/docs/tdd/teamora-tdd-m1m2-v4.2.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+  <h1>Teamora TDD v4.2 (Module 1 & 2)</h1>
+
+<blockquote>
+<p><strong>Decision note added after approval (2026-09-25):</strong> the backend framework split in §17.2 (below) (NestJS for Auth, Notification, Requisition, Scoring Matrix, Publish; FastAPI for the rest) is superseded by <code>Technical/Teamora_Technical_Stack_Charter_v1.2.md</code>: <strong>every backend service is Python/FastAPI</strong>. Also recorded on PR #7 (B3–B5, accepted 2026-09-24): requisition-service owns all Module 1 tables, a candidate-service owns Module 2 candidate upload/search, and Release 1 has no Kong gateway and no Go services. Service boundaries, APIs, data model and isolation rules in this document are unchanged.</p>
+</blockquote>
+<p><img alt="" src="../tdd-v4.2-media/media/1edd248455318f3da3f5928023b32e5fc6c76574.png" style="max-width:100%" /></p>
+<table style="width:93%;">
+<colgroup>
+<col style="width: 93%" />
+</colgroup>
+<tbody>
+<tr>
+<td style="text-align: center;"><p><strong>Teamora</strong></p>
+<p><em>People. Potential. Progress.</em></p>
+<p>Module 1 &amp; 2 — Technical Design Document</p></td>
+</tr>
+<tr>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>TECHNICAL DESIGN (HLD/LLD)</strong></p>
+<p><strong>PROJECT CODE: PHN-HR-2026-01-TDD-M1M2</strong></p>
+<p>September 2026</p>
+<p>Submitted by: Phoneme Solutions Pvt. Ltd.</p>
+<p><em>Security Classification: Confidential — Internal</em></p>
+<h2 id="document-control">Document Control<a class="headerlink" href="#document-control" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th><strong>Field</strong></th>
+<th><strong>Value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document Description</td>
+<td>Technical Design Document (HLD/LLD) — Teamora, Module 1 (JD Intake &amp; Freezing) and Module 2 (Sourcing &amp; Resume Aggregation)</td>
+</tr>
+<tr>
+<td>Identification</td>
+<td>PHN-HR-2026-01-TDD-M1M2, Version 4.2 (Draft — pending Reviewed/Approved sign-off, see Authorization below)</td>
+</tr>
+<tr>
+<td>Security Classification</td>
+<td>Confidential — Internal</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>HR Management project workspace</td>
+</tr>
+</tbody>
+</table>
+<h2 id="authorization">Authorization<a class="headerlink" href="#authorization" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Name of the Person</strong></th>
+<th><strong>Date</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prepared by</td>
+<td>Anuj (with drafting support)</td>
+<td>10-Sep-2026</td>
+</tr>
+<tr>
+<td>Reviewed by</td>
+<td>Pending</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>Approved by</td>
+<td>Pending</td>
+<td>Pending</td>
+</tr>
+</tbody>
+</table>
+<h2 id="change-log">Change Log<a class="headerlink" href="#change-log" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th><strong>Version</strong></th>
+<th><strong>Date</strong></th>
+<th><strong>Section</strong></th>
+<th><strong>A/M/D</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Reviewed By</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td>10-Sep-2026</td>
+<td>All</td>
+<td>A</td>
+<td>Initial Technical Design for Module 1 and Module 2, following requirements lock in the BRD/PRD</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>1.1</td>
+<td>15-Sep-2026</td>
+<td>3, 4, 6.2, 10, 12</td>
+<td>A</td>
+<td>Added AAA/Session Management, Key Management, consolidated Data Schema (ER diagram), Data Flow Diagram, and Object Flow Diagram (JobRequisition state machine)</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>2.0</td>
+<td>15-Sep-2026</td>
+<td>1, 4.2, 5–16</td>
+<td>A/M</td>
+<td>Resolved critical/high review findings: replaced JDVersion.is_frozen with a full status/supersede lifecycle keyed to a new active_version_id pointer; rekeyed ScoringMatrix to jd_version_id and added draft-matrix generate/edit/freeze API sequence (Section 8); removed behavioral_proxy from screening-stage scoring per business decision (soft skills excluded entirely at screening); added Tenant &amp; Organization Model (Section 5) with an explicit isolation enforcement matrix, reflecting the Release 1 in-scope staffing-agency/multi-client model; replaced DuplicateMatch.resolved boolean with a resolution/conflict_flag/reversal model (Section 7.1); separated KMS master-key rotation, DEK rotation, and re-encryption (Section 4.2); corrected resume-format scope to PDF/DOCX only (Section 10.4); labeled Naukri RMS and LinkedIn Talent Solutions integrations as proposed adapter contracts pending vendor confirmation (Section 10, 16); stated the Release 1 module boundary (Section 1.2); renumbered Sections 12–16 to resolve a duplicate section number and added new error-handling and open-decision entries</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>2.1</td>
+<td>15-Sep-2026</td>
+<td>1, 4.2, 5, 6, 7, 8, 15, 16</td>
+<td>A/M</td>
+<td>Resolved second-pass review findings: relabeled document status from Approved Baseline to Draft pending actual sign-off (Section 1.2); added an authoritative JobRequisition-vs-JDVersion state table and restored the missing Revising value to the JDVersion status enum (Section 6.0); precisely scoped the Approved-row immutability exception to permit only the status/superseded_by supersession write (Section 6); corrected the KMS master-key-rotation description — rotation does not auto re-wrap existing DEKs — in both prose and the key-management diagram (Section 4.2); keyed JDField to jd_version_id instead of requisition_id to stop historical drift (Section 6); added an explicit tenant_id column to Application and documented the parent-chain inheritance model for JDBrief/JDField/JDVersion/ScoringMatrix/ScoringCriterion (Section 7.1); resolved the DuplicateMatch reversal contradiction onto one append-only model with a previous_decision_id chain, updating Section 7.1 and the Section 15 error-handling row to agree; distinguished explicit-null from absent client_id and added PostgreSQL Row-Level Security plus storage-credential IAM scoping to the isolation matrix (Section 5.2–5.3); split the draft-matrix endpoints to identify an exact jd_version_id with optimistic-concurrency revision checking, and redefined the freeze endpoint's idempotency so an exact-repeat freeze is a no-op while a conflicting concurrent freeze is rejected (Section 8); explicitly deferred the Client Stakeholder portal role out of Release 1 rather than leaving it open-ended (Section 1.2, 16); fixed the Section 7.2 diagram caption/section references and regenerated the ER and key-management diagrams</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>2.2</td>
+<td>15-Sep-2026</td>
+<td>2, 4.2, 6, 7.2, 7.3, 10</td>
+<td>M</td>
+<td>Visual-only pass, no content or architectural change: restyled all embedded Mermaid diagrams (architecture, DFD, key management, object/state flow, AAA session sequence) with role-based icon prefixes and semantic classDef colour-coding (client/gateway blue-grey, Module 1 orange, Module 2 dark-red, cross-cutting platform purple, data layer teal, external amber), and regenerated the corresponding PNGs at updated pixel dimensions</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>2.3</td>
+<td>15-Sep-2026</td>
+<td>5.3, 6.0</td>
+<td>A</td>
+<td>Added two new infographic-style diagrams, no prose change: Figure 5.1 visualizes the Section 5.3 isolation enforcement matrix as a five-layer fan-out/fan-in diagram (database, message queue, search index, object storage, webhooks); Figure 6.1 visualizes the Section 6.0 JDVersion.status state table as a state-machine diagram (Draft/Revising/PendingApproval/Approved/Superseded/Rejected), styled consistent with the Section 13 object-flow diagram</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>3.0</td>
+<td>15-Sep-2026</td>
+<td>16, 17, 18, 19</td>
+<td>A</td>
+<td>Major architectural addition — resolves the BRD/PRD's open "FastAPI or NestJS" stack ambiguity by finalizing a microservices architecture: new Section 17 decomposes the platform into independently deployable services with a per-service technology stack table (framework, data/queue dependency, horizontal scaling mechanism, vertical scaling mechanism) covering both cross-cutting platform services and every Module 1/2 component from the Section 2 Component Overview; new Section 18 adds the deployment topology (two Kubernetes node pools, Multi-AZ data layer, DR posture) with Figure 18.1; new Section 19 adds the CI/CD pipeline (commit through canary to full production rollout with automated SLO-triggered rollback) with Figure 19.1; updated two Section 16 open items to reference the new default stack choices (third-party LLM API for JD Generation, pgvector for Dedupe) rather than leaving them fully undecided</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>4.0</td>
+<td>16-Sep-2026</td>
+<td>3, 4, 5, 16, 17.2, 18</td>
+<td>A/M</td>
+<td>Two major architectural decisions: (1) Authentication model — Section 3.1 adds federated SSO (Google Workspace and Microsoft 365/Entra ID via OIDC) as the primary login path with local email+password (Argon2id, tenant-set policy, TOTP MFA) as the fallback for tenants on neither directory, adds a User entity table (auth_method, mfa_enabled, role) and new Figure 3.1; Section 3.2 formalizes the role hierarchy into an explicit table (Phoneme Platform Admin, platform-wide &gt; Tenant Admin, per-entity &gt; Manager/Recruiter/HR, per-entity &gt; Candidate) and renumbers the former Figure 3.1 session-sequence diagram to Figure 3.2; Section 5 cross-references the hierarchy. (2) Hosting model — new Section 4.0 finalizes hosting as on-prem and selects a native KMS (HashiCorp Vault Transit Engine, HSM-backed via PKCS#11) over a cloud KMS as the Release 1 default, with cloud KMS kept only as an optional future hybrid path; Section 4.1/4.2 and the Section 17.2 Key/Secrets Management stack row updated to match; Section 18 rewritten for on-prem infrastructure throughout (self-hosted Kubernetes, on-prem load balancer/WAF, self-hosted Kafka/PostgreSQL/Redis/OpenSearch, MinIO object storage) with Multi-AZ reframed as Multi-Rack/single-DC for Release 1 and full cross-DC DR flagged as a fast-follow; both diagrams (Figure 4.1, Figure 18.1) regenerated; three new Section 16 open items added (HSM vendor selection, secondary-DC timeline, SSO directory/role-mapping detail)</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>4.1</td>
+<td>17-Sep-2026</td>
+<td>Document Control, footer</td>
+<td>M</td>
+<td>Product/brand name confirmed and applied throughout: renamed from the working name "Phoneme HR Suite" to "Teamora" (by Phoneme) in the cover page, running footer, Document Control, and cross-references to the companion BRD/PRD. No architectural or requirement content changed. Phoneme Solutions Pvt. Ltd. remains the submitting company; "Teamora" is the product/customer-facing name only.</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>4.2</td>
+<td>18-Sep-2026</td>
+<td>Document Control, footer</td>
+<td>M</td>
+<td>Brand finalization: dropped the "by Phoneme" line from the product lockup (cover, running footer, Document Description, BRD/PRD cross-reference) and replaced the working tagline "One place for your people." with the finalized tagline "People. Potential. Progress." No architectural content changed.</td>
+<td>Pending</td>
+</tr>
+</tbody>
+</table>
+<h2 id="client-sign-off">Client Sign Off<a class="headerlink" href="#client-sign-off" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th><strong>Stakeholder Name</strong></th>
+<th><strong>Role</strong></th>
+<th><strong>Sign Off Date</strong></th>
+<th><strong>Communication</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="confidentiality-agreement">Confidentiality Agreement<a class="headerlink" href="#confidentiality-agreement" title="Permanent link">&para;</a></h2>
+<p>This document is copyrighted, and all rights are reserved. This document may not, in whole or in part, be copied, photocopied, reproduced, translated, or reduced to any electronic medium or machine-readable form without prior consent, in writing. This document is for internal use only and may, in whole or in part, be provided to anyone outside of the Company, including customers, clients, or prospects after taking an approval from an authorized representative.</p>
+<h2 id="1-introduction">1. Introduction<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
+<h3 id="11-purpose">1.1 Purpose<a class="headerlink" href="#11-purpose" title="Permanent link">&para;</a></h3>
+<p>This Technical Design Document (TDD) specifies the data model, API contracts, integration mechanics, and sequence flows for the two modules whose requirements are carried at Draft v2.0 (pending formal approval) in the companion BRD/PRD (PHN-HR-2026-01-BRDPRD): Module 1 — Job Description (JD) Intake &amp; Freezing, and Module 2 — Candidate Sourcing &amp; Resume Aggregation. It is the engineering handoff artifact for these two modules; it does not restate business rationale, which lives in the BRD/PRD. This TDD itself carries the same status — see Document Control/Authorization below for the current sign-off state; "Draft v2.0" in this document's own identification reflects that no Reviewed-by/Approved-by has yet been recorded.</p>
+<h3 id="12-scope">1.2 Scope<a class="headerlink" href="#12-scope" title="Permanent link">&para;</a></h3>
+<p>Release 1 boundary: this document covers Module 1 (JD Intake &amp; Freezing) and Module 2 (Sourcing &amp; Resume Aggregation) only — Modules 3–10 are explicitly out of scope for Release 1 and will be issued as their own Technical Design documents once each module's requirements reach Approved Baseline in the BRD/PRD. Release 1 includes, as an in-scope (not deferred) requirement, the staffing-agency / multi-client tenant model described in Section 5: a Tenant may be either a direct employer or a staffing agency acting on behalf of one or more end-client companies, and this hierarchy is reflected throughout the Module 1 and Module 2 data model, APIs, and isolation rules below. The Client Stakeholder (end-client-facing) portal role is explicitly out of scope for Release 1 pending the access-model decision in Section 16 — Release 1 exposes agency requisitions/candidates only to the agency's own internal users (Recruiter/HR, Tenant Admin), never directly to an end-client contact.</p>
+<p>In scope: entity/field-level data model, REST API contracts, third-party integration specifications (Naukri RMS, LinkedIn Talent Solutions, email intake, resume/NLP parsing), sequence flows, and the technical non-functional considerations specific to these two modules. Out of scope: UI/screen design (a separate UX specification), and the data model/APIs for Modules 3–10.</p>
+<h3 id="13-references">1.3 References<a class="headerlink" href="#13-references" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>BRD/PRD — Teamora: Candidate Search to Onboarding Module (PHN-HR-2026-01-BRDPRD), Section 4.1 and 4.2 — the Feature Lists and Approved Decisions this design implements.</p>
+</li>
+<li>
+<p>Naukri RMS (Recruiter Management System) employer API documentation.</p>
+</li>
+<li>
+<p>LinkedIn Recruiter / Talent Solutions API documentation (OAuth2 authorization-code flow).</p>
+</li>
+</ul>
+<h3 id="14-abbreviations">1.4 Abbreviations<a class="headerlink" href="#14-abbreviations" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Term</strong></th>
+<th><strong>Meaning</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TDD</td>
+<td>Technical Design Document</td>
+</tr>
+<tr>
+<td>NLP</td>
+<td>Natural Language Processing</td>
+</tr>
+<tr>
+<td>RMS</td>
+<td>Recruiter Management System</td>
+</tr>
+<tr>
+<td>SLA</td>
+<td>Service Level Agreement</td>
+</tr>
+<tr>
+<td>JD</td>
+<td>Job Description</td>
+</tr>
+<tr>
+<td>PII</td>
+<td>Personally Identifiable Information</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-system-context-architecture-overview">2. System Context &amp; Architecture Overview<a class="headerlink" href="#2-system-context-architecture-overview" title="Permanent link">&para;</a></h2>
+<p>Both modules sit behind the tenant-aware API layer described in the BRD/PRD's solution overview. Module 1 owns the requisition and JD lifecycle; Module 2 owns candidate intake and dedupe. Module 1's freeze action is the trigger that hands a requisition to Module 2 (publish to sourcing channels); Module 2's unified candidate record is the entry point for Module 3 (Screening &amp; Shortlisting, out of scope here).</p>
+<p><strong>Component Overview</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Component</strong></th>
+<th><strong>Owns</strong></th>
+<th><strong>Consumes / Produces</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Requisition Service</td>
+<td>JobRequisition lifecycle, approval state</td>
+<td>Produces requisition.frozen event consumed by Publish Service</td>
+</tr>
+<tr>
+<td>JD Generation Service</td>
+<td>NLP extraction, multi-variant JD generation</td>
+<td>Consumes raw briefs; produces JDVersion records</td>
+</tr>
+<tr>
+<td>Scoring Matrix Service</td>
+<td>Weighted matrix generation and storage</td>
+<td>Triggered by requisition freeze; produces ScoringMatrix + ScoringCriterion records</td>
+</tr>
+<tr>
+<td>Publish Service</td>
+<td>Fan-out of a frozen requisition to configured sourcing channels</td>
+<td>Consumes requisition.frozen; calls channel adapters</td>
+</tr>
+<tr>
+<td>Channel Adapters (Naukri RMS, LinkedIn, Email, Manual, Referral)</td>
+<td>Per-channel ingestion/posting logic</td>
+<td>Produce raw candidate/application payloads</td>
+</tr>
+<tr>
+<td>Resume Parsing Service</td>
+<td>Structured field extraction from resume files</td>
+<td>Consumes raw resume files; produces parsed candidate JSON</td>
+</tr>
+<tr>
+<td>Dedupe Service</td>
+<td>Duplicate candidate detection</td>
+<td>Consumes parsed candidate records; produces DuplicateMatch records</td>
+</tr>
+<tr>
+<td>Candidate Store / Unified Inbox Index</td>
+<td>Canonical Candidate and Application records</td>
+<td>Serves search/filter queries for the unified resume inbox</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Architecture Diagram</strong></p>
+<p>The diagram below shows the component layout for Module 1 and Module 2 within the wider platform: client layer, API gateway, the two modules' internal services, the cross-cutting platform services (Auth, Key/Secrets Management, Audit, Notification), and the shared per-tenant data layer.</p>
+<p><img alt="" src="../tdd-v4.2-media/media/b0eb0780eea9b6f89d005bd39bde0ca3634d0eb6.png" style="max-width:100%" /></p>
+<p><em>Figure 2.1 — System architecture: Module 1 &amp; 2 components, cross-cutting services, and data layer</em></p>
+<h2 id="3-aaa-authentication-authorization-session-management">3. AAA — Authentication, Authorization &amp; Session Management<a class="headerlink" href="#3-aaa-authentication-authorization-session-management" title="Permanent link">&para;</a></h2>
+<p>Authentication, authorization, and session handling are platform-wide services consumed by every module, not module-specific logic. This section defines the pattern Module 1 and Module 2 build against; it becomes the standard for all subsequent modules.</p>
+<h3 id="31-authentication">3.1 Authentication<a class="headerlink" href="#31-authentication" title="Permanent link">&para;</a></h3>
+<p>Most enterprise tenants already run their corporate email and directory on Google Workspace or Microsoft 365 — the platform federates to whichever one a tenant uses instead of asking every employee to hold a separate password. A tenant not on either (a smaller company, or one on a different mail provider) falls back to locally-managed credentials. All three paths converge on the same session-issuance step (Section 3.3); which path a given user takes is a per-tenant configuration choice, not a code fork.</p>
+<p><img alt="" src="../tdd-v4.2-media/media/cea6fff36a09a98842026bef985e99215c715129.png" style="max-width:100%" /></p>
+<p><em>Figure 3.1 — Authentication paths: federated SSO (Google Workspace / Microsoft 365) and local email + password, converging on one session model</em></p>
+<table>
+<thead>
+<tr>
+<th><strong>Field</strong></th>
+<th><strong>Type</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>User.id</td>
+<td>UUID (PK)</td>
+<td></td>
+</tr>
+<tr>
+<td>User.tenant_id</td>
+<td>UUID (FK -&gt; Tenant), nullable</td>
+<td>Null only for a Phoneme Platform Admin, who is not scoped to any tenant</td>
+</tr>
+<tr>
+<td>User.email</td>
+<td>text (unique within tenant)</td>
+<td>Also the SSO-matched identity for the federated paths</td>
+</tr>
+<tr>
+<td>User.auth_method</td>
+<td>enum</td>
+<td>sso_google | sso_microsoft | local_password — set per user, not inferred from the tenant's enabled providers</td>
+</tr>
+<tr>
+<td>User.password_hash</td>
+<td>text, nullable</td>
+<td>Argon2id; null whenever auth_method is an SSO path</td>
+</tr>
+<tr>
+<td>User.mfa_enabled</td>
+<td>boolean</td>
+<td>Always true for Phoneme Platform Admin; tenant-configurable for local_password users</td>
+</tr>
+<tr>
+<td>User.role</td>
+<td>enum</td>
+<td>tenant_admin | manager | recruiter_hr (Section 3.2); platform_admin is not tenant-scoped</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>Federated SSO (Release 1, primary path): "Sign in with Google" (OIDC against Google Workspace) and "Sign in with Microsoft" (OIDC against Microsoft 365 / Entra ID) are both supported. A Tenant Admin enables one or both during onboarding and, where the directory supports it, restricts sign-in to their own verified domain(s) — so a Google login cannot be used to reach a tenant that only enabled Microsoft.</p>
+</li>
+<li>
+<p>Local email + password (fallback path): for a tenant with no Google Workspace or Microsoft 365 directory — or for any individual account a Tenant Admin chooses to provision manually rather than through SSO — the platform issues local credentials. Passwords are hashed with Argon2id (never reversible, never logged); the Tenant Admin sets the tenant's password policy (minimum length/complexity, expiry if required); Time-based One-Time Passcode (TOTP) multi-factor authentication is available per tenant and mandatory for the Phoneme Platform Admin role regardless of tenant setting.</p>
+</li>
+<li>
+<p>A tenant may enable more than one path at once (e.g. Google SSO for most staff, local credentials for a handful of contractors) — User.auth_method is recorded per user, not assumed from the tenant's default.</p>
+</li>
+<li>
+<p>Candidates authenticate separately via a magic-link / OTP flow tied to their application record — no password, no standing account, and no relationship to the tenant's chosen provider(s) above.</p>
+</li>
+<li>
+<p>All tokens — however issued — carry a tenant_id claim; the API Gateway rejects any request where the token's tenant_id does not match the tenant context of the resource being accessed.</p>
+</li>
+</ul>
+<h3 id="32-authorization">3.2 Authorization<a class="headerlink" href="#32-authorization" title="Permanent link">&para;</a></h3>
+<p>Roles form a strict two-tier hierarchy: Phoneme operates the portal itself, and each Tenant (a customer company or staffing agency) administers its own users within it. Nothing below is a Release 1 open question — this is the confirmed access model.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Tier</strong></th>
+<th><strong>Role</strong></th>
+<th><strong>Scope</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Platform (Phoneme)</td>
+<td>Phoneme Platform Admin</td>
+<td>Cross-tenant: tenant provisioning, platform configuration, support break-glass access — every use is fully audited (Section 4.2) and requires TOTP MFA regardless of tenant policy</td>
+</tr>
+<tr>
+<td>Tenant (per entity)</td>
+<td>Tenant Admin</td>
+<td>Full control within their own Tenant: user provisioning (SSO or local), role assignment, SSO/password-policy configuration, client management for staffing agencies (Section 5) — never another tenant's data</td>
+</tr>
+<tr>
+<td>Tenant (per entity)</td>
+<td>Manager / Recruiter / HR ("User")</td>
+<td>Day-to-day module use within their own Tenant and, for an agency, the Client(s) they are scoped to — cannot alter tenant-level auth or billing configuration</td>
+</tr>
+<tr>
+<td>Candidate</td>
+<td>Candidate</td>
+<td>Own application record only, via magic-link — no visibility into any tenant's internal roles or data</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>Role-based access control (RBAC) is enforced at the API Gateway and the service layer, evaluated per-request against (tenant_id, role, resource) — a Manager can only freeze/edit requisitions in their own department unless granted a broader scope by their Tenant Admin.</p>
+</li>
+<li>
+<p>A Tenant Admin's authority is bounded by their own tenant_id — provisioning, role changes, and SSO/password-policy configuration all reject a request scoped outside it, with no exception.</p>
+</li>
+<li>
+<p>Field-level authorization: PII fields (e.g. candidate salary expectations, BGV data in later modules) are visible only to roles explicitly entitled to them, independent of general resource access.</p>
+</li>
+</ul>
+<h3 id="33-session-management">3.3 Session Management<a class="headerlink" href="#33-session-management" title="Permanent link">&para;</a></h3>
+<p>Session state is server-side (Redis-backed) so that revocation is immediate and centrally enforceable — a design choice over purely stateless JWT validation, which cannot be revoked before expiry.</p>
+<p><img alt="" src="../tdd-v4.2-media/media/2cb70704eb1a0ebab7495e54c0a2ec973c5cc7f3.png" style="max-width:100%" /></p>
+<p><em>Figure 3.2 — Manager login, per-request AuthN/AuthZ check, token refresh, and logout/revocation sequence</em></p>
+<ul>
+<li>
+<p>Access tokens: short-lived JWT (15 minutes), signature-verified at the gateway on every request.</p>
+</li>
+<li>
+<p>Refresh tokens: 7-day validity, rotating on each use (old refresh token invalidated the moment a new one is issued) to limit replay risk.</p>
+</li>
+<li>
+<p>Session cookie: HttpOnly, Secure, SameSite=Strict — never exposed to page JavaScript.</p>
+</li>
+<li>
+<p>Logout and administrative revocation both delete the Redis session record and blacklist the associated refresh token immediately.</p>
+</li>
+</ul>
+<h2 id="4-key-management">4. Key Management<a class="headerlink" href="#4-key-management" title="Permanent link">&para;</a></h2>
+<p>Every channel credential (Naukri RMS, LinkedIn Recruiter API keys), and every PII field stored at rest, is protected through a KMS plus a secrets-manager layer rather than application-level static secrets.</p>
+<h3 id="40-native-vs-cloud-kms-on-prem-hosting-decision">4.0 Native vs. Cloud KMS — On-Prem Hosting Decision<a class="headerlink" href="#40-native-vs-cloud-kms-on-prem-hosting-decision" title="Permanent link">&para;</a></h3>
+<p>Hosting is on-prem (Section 18) rather than on a hyperscaler, so a hyperscaler-managed KMS (AWS KMS / Azure Key Vault) is not the default reach — either it sits outside the on-prem network boundary the rest of the platform is deliberately inside, or it requires a standing internet-facing dependency for every encrypt/decrypt call, which an on-prem deployment is usually chosen specifically to avoid. The Release 1 default is therefore a native KMS: HashiCorp Vault's Transit Secrets Engine, run as part of the same on-prem Vault HA cluster already used as the secrets manager, with its own root key protected by a PKCS#11-compatible Hardware Security Module (HSM) — this keeps master-key custody entirely inside Phoneme's own infrastructure, which also simplifies the DPDP Act data-residency story (Section 4.2) since no key material or ciphertext ever leaves the premises. A cloud KMS remains available as an optional hybrid path for a specific customer who separately requires cloud-based DR replication, but that is a fast-follow scenario, not the Release 1 baseline — see Section 16.</p>
+<p><img alt="" src="../tdd-v4.2-media/media/6a4ce236d44d933ff16942428c6ef4dfff4a7310.png" style="max-width:100%" /></p>
+<p><em>Figure 4.1 — Key management layer: native KMS, secrets manager, per-tenant data-encryption keys, and encrypted storage</em></p>
+<h3 id="41-principles">4.1 Principles<a class="headerlink" href="#41-principles" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>No service ever holds a long-lived plaintext secret. Channel credentials are fetched just-in-time from the secrets manager (HashiCorp Vault, on-prem HA cluster) with short-lived leases (max 15 minutes).</p>
+</li>
+<li>
+<p>Envelope encryption: the native KMS (Vault Transit Engine, HSM-backed root key) holds the master key; per-tenant Data Encryption Keys (DEKs) are generated, wrapped by the master key, and used to encrypt tenant data — the master key itself never leaves the HSM boundary.</p>
+</li>
+<li>
+<p>PII and sensitive fields (SourcingChannelConfig.credentials_ref, candidate salary/compensation data introduced in later modules) are encrypted at the column level in PostgreSQL using the tenant's DEK; resumes and offer documents in object storage (MinIO, on-prem — Section 18) use server-side encryption sourced from the same native KMS.</p>
+</li>
+</ul>
+<h3 id="42-rotation-audit">4.2 Rotation &amp; Audit<a class="headerlink" href="#42-rotation-audit" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Three distinct operations are kept separate, mirroring the same distinction a cloud KMS provider draws between key rotation and data re-encryption, which applies equally to the native KMS: (1) KMS root-key rotation, (2) per-tenant DEK rotation, and (3) re-encryption of already-stored data. Conflating these was flagged as a design error in the v1.1 draft and is corrected here.</p>
+</li>
+<li>
+<p>KMS root-key rotation: Vault Transit rotates the root key on a configured schedule (annual default) or on-demand. As with a cloud KMS's automatic rotation, rotation generates new key material for future encrypt operations, but existing wrapped DEKs are not automatically re-wrapped — Vault retains all prior key versions internally so those DEKs continue to unwrap and decrypt correctly without any action. Re-wrapping a DEK under a specific newer key version is a distinct, explicit operation (see re-encryption below), never an automatic side effect of root-key rotation.</p>
+</li>
+<li>
+<p>Per-tenant DEK rotation: a new DEK version is generated every 90 days (or on-demand, e.g. after a suspected compromise). Each encrypted record/object stores a key_version reference alongside its ciphertext, so newly written data immediately uses the current DEK version while existing data remains readable under its original version — rotation does not require synchronous re-encryption of the whole tenant's data set.</p>
+</li>
+<li>
+<p>Re-encryption of existing data under a new DEK version is a separate, explicitly-scheduled background job (not an implicit side effect of rotation), run tenant-by-tenant with progress tracked per table/object-storage prefix; if a re-encryption job is interrupted, it resumes from the last completed batch using the recorded key_version watermark rather than restarting or leaving mixed-version data unaccounted for.</p>
+</li>
+<li>
+<p>Every secret access is logged to the Audit &amp; Event Log with requester identity, tenant_id, and purpose — required both for SOC2-style controls and for DPDP Act accountability obligations.</p>
+</li>
+<li>
+<p>Credential rotation for a sourcing channel (e.g. a new Naukri RMS API key) is a Tenant Admin action that writes a new SourcingChannelConfig.credentials_ref without any service restart.</p>
+</li>
+</ul>
+<h2 id="5-tenant-organization-model">5. Tenant &amp; Organization Model<a class="headerlink" href="#5-tenant-organization-model" title="Permanent link">&para;</a></h2>
+<p>Release 1 includes the staffing-agency multi-client tenant model as an in-scope requirement (not deferred): a single agency Tenant manages requisitions and candidates on behalf of multiple end-client companies, alongside the simpler direct-employer case where a Tenant has no clients at all. This section is written as a platform-wide concern — Module 1 and Module 2 both consume it rather than each defining their own isolation rules — and is a first candidate for extraction into a standalone Shared SaaS Platform Specification once that document exists. Release 1 supports internal agency users (Recruiter/HR, Tenant Admin) accessing client-scoped data; the end-client-facing Client Stakeholder role is out of scope for Release 1 (Section 1.2, Section 16). This section defines Tenant/Client as the data-scoping model; the role hierarchy that sits on top of it — Phoneme Platform Admin above every Tenant Admin, who in turn administers their own Tenant's Users — is defined in Section 3.2 and applies uniformly here.</p>
+<h3 id="51-entities">5.1 Entities<a class="headerlink" href="#51-entities" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Field</strong></th>
+<th><strong>Type</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tenant.id</td>
+<td>UUID (PK)</td>
+<td></td>
+</tr>
+<tr>
+<td>Tenant.org_type</td>
+<td>enum</td>
+<td>direct_employer | staffing_agency</td>
+</tr>
+<tr>
+<td>Tenant.name</td>
+<td>text</td>
+<td></td>
+</tr>
+<tr>
+<td>Client.id</td>
+<td>UUID (PK)</td>
+<td>Exists only for staffing_agency tenants</td>
+</tr>
+<tr>
+<td>Client.agency_tenant_id</td>
+<td>UUID (FK -&gt; Tenant)</td>
+<td>The agency that manages this end-client relationship</td>
+</tr>
+<tr>
+<td>Client.name</td>
+<td>text</td>
+<td></td>
+</tr>
+<tr>
+<td>Client.status</td>
+<td>enum</td>
+<td>active | offboarded</td>
+</tr>
+</tbody>
+</table>
+<h3 id="52-scoping-rule">5.2 Scoping Rule<a class="headerlink" href="#52-scoping-rule" title="Permanent link">&para;</a></h3>
+<p>Every record that belongs to a requisition, candidate, or application carries both tenant_id (mandatory, always) and client_id (mandatory for staffing_agency tenants, explicitly null for direct_employer tenants). A direct-employer tenant is modeled as the degenerate case of an agency with exactly zero clients — this keeps a single code path rather than branching application logic by org_type.</p>
+<p>Explicit null vs. absent field: for a direct_employer tenant, client_id = null is the one valid, expected value — it is set deliberately, not left out. A request/event/record that OMITS the client_id field entirely (as opposed to supplying it as null) is always a validation error (422) regardless of tenant org_type, at every layer in Section 5.3 — API request bodies, event envelopes, and webhook payloads alike. This distinguishes "this tenant has no client, by design" (valid null) from "the caller forgot to populate this field" (rejected as malformed), which earlier drafts of this section did not separate.</p>
+<h3 id="53-isolation-enforcement-matrix">5.3 Isolation Enforcement Matrix<a class="headerlink" href="#53-isolation-enforcement-matrix" title="Permanent link">&para;</a></h3>
+<p>Tenant isolation is stated as a requirement in the BRD/PRD, but stating it is not the same as enforcing it at every layer data passes through. Enforcement is defined per layer, not assumed to follow from the database schema alone:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Layer</strong></th>
+<th><strong>Enforcement Mechanism</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Database (PostgreSQL)</td>
+<td>Row-level filtering on (tenant_id, client_id) is applied both by a mandatory query-builder middleware for application-code paths, and by native PostgreSQL Row-Level Security (RLS) policies on every multi-tenant table as the layer-of-last-resort — RLS is enabled specifically so a raw-SQL script, an ad-hoc analytics query, or a background/batch job connecting directly to the database cannot bypass tenant scoping simply by not going through the application's query builder. A connection's tenant/client context is set via a session variable checked by the RLS policy; a connection with no context set sees zero rows, never all rows. A query with neither key fails to compile at the application layer as an additional check, but RLS is what holds even when that layer is bypassed</td>
+</tr>
+<tr>
+<td>Message queue / events</td>
+<td>Every event envelope (e.g. requisition.frozen) carries tenant_id (always) and client_id (present and explicitly null for a direct-employer tenant, per Section 5.2); consumers reject and dead-letter any message where either field is absent from the envelope — a present null client_id is valid and is not dead-lettered</td>
+</tr>
+<tr>
+<td>Search / candidate index</td>
+<td>tenant_id + client_id are mandatory partition/filter keys set server-side from the authenticated session — never accepted as client-supplied query parameters</td>
+</tr>
+<tr>
+<td>Object storage (resumes, offer documents)</td>
+<td>Storage key is prefixed by tenant_id/client_id, and the IAM policy attached to each service's storage credentials is itself scoped to that prefix pattern (not merely to the bucket) — so a credential compromise or an application-layer bug that leaks another tenant's key still cannot read across the prefix boundary at the storage layer; a direct_employer object uses a fixed client segment (e.g. "_none") in its key rather than omitting the segment, keeping the prefix pattern uniform</td>
+</tr>
+<tr>
+<td>Webhooks / external identity</td>
+<td>Idempotency and identity matching are scoped to (tenant_id, integration_account_id, channel_type, external_id) — not channel_type + external_id alone, since two tenants (or two clients under one agency) may run independent integration accounts on the same channel with overlapping vendor-side IDs</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="" src="../tdd-v4.2-media/media/613d533f39706738c8f8b5e9e6b38fb392c710ea.png" style="max-width:100%" /></p>
+<p><em>Figure 5.1 — Isolation enforcement layers: how every request/event is scoped independently at each of the five layers</em></p>
+<h2 id="6-data-model-module-1-jd-intake-freezing">6. Data Model — Module 1 (JD Intake &amp; Freezing)<a class="headerlink" href="#6-data-model-module-1-jd-intake-freezing" title="Permanent link">&para;</a></h2>
+<h3 id="60-authoritative-state-model-jobrequisition-vs-jdversion">6.0 Authoritative State Model — JobRequisition vs. JDVersion<a class="headerlink" href="#60-authoritative-state-model-jobrequisition-vs-jdversion" title="Permanent link">&para;</a></h3>
+<p>Two distinct state machines are in play, and every other section (data model, APIs, sequence flows, error handling, the object-flow diagram) must agree with this one table rather than restate its own version. JobRequisition.status tracks the requisition as a whole (is it open, on hold, closed); JDVersion.status tracks one specific version of the JD content within that requisition (is this particular draft the currently approved one). A requisition can be Frozen_Open (an Approved version exists and sourcing is live) while a new JDVersion for the same requisition is independently sitting in Draft/Revising/PendingApproval as a proposed revision — the two are not the same field and do not transition in lockstep.</p>
+<table>
+<thead>
+<tr>
+<th><strong>State machine</strong></th>
+<th><strong>Values (authoritative)</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JobRequisition.status</td>
+<td>Draft → PendingApproval ⇄ Revising → Frozen_Open ⇄ OnHold → Closed</td>
+<td>Draft/PendingApproval/Revising describe the requisition before its first freeze; once any version has been Approved at least once, the requisition itself is Frozen_Open (or OnHold/Closed) even while a later JDVersion revision is separately mid-review</td>
+</tr>
+<tr>
+<td>JDVersion.status</td>
+<td>Draft → Revising ⇄ PendingApproval → Approved → Superseded (or → Rejected from Draft/Revising/PendingApproval)</td>
+<td>Per-version content lifecycle. Revising was omitted from the field-table enum in an earlier draft of this section — corrected below to match its use throughout Sections 8, 12, 14 and 15. Revising and PendingApproval are distinct: PendingApproval means "sent to the manager, awaiting a decision"; Revising means "manager requested changes, a new draft is being generated/edited" — a version cycles PendingApproval ⇄ Revising through the review loop before its eventual Approved or Rejected</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="" src="../tdd-v4.2-media/media/218eb1475afb7d88e06c1a0146c6cfe58c1bdcbd.png" style="max-width:100%" /></p>
+<p><em>Figure 6.1 — JDVersion.status state machine: the per-version content lifecycle distinct from JobRequisition.status</em></p>
+<p><strong>JobRequisition</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Field</strong></th>
+<th><strong>Type</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID (PK)</td>
+<td></td>
+</tr>
+<tr>
+<td>tenant_id</td>
+<td>UUID (FK)</td>
+<td>Every query scoped by this field — see Section 5.3</td>
+</tr>
+<tr>
+<td>client_id</td>
+<td>UUID (FK -&gt; Client, nullable)</td>
+<td>Mandatory (non-null) for staffing_agency tenants; explicitly null (a valid, expected value, not merely permitted) for direct_employer tenants — see Section 5.2's null-vs-absent distinction</td>
+</tr>
+<tr>
+<td>department_id</td>
+<td>UUID (FK)</td>
+<td>Nullable if not supplied in the brief; flagged for manager confirmation</td>
+</tr>
+<tr>
+<td>status</td>
+<td>enum</td>
+<td>Draft | PendingApproval | Revising | Frozen_Open | OnHold | Closed</td>
+</tr>
+<tr>
+<td>active_version_id</td>
+<td>UUID (FK -&gt; JDVersion, nullable)</td>
+<td>The single currently-approved JD version; see Section 6's JDVersion notes for the immutable-history model this pointer enables</td>
+</tr>
+<tr>
+<td>created_by</td>
+<td>UUID (FK -&gt; User)</td>
+<td>The manager who submitted the brief</td>
+</tr>
+<tr>
+<td>created_at / updated_at</td>
+<td>timestamp</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>JDBrief (raw intake)</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Field</strong></th>
+<th><strong>Type</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID (PK)</td>
+<td></td>
+</tr>
+<tr>
+<td>requisition_id</td>
+<td>UUID (FK)</td>
+<td></td>
+</tr>
+<tr>
+<td>raw_text</td>
+<td>text</td>
+<td>Verbatim manager brief</td>
+</tr>
+<tr>
+<td>source</td>
+<td>enum</td>
+<td>email | portal</td>
+</tr>
+<tr>
+<td>received_at</td>
+<td>timestamp</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>JDField (NLP-extracted structured fields)</strong></p>
+<p>Keyed to the specific JDVersion it was extracted for and confirmed against, not only to the requisition — otherwise a later revision's field edits would silently rewrite the confirmed-field snapshot that an earlier Approved version's ScoringCriterion.source_field_ref (see ScoringMatrix/ScoringCriterion below) points to, for the same historical-drift reason that section keys the matrix to jd_version_id rather than requisition_id.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Field</strong></th>
+<th><strong>Type</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID (PK)</td>
+<td></td>
+</tr>
+<tr>
+<td>requisition_id</td>
+<td>UUID (FK)</td>
+<td>Denormalized for query convenience; jd_version_id is the field's true owning scope</td>
+</tr>
+<tr>
+<td>jd_version_id</td>
+<td>UUID (FK -&gt; JDVersion)</td>
+<td>Which version's extraction/confirmation this field snapshot belongs to; a new JDVersion gets its own JDField rows rather than reusing/mutating the prior version's</td>
+</tr>
+<tr>
+<td>field_name</td>
+<td>enum</td>
+<td>role_title | experience_range | education_pref | comp_band | job_role_tag | must_have_skills | domain_competencies | soft_skills | department | target_start_date</td>
+</tr>
+<tr>
+<td>field_value</td>
+<td>text / JSON</td>
+<td></td>
+</tr>
+<tr>
+<td>confidence_score</td>
+<td>decimal (0–1)</td>
+<td>Below tenant-configured threshold (default 0.75) → manager_confirmed forced false</td>
+</tr>
+<tr>
+<td>manager_confirmed</td>
+<td>boolean</td>
+<td>Gate before this field can feed an Approved JD version</td>
+</tr>
+</tbody>
+</table>
+<p><strong>JDVersion — immutable-history model</strong></p>
+<p>A JD revised after its initial approval must not overwrite history: any assessment, matrix, or downstream record that referenced an approved version has to keep resolving to the exact content that was approved at the time, even after a later revision supersedes it. JDVersion.status therefore replaces the earlier is_frozen boolean with a full lifecycle, and JobRequisition.active_version_id (Section 6) is the single pointer to "the current one" — approved versions themselves are never deleted or edited, only superseded.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Field</strong></th>
+<th><strong>Type</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID (PK)</td>
+<td></td>
+</tr>
+<tr>
+<td>requisition_id</td>
+<td>UUID (FK)</td>
+<td></td>
+</tr>
+<tr>
+<td>version_no</td>
+<td>integer</td>
+<td>Monotonically increasing per requisition</td>
+</tr>
+<tr>
+<td>variant_type</td>
+<td>enum</td>
+<td>formal | candidate_friendly | condensed | manager_edited</td>
+</tr>
+<tr>
+<td>content</td>
+<td>text</td>
+<td></td>
+</tr>
+<tr>
+<td>generated_by</td>
+<td>enum</td>
+<td>system | manager</td>
+</tr>
+<tr>
+<td>status</td>
+<td>enum</td>
+<td>Draft | Revising | PendingApproval | Approved | Superseded | Rejected — see Section 6.0 for the authoritative transition table (Revising was missing from an earlier draft of this row; corrected here to match its use elsewhere in this document)</td>
+</tr>
+<tr>
+<td>superseded_by</td>
+<td>UUID (FK -&gt; JDVersion, nullable)</td>
+<td>Set only when status transitions Approved → Superseded, pointing at the version that replaced it</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>timestamp</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>A requisition can have at most one version with status = Approved at any moment, matching JobRequisition.active_version_id.</p>
+</li>
+<li>
+<p>Immutability, precisely defined: once a version reaches Approved, its content-bearing fields (version_no, variant_type, content, generated_by) are immutable — a DB-level trigger rejects any UPDATE that touches them. The status and superseded_by columns are the sole, explicit exception: the freeze/supersede transaction is permitted to write status = Superseded and superseded_by on the prior Approved row as part of approving its replacement, and this is the only UPDATE path the trigger allows against an Approved row. This is a controlled metadata transition, not a general relaxation of immutability — content is never touched after Approved.</p>
+</li>
+<li>
+<p>Revising an already-approved JD does not touch that row: it creates a new Draft version that goes through the normal review loop (Draft → Revising ⇄ PendingApproval); only when the new version is approved does the transaction (a) set the new version's status to Approved, (b) set the previous Approved version's status to Superseded and its superseded_by per the exception above, and (c) repoint JobRequisition.active_version_id — all three in one atomic write.</p>
+</li>
+<li>
+<p>Any record that must remain accurate to "the JD as it was when X happened" (a ScoringMatrix, a JDField snapshot, a candidate assessment, an audit log entry) stores a direct jd_version_id foreign key, never a lookup through the requisition — so it keeps resolving correctly regardless of later supersession.</p>
+</li>
+</ul>
+<p><strong>ScoringMatrix / ScoringCriterion — versioned with the JD, not the requisition</strong></p>
+<p>A scoring matrix belongs to the JD version it was approved alongside, not to the requisition as a whole — otherwise revising a JD after freeze would silently rewrite the matrix that earlier assessments were scored against. Draft criteria are generated, retrieved, and edited before approval; see Section 8's draft-matrix endpoints for the API sequence this table supports.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Field</strong></th>
+<th><strong>Type</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ScoringMatrix.id</td>
+<td>UUID (PK)</td>
+<td></td>
+</tr>
+<tr>
+<td>ScoringMatrix.jd_version_id</td>
+<td>UUID (FK -&gt; JDVersion)</td>
+<td>One matrix per JD version, not per requisition — preserves a distinct matrix for every approved version in the requisition's history</td>
+</tr>
+<tr>
+<td>ScoringMatrix.status</td>
+<td>enum</td>
+<td>Draft | Approved. Approved is immutable, set atomically with the JD version's Draft → Approved transition</td>
+</tr>
+<tr>
+<td>ScoringMatrix.approved_at</td>
+<td>timestamp</td>
+<td>Set only when status becomes Approved</td>
+</tr>
+<tr>
+<td>ScoringCriterion.id</td>
+<td>UUID (PK)</td>
+<td></td>
+</tr>
+<tr>
+<td>ScoringCriterion.matrix_id</td>
+<td>UUID (FK)</td>
+<td></td>
+</tr>
+<tr>
+<td>ScoringCriterion.category</td>
+<td>enum</td>
+<td>core_skills | experience_seniority | domain_competency | education_fit — screening-stage only, sums to 100. behavioral_proxy is deliberately excluded: soft-skill and behavioral evidence is never expressed as a numeric screening criterion (BRD/PRD Section 4.1, Approved Decisions) and is assessed only at interview, out of scope of this document</td>
+</tr>
+<tr>
+<td>ScoringCriterion.criterion_name</td>
+<td>text</td>
+<td>e.g. "Power BI proficiency"</td>
+</tr>
+<tr>
+<td>ScoringCriterion.weight_percent</td>
+<td>decimal</td>
+<td>All Approved criteria for a matrix sum to exactly 100; a Draft matrix may be temporarily incomplete while a manager is still editing it</td>
+</tr>
+<tr>
+<td>ScoringCriterion.source_field_ref</td>
+<td>UUID (FK -&gt; JDField)</td>
+<td>Traceability back to the JD field that generated this criterion</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-data-model-module-2-sourcing-resume-aggregation">7. Data Model — Module 2 (Sourcing &amp; Resume Aggregation)<a class="headerlink" href="#7-data-model-module-2-sourcing-resume-aggregation" title="Permanent link">&para;</a></h2>
+<h3 id="71-entities">7.1 Entities<a class="headerlink" href="#71-entities" title="Permanent link">&para;</a></h3>
+<p><strong>SourcingChannelConfig — now scoped as an integration account</strong></p>
+<p>A channel configuration is scoped to (tenant_id, client_id) rather than tenant_id alone, since an agency tenant commonly needs independent vendor credentials per client (each end-client has its own Naukri RMS employer account, for example). This is what Section 5.3's webhook idempotency rule scopes against.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Field</strong></th>
+<th><strong>Type</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID (PK)</td>
+<td>Functions as the integration_account_id referenced throughout this document</td>
+</tr>
+<tr>
+<td>tenant_id</td>
+<td>UUID (FK)</td>
+<td></td>
+</tr>
+<tr>
+<td>client_id</td>
+<td>UUID (FK -&gt; Client, nullable)</td>
+<td>Set for staffing_agency tenants; identifies which client this integration account posts/sources on behalf of</td>
+</tr>
+<tr>
+<td>channel_type</td>
+<td>enum</td>
+<td>naukri_rms | linkedin_recruiter | niche_board | email_intake | manual_upload | referral</td>
+</tr>
+<tr>
+<td>credentials_ref</td>
+<td>UUID (FK -&gt; Secret store)</td>
+<td>Never stored in plaintext in this table</td>
+</tr>
+<tr>
+<td>is_active</td>
+<td>boolean</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Candidate</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Field</strong></th>
+<th><strong>Type</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID (PK)</td>
+<td></td>
+</tr>
+<tr>
+<td>tenant_id</td>
+<td>UUID (FK)</td>
+<td>Reusable across requisitions within a tenant</td>
+</tr>
+<tr>
+<td>client_id</td>
+<td>UUID (FK -&gt; Client, nullable)</td>
+<td>Agency tenants: the client this candidate was sourced for. A candidate applying to two different clients under the same agency gets two Candidate rows — deliberately not shared, so one client's view of a candidate never leaks to another</td>
+</tr>
+<tr>
+<td>name / email / phone</td>
+<td>text</td>
+<td>Primary dedupe keys, scoped within (tenant_id, client_id) — see DuplicateMatch below</td>
+</tr>
+<tr>
+<td>resume_file_ref</td>
+<td>UUID (FK -&gt; object storage)</td>
+<td></td>
+</tr>
+<tr>
+<td>parsed_json</td>
+<td>JSONB</td>
+<td>Structured output of the Resume Parsing Service</td>
+</tr>
+<tr>
+<td>source_channel</td>
+<td>enum</td>
+<td>Matches SourcingChannelConfig.channel_type at first intake</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>timestamp</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Application</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Field</strong></th>
+<th><strong>Type</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID (PK)</td>
+<td></td>
+</tr>
+<tr>
+<td>candidate_id</td>
+<td>UUID (FK)</td>
+<td></td>
+</tr>
+<tr>
+<td>requisition_id</td>
+<td>UUID (FK)</td>
+<td></td>
+</tr>
+<tr>
+<td>tenant_id</td>
+<td>UUID (FK)</td>
+<td>Denormalized from both candidate_id and requisition_id (which must agree) — an explicit column rather than a join, so the RLS policy and query-builder middleware in Section 5.3 apply directly to this table like every other multi-tenant table, instead of Application being the one table that only reaches scoping indirectly</td>
+</tr>
+<tr>
+<td>client_id</td>
+<td>UUID (FK -&gt; Client, nullable)</td>
+<td>Denormalized from the requisition for isolation-filter simplicity — see Section 5.3</td>
+</tr>
+<tr>
+<td>status</td>
+<td>enum</td>
+<td>Feeds Module 3 pipeline stage — out of scope of this TDD beyond intake</td>
+</tr>
+<tr>
+<td>applied_at</td>
+<td>timestamp</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Tenant/client scoping on Module 1 child tables (JDBrief, JDField, JDVersion, ScoringMatrix, ScoringCriterion): these intentionally do not carry their own tenant_id/client_id columns — they inherit scope through their parent JobRequisition (directly, or via jd_version_id → JobRequisition for JDVersion-keyed tables). This is a deliberate design choice, not an oversight: the RLS policies in Section 5.3 on these tables are join-based (checking the parent JobRequisition's tenant_id/client_id), and an insert/update trigger rejects any row whose parent-chain tenant/client would disagree with a value passed explicitly — so a JDField cannot be attached to a requisition in a different tenant than the field's own (would-be) tenant_id, even though the column doesn't exist to set incorrectly in the first place. Candidate, Application, SourcingChannelConfig, and DuplicateMatch's parent Candidates carry explicit tenant_id/client_id columns because they are queried directly and at volume (search, dedupe, webhooks) where a join-based policy alone would be a performance concern.</li>
+</ul>
+<p><strong>DuplicateMatch — conflict, reversal, and audit</strong></p>
+<p>Matching is scoped within (tenant_id, client_id) — the same person applying through two different agency clients is not treated as a duplicate, by design (Candidate note above). Within that scope, an exact-key match (email or phone) is not always safe to auto-link: the same phone number can be reused by a different person, or two sources can disagree on the name attached to one email. Conflicting evidence is routed to a recruiter rather than silently auto-linked, and every resolution — link or reject — is recorded rather than only the current state.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Field</strong></th>
+<th><strong>Type</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID (PK)</td>
+<td></td>
+</tr>
+<tr>
+<td>candidate_id_primary / candidate_id_duplicate</td>
+<td>UUID (FK)</td>
+<td></td>
+</tr>
+<tr>
+<td>match_type</td>
+<td>enum</td>
+<td>exact_email | exact_phone | content_similarity</td>
+</tr>
+<tr>
+<td>confidence_score</td>
+<td>decimal (0–1)</td>
+<td>See Section 14 for thresholds</td>
+</tr>
+<tr>
+<td>conflict_flag</td>
+<td>boolean</td>
+<td>True when exact-key evidence is accompanied by materially conflicting attributes (different name, different declared employer) — forces manual review even for an exact_email/exact_phone match_type</td>
+</tr>
+<tr>
+<td>resolution</td>
+<td>enum</td>
+<td>pending | linked | rejected_not_duplicate | reversed. Replaces the earlier plain resolved boolean, which could not distinguish "confirmed duplicate" from "confirmed not a duplicate"</td>
+</tr>
+<tr>
+<td>previous_decision_id</td>
+<td>UUID (FK -&gt; DuplicateMatch, nullable)</td>
+<td>Set only on a reversed row; points at the prior decision row (for the same candidate pair) that this row corrects. Null on every row that is not itself a reversal</td>
+</tr>
+<tr>
+<td>resolved_by / resolved_at</td>
+<td>UUID (FK -&gt; User) / timestamp</td>
+<td></td>
+</tr>
+<tr>
+<td>resolution_notes</td>
+<td>text</td>
+<td>Free-text rationale captured from the recruiter — required when resolution is rejected_not_duplicate or reversed</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>Append-only decision model (the single authoritative model — Section 14/15 must not restate this differently): a resolution decision is never edited in place once written. Reversing an earlier match does not set resolution = reversed on the original row; it INSERTS a new DuplicateMatch row for the same candidate pair, with resolution = reversed and previous_decision_id pointing at the row being corrected. The original row is retained exactly as it was decided, unmodified, alongside the correction.</p>
+</li>
+<li>
+<p>Current-link state for a candidate pair is derived, not stored on a single row: it is the resolution of the most recent row (by resolved_at) for that (candidate_id_primary, candidate_id_duplicate) pair. Application code and reporting must always resolve current state this way rather than reading resolution off an arbitrary matching row, since older rows for the same pair remain in the table by design.</p>
+</li>
+<li>
+<p>Application/source history is never destructively merged: when two Candidate rows are linked as duplicates, each retains its own Application and source_channel history; linking establishes a relationship between them, it does not collapse one record into the other.</p>
+</li>
+</ul>
+<h3 id="72-consolidated-data-schema-module-1-2">7.2 Consolidated Data Schema (Module 1 &amp; 2)<a class="headerlink" href="#72-consolidated-data-schema-module-1-2" title="Permanent link">&para;</a></h3>
+<p>The entity-relationship diagram below consolidates every table introduced in Sections 5, 6 and 7 into a single schema view, showing primary/foreign-key relationships across the two modules — including how an Approved ScoringMatrix traces back to the JDField it was derived from, and how Candidate/Application/DuplicateMatch tie together for the unified inbox.</p>
+<p><img alt="" src="../tdd-v4.2-media/media/492e0db42fc30ed36b6ac8476a160c0d7dca52b6.png" style="max-width:100%" /></p>
+<p><em>Figure 7.1 — Consolidated entity-relationship diagram, Module 1 &amp; 2</em></p>
+<h2 id="8-api-contracts-module-1">8. API Contracts — Module 1<a class="headerlink" href="#8-api-contracts-module-1" title="Permanent link">&para;</a></h2>
+<p><strong>POST /api/v1/requisitions/intake</strong></p>
+<p>Creates a requisition from a manager's raw brief and kicks off NLP extraction.</p>
+<p>Request: { "tenant_id": "uuid", "client_id": "uuid|null", "department_id": "uuid|null", "raw_brief_text": "string", "source": "email|portal" } Response: 201 { "requisition_id": "uuid", "status": "Draft" } Errors: 422 if client_id is missing for a staffing_agency tenant, or supplied for a direct_employer tenant</p>
+<p><strong>GET /api/v1/requisitions/{id}/jd-versions</strong></p>
+<p>Lists all JD versions for a requisition, in version order, including their status (Draft / PendingApproval / Approved / Superseded / Rejected) — the full immutable history, not only the current one.</p>
+<p><strong>POST /api/v1/requisitions/{id}/jd-versions/{versionId}/feedback</strong></p>
+<p>Submits manager feedback (email reply or portal form) for NLP parsing into a structured diff and a new draft version.</p>
+<p>Request: { "feedback_text": "string", "source": "email|portal" } Response: 202 { "new_version_id": "uuid", "status": "Revising", "low_confidence_fields": ["string", ...] }</p>
+<p><strong>GET /api/v1/requisitions/{id}/jd-versions/{versionId}/scoring-matrix/draft</strong></p>
+<p>Returns the in-progress draft ScoringCriterion set bound to this specific JD version (versionId), for the manager to review before freezing. Identifying the matrix by (requisition, version) rather than by requisition alone matters because a requisition can have more than one JDVersion in flight across review rounds (Section 6.0) — an endpoint keyed only on requisition_id would be ambiguous about which draft it means. A draft matrix need not sum to 100 percent — it can be incomplete while under active editing.</p>
+<p>Response: 200 { "matrix_id": "uuid", "jd_version_id": "uuid", "status": "Draft", "matrix_revision": integer, "criteria": [ { "criterion_id", "criterion_name", "category", "weight_percent" }, ... ], "current_total_percent": number }</p>
+<p><strong>PATCH /api/v1/requisitions/{id}/jd-versions/{versionId}/scoring-matrix/draft</strong></p>
+<p>Manager edits draft criterion weights (via the scoring-matrix slider UI) before freeze. Validated only against per-criterion bounds at this stage — the sum-to-100 rule is enforced at freeze, not on every intermediate edit, so a manager can save a partial adjustment mid-session. Optimistic concurrency: the request must echo the matrix_revision last read; a mismatch (another edit landed first, e.g. two browser tabs, or the version was regenerated by a new feedback round) is rejected rather than silently overwriting a concurrent edit, and the response returns the current state for the caller to re-apply against.</p>
+<p>Request: { "matrix_revision": integer, "criteria": [ { "criterion_id": "uuid", "weight_percent": number }, ... ] } Response: 200 { "status": "Draft", "matrix_revision": integer, "current_total_percent": number } Errors: 409 { "reason": "revision_mismatch", "current_matrix_revision": integer, "current_criteria": [...] } if matrix_revision does not match the current row</p>
+<p><strong>POST /api/v1/requisitions/{id}/freeze</strong></p>
+<p>Approves a specific JD version and its draft scoring matrix in a single atomic transaction — the Approved Decision (BRD/PRD Section 4.1) that freezing is a hard, content-immutable state change (Section 6's immutability-exception note applies). If the requisition already has an Approved version, that version is superseded (not overwritten) and JobRequisition.active_version_id repoints to the newly approved one; the superseded version and its matrix remain queryable by their own ID for any assessment that already referenced them.</p>
+<p>Idempotency and replay vs. conflict, distinguished (resolving the earlier ambiguity between the no-op-retry requirement and the general 409-on-invalid-state rule): the caller supplies expected_active_version_id, the active_version_id it last observed for the requisition (null if none yet). The server compares it against the requisition's actual current active_version_id before proceeding.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Case</strong></th>
+<th><strong>Server behavior</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>approved_version_id is already the requisition's active_version_id (an exact repeat of a freeze that already succeeded)</td>
+<td>200, no-op — returns the same response the original successful call returned; no new version, no new Superseded row, no duplicate matrix</td>
+</tr>
+<tr>
+<td>expected_active_version_id matches the requisition's actual current active_version_id, and approved_version_id is a PendingApproval version awaiting this decision</td>
+<td>Proceeds: approves approved_version_id, supersedes the prior active version if any, repoints active_version_id — normal path</td>
+</tr>
+<tr>
+<td>expected_active_version_id does NOT match the requisition's actual current active_version_id (someone else's freeze — of this or a different version — landed first)</td>
+<td>409 { "reason": "stale_expected_version", "current_active_version_id": "uuid" } — the two simultaneous-freeze race is resolved this way: exactly one caller's expected_active_version_id matches at commit time</td>
+</tr>
+<tr>
+<td>approved_version_id is not in PendingApproval status and is not already the active version (e.g. Draft, Rejected, or a different Superseded version)</td>
+<td _reason_:="&quot;reason&quot;:" _version_not_approvable_="&quot;version_not_approvable&quot;">409</td>
+</tr>
+</tbody>
+</table>
+<p>Request: { "approved_version_id": "uuid", "expected_active_version_id": "uuid|null" } Response: 200 { "status": "Frozen_Open", "active_version_id": "uuid", "scoring_matrix_id": "uuid", "superseded_version_id": "uuid|null" } Errors: 409 (see table above) if the draft matrix's criteria do not sum to exactly 100</p>
+<p><strong>GET /api/v1/requisitions/{id}/scoring-matrix</strong></p>
+<p>Returns the Approved scoring matrix bound to the requisition's current active_version_id, for consumption by the Module 3 scoring engine. Callers needing the matrix behind a specific historical (superseded) JD version query it directly by jd_version_id instead.</p>
+<h2 id="9-api-contracts-module-2">9. API Contracts — Module 2<a class="headerlink" href="#9-api-contracts-module-2" title="Permanent link">&para;</a></h2>
+<p><strong>POST /api/v1/requisitions/{id}/publish</strong></p>
+<p>Triggered automatically on requisition freeze (or manually re-triggered by a recruiter); fans out to every active SourcingChannelConfig (integration account) scoped to the requisition's (tenant_id, client_id).</p>
+<p><strong>POST /webhooks/naukri-rms/applications</strong></p>
+<p>Inbound webhook (or polling result) from Naukri RMS carrying a new application/resume. Idempotency and identity resolution are keyed on (integration_account_id, external_application_id) — integration_account_id is the SourcingChannelConfig.id resolved from the webhook's registered endpoint, which already encodes tenant_id and client_id (Section 5.3).</p>
+<p>Request (from Naukri RMS): { "external_application_id": "string", "requisition_external_ref": "string", "resume_url": "string", "applicant": { "name", "email", "phone" } } Response: 202 { "candidate_id": "uuid", "application_id": "uuid", "duplicate_check": "queued" }</p>
+<p><strong>POST /webhooks/linkedin-recruiter/applications</strong></p>
+<p>Equivalent inbound contract for LinkedIn Talent Solutions, same idempotency scoping as above. Which specific LinkedIn Talent Solutions product (Recruiter System Connect, Apply Connect, or another) this integrates with is not yet confirmed — see Section 16.</p>
+<p><strong>POST /webhooks/email-intake/resume</strong></p>
+<p>Inbound-email-parse webhook: dedicated per-(tenant, client) intake address receives an email with a resume attachment; the email provider's inbound-parse service posts the parsed MIME payload here.</p>
+<p><strong>POST /api/v1/candidates/upload</strong></p>
+<p>Manual single/bulk upload path used by recruiters as the universal fallback for channels without an API.</p>
+<p><strong>GET /api/v1/candidates/search</strong></p>
+<p>Full-text and filtered search across the caller's (tenant_id, client_id)-scoped candidate pool — backs the unified resume inbox and Module 2's candidate database search feature. client_id is resolved server-side from the authenticated session, never accepted as a caller-supplied filter (Section 5.3).</p>
+<p>Query params: q, skills[], experience_min, experience_max, source_channel[], requisition_id, page, page_size</p>
+<h2 id="10-integration-specifications">10. Integration Specifications<a class="headerlink" href="#10-integration-specifications" title="Permanent link">&para;</a></h2>
+<h3 id="101-naukri-rms">10.1 Naukri RMS<a class="headerlink" href="#101-naukri-rms" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Status: proposed internal adapter contract — Naukri RMS partner-agreement terms and exact API capabilities are not yet confirmed; treat this section as the integration Phoneme intends to build against, pending vendor confirmation (Section 16).</p>
+</li>
+<li>
+<p>Auth: OAuth2 client-credentials, per-integration-account contracted employer account.</p>
+</li>
+<li>
+<p>Direction: confirm at vendor onboarding whether push (webhook) or poll is available under the contracted plan — Section 16 lists this as an open technical decision.</p>
+</li>
+<li>
+<p>Rate limits: respect vendor-published limits; Publish Service applies exponential backoff on 429 responses.</p>
+</li>
+</ul>
+<h3 id="102-linkedin-talent-solutions">10.2 LinkedIn Talent Solutions<a class="headerlink" href="#102-linkedin-talent-solutions" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Status: proposed internal adapter contract. LinkedIn documents multiple distinct Talent Solutions integration products (e.g. Recruiter System Connect, Apply Connect) with different capabilities; "LinkedIn Recruiter API" as used elsewhere in this document is a placeholder pending confirmation of which specific product Phoneme contracts for — this is a vendor-feasibility gate, not a detail to resolve during implementation (Section 16).</p>
+</li>
+<li>
+<p>Auth: OAuth2 authorization-code flow, requiring a per-integration-account recruiter to grant consent once during channel setup.</p>
+</li>
+<li>
+<p>Token refresh handled by the channel adapter; a failed refresh marks the channel Integration Error and alerts the tenant admin without blocking other channels.</p>
+</li>
+</ul>
+<h3 id="103-email-intake">10.3 Email Intake<a class="headerlink" href="#103-email-intake" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>A dedicated per-(tenant, client) intake address, provisioned at integration-account setup, routed through a transactional-email provider's inbound-parse webhook (e.g. SendGrid Inbound Parse or equivalent).</p>
+</li>
+<li>
+<p>Attachment extraction feeds the Resume Parsing Service; the email body itself is retained for audit but is not parsed for structured fields.</p>
+</li>
+</ul>
+<h3 id="104-resume-parsing-service">10.4 Resume Parsing Service<a class="headerlink" href="#104-resume-parsing-service" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Release 1 supported formats: PDF and DOCX only, matching the BRD/PRD's scope statement (a broader "any resume format" claim in earlier drafts has been corrected — see BRD/PRD Change Log). Other formats (.doc, .rtf, .pages, images) are rejected at upload/intake with an explicit unsupported-format error, not silently dropped.</p>
+</li>
+<li>
+<p>Scanned/image-only PDFs (no extractable text layer) and password-protected files are detected and routed to the same manual structured-entry fallback used for NLP extraction failure (Section 15), rather than failing silently or producing an empty parse.</p>
+</li>
+<li>
+<p>Returns structured JSON (contact, work history, skills, education) with a per-field confidence score, consistent with the JDField confidence model in Module 1.</p>
+</li>
+<li>
+<p>Build-vs-buy is an open decision — see Section 16.</p>
+</li>
+</ul>
+<h2 id="11-data-flow-diagrams">11. Data Flow Diagrams<a class="headerlink" href="#11-data-flow-diagrams" title="Permanent link">&para;</a></h2>
+<p>The Level-1 data flow diagram below traces information from the manager's raw brief through JD generation, freezing, and scoring-matrix creation (Module 1), and from a published requisition through candidate sourcing, parsing and dedupe to the unified candidate store (Module 2) — ending at the handoff into Module 3 (Screening &amp; Shortlisting).</p>
+<p><img alt="" src="../tdd-v4.2-media/media/b44dd20e8ffef825063f07639f35538f8964e7b4.png" style="max-width:100%" /></p>
+<p><em>Figure 11.1 — Level-1 data flow diagram, JD Intake → Freeze → Publish → Sourcing → Candidate Store</em></p>
+<h2 id="12-sequence-flows">12. Sequence Flows<a class="headerlink" href="#12-sequence-flows" title="Permanent link">&para;</a></h2>
+<h3 id="121-module-1-jd-intake-to-freeze">12.1 Module 1 — JD Intake to Freeze<a class="headerlink" href="#121-module-1-jd-intake-to-freeze" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Manager → Email/Portal: submits raw brief.</p>
+</li>
+<li>
+<p>Requisition Service: creates JobRequisition (status Draft) and JDBrief record.</p>
+</li>
+<li>
+<p>JD Generation Service: runs NLP extraction → JDField records; generates 2–3 JDVersion drafts plus a draft ScoringMatrix/ScoringCriterion set.</p>
+</li>
+<li>
+<p>Notification Service: emails manager, updates portal Pending JD Approval queue.</p>
+</li>
+<li>
+<p>Manager → Email reply or Portal edit: feedback submitted via POST .../feedback, and/or draft matrix weights adjusted via PATCH .../scoring-matrix/draft.</p>
+</li>
+<li>
+<p>JD Generation Service: parses feedback into a structured diff → new JDVersion (status Revising). Loop to step 4 until manager freezes.</p>
+</li>
+<li>
+<p>SLA Scheduler: if no manager response within the configured window, triggers a reminder, then an HR escalation notification.</p>
+</li>
+<li>
+<p>Manager → POST .../freeze: approves the PendingApproval version and its draft matrix in one atomic transaction.</p>
+</li>
+<li>
+<p>Scoring Matrix Service: sets the new JDVersion.status = Approved and its ScoringMatrix.status = Approved; if a previously Approved version existed, sets it to Superseded; repoints JobRequisition.active_version_id and sets status = Frozen_Open.</p>
+</li>
+<li>
+<p>Requisition Service: emits requisition.frozen event (carrying tenant_id, client_id, active_version_id), consumed by the Module 2 Publish Service.</p>
+</li>
+</ol>
+<h3 id="122-module-2-publish-to-unified-candidate-record">12.2 Module 2 — Publish to Unified Candidate Record<a class="headerlink" href="#122-module-2-publish-to-unified-candidate-record" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Publish Service: consumes requisition.frozen; calls each active channel adapter (integration account) scoped to the requisition's (tenant_id, client_id).</p>
+</li>
+<li>
+<p>Channel Adapter (Naukri RMS / LinkedIn / email / manual / referral): posts the requisition or begins listening/polling for applications.</p>
+</li>
+<li>
+<p>Inbound application/resume arrives via webhook, poll result, or manual upload, identified by (integration_account_id, external_application_id).</p>
+</li>
+<li>
+<p>Resume Parsing Service: extracts structured candidate fields; tags source_channel; routes unsupported/unparseable files to manual fallback (Section 15).</p>
+</li>
+<li>
+<p>Dedupe Service: checks against existing Candidate records scoped to (tenant_id, client_id) (see Section 14 for match logic and Section 7.1's DuplicateMatch conflict handling); links to an existing record, creates a new one, or routes to manual review on conflicting evidence.</p>
+</li>
+<li>
+<p>Candidate Store: persists/updates Candidate and Application; Unified Inbox Index makes the record searchable.</p>
+</li>
+</ol>
+<h2 id="13-object-flow-diagram-jobrequisition-lifecycle">13. Object Flow Diagram — JobRequisition Lifecycle<a class="headerlink" href="#13-object-flow-diagram-jobrequisition-lifecycle" title="Permanent link">&para;</a></h2>
+<p>The JobRequisition entity is the central object driving Module 1; its state machine gates every other action (JD editing, freeze, scoring-matrix generation, publish). The diagram below is the authoritative object-flow reference for implementation — every state transition must go through the guarded transitions shown, never a direct field update.</p>
+<p><img alt="" src="../tdd-v4.2-media/media/143be531b7cbdb87116e6be0f0bbce31204749ca.png" style="max-width:100%" /></p>
+<p><em>Figure 13.1 — JobRequisition object/state flow, Draft through Closed</em></p>
+<h2 id="14-non-functional-technical-considerations">14. Non-Functional / Technical Considerations<a class="headerlink" href="#14-non-functional-technical-considerations" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Idempotency: every inbound webhook endpoint (Naukri RMS, LinkedIn, email intake) is keyed on (integration_account_id, external_application_id), which is itself scoped to a (tenant_id, client_id) integration account — so a vendor retry cannot create a duplicate Candidate/Application, and two different tenants' or clients' external IDs can never collide.</p>
+</li>
+<li>
+<p>JD immutability: an Approved or Superseded JDVersion is enforced read-only at both the application layer and a database-level constraint — not application-logic discipline alone; only a Draft/PendingApproval/Revising version may be mutated.</p>
+</li>
+<li>
+<p>NLP confidence threshold: tenant-configurable, default 0.75; any JDField below threshold forces manager_confirmed = false and blocks freeze until resolved.</p>
+</li>
+<li>
+<p>SLA escalation: implemented as a scheduled job (not a request-time check) polling PendingApproval requisitions against their configured SLA window.</p>
+</li>
+<li>
+<p>Dedupe matching order: exact match on email, then exact match on phone (both high-confidence, auto-link), then content-similarity scoring on parsed resume text (e.g. embedding cosine similarity) for a manual-review confidence band rather than an auto-link — routed to DuplicateMatch.resolution = pending with conflict_flag set on conflicting evidence, per the conflict-handling and reversal model in Section 7.1, rather than a silent auto-merge.</p>
+</li>
+<li>
+<p>Vendor rate limits: all channel adapters implement exponential backoff and surface a distinct Integration Error channel status so one vendor outage never blocks other channels or the unified inbox.</p>
+</li>
+</ul>
+<h2 id="15-error-handling-edge-cases">15. Error Handling &amp; Edge Cases<a class="headerlink" href="#15-error-handling-edge-cases" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th><strong>Scenario</strong></th>
+<th><strong>Handling</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NLP extraction fails entirely on a brief</td>
+<td>Requisition remains in Draft; manager is offered a manual structured-entry form as a fallback rather than a blocked pipeline</td>
+</tr>
+<tr>
+<td>Job-board API authentication failure</td>
+<td>Channel marked Integration Error; other channels continue publishing; tenant admin is alerted</td>
+</tr>
+<tr>
+<td>Manager attempts to edit a frozen (Approved) JD</td>
+<td>Rejected at the API layer (409); the correct path is a new version via the standard feedback/edit flow, which produces a new Draft/Revising version and reopens approval rather than mutating the Approved record</td>
+</tr>
+<tr>
+<td>JD revised after initial freeze</td>
+<td>A new JDVersion (status Draft → Revising → PendingApproval) is created against the same JobRequisition; on its own freeze, the previously Approved version is set Superseded (superseded_by = new version) and JobRequisition.active_version_id is repointed — history is retained, never overwritten</td>
+</tr>
+<tr>
+<td>Conflicting identity evidence in dedupe</td>
+<td>e.g. matching email but differing name/phone in a way that fails the similarity threshold — DuplicateMatch is created with resolution = pending and conflict_flag = true, routed to a recruiter queue rather than auto-linked or auto-rejected</td>
+</tr>
+<tr>
+<td>Recruiter needs to reverse an incorrect auto-link</td>
+<td>Recruiter action inserts a new DuplicateMatch row (resolution = reversed, previous_decision_id -&gt; the original row, resolution_notes required); the original row is left unmodified for audit and the two Candidate records are split back apart — see the append-only decision model in Section 7.1, which is authoritative over this row's phrasing</td>
+</tr>
+<tr>
+<td>Agency requisition raised without a client_id</td>
+<td>Rejected at intake (422) for any Tenant with org_type = staffing_agency; client_id is mandatory whenever the owning tenant is an agency, per Section 5.2</td>
+</tr>
+<tr>
+<td>Duplicate-detection false positive</td>
+<td>Recruiter sets DuplicateMatch.resolution = rejected_not_duplicate with resolution_notes, which is retained for audit rather than deleting the match record</td>
+</tr>
+<tr>
+<td>Matrix weights submitted not summing to 100</td>
+<td>Freeze request rejected (409) with the offending total returned, rather than silently normalizing</td>
+</tr>
+</tbody>
+</table>
+<h2 id="16-open-technical-decisions-dependencies">16. Open Technical Decisions / Dependencies<a class="headerlink" href="#16-open-technical-decisions-dependencies" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Naukri RMS integration direction — confirm push (webhook) vs. poll availability under the contracted plan.</p>
+</li>
+<li>
+<p>Resume-parsing provider — build an in-house parser vs. license a third-party resume-parsing API.</p>
+</li>
+<li>
+<p>NLP model for brief-to-schema extraction — Section 17.2 proposes a third-party LLM API as the Release 1 default for the JD Generation Service (fastest to horizontal-scale, no GPU fleet to operate); the associated per-tenant data-residency implications under the DPDP Act, and the point at which an in-house fine-tuned model becomes worth the added operational cost, remain open.</p>
+</li>
+<li>
+<p>Similarity-search infrastructure for duplicate detection — Section 17.2 proposes pgvector on the existing PostgreSQL instance as the Release 1 default for the Dedupe Service; the threshold candidate-pool scale per tenant at which a dedicated vector-search service becomes necessary is not yet defined and should be revisited once real volume data exists.</p>
+</li>
+<li>
+<p>Default and tenant-configurable bounds for the NLP confidence threshold and the SLA escalation window.</p>
+</li>
+<li>
+<p>Client Stakeholder read-only portal role — explicitly deferred out of Release 1 (Section 1.2): no end-client contact has direct system access in Release 1. Scope of what such a role would see (requisition status, candidate pipeline) remains undefined and is a fast-follow decision, not a Release 1 blocker.</p>
+</li>
+<li>
+<p>Vendor/product-tier confirmation pending for both Naukri RMS (contracted plan capabilities, push vs. poll) and LinkedIn Talent Solutions (exact product — Recruiter System Connect vs. Apply Connect vs. other) — both integrations in Section 10 are proposed adapter contracts, not confirmed vendor capabilities, until this gate clears.</p>
+</li>
+<li>
+<p>HSM selection for the native KMS (Section 4.0) — a specific PKCS#11-compatible HSM vendor/model (e.g. Thales Luna, Utimaco, or a network-attached HSM appliance) has not been chosen; this gates final procurement and capacity sizing for the Key/Secrets Management node (Section 17.2, Section 18.1).</p>
+</li>
+<li>
+<p>Secondary data-centre timeline for full DR (Section 18.2) — Release 1 ships single-DC with multi-rack redundancy only; the target RTO/RPO and go-live date for cross-DC replication are not yet defined.</p>
+</li>
+<li>
+<p>Directory-level detail for federated SSO (Section 3.1) — whether domain-restricted sign-in is enforced per tenant from day one or added as a fast-follow, and which Google Workspace / Microsoft 365 Entra ID group or org-unit claims (if any) map onto the Manager/Recruiter/HR role distinction versus requiring a Tenant Admin to assign that role manually after first SSO login.</p>
+</li>
+</ol>
+<h2 id="17-microservices-decomposition-per-service-technology-stack">17. Microservices Decomposition &amp; Per-Service Technology Stack<a class="headerlink" href="#17-microservices-decomposition-per-service-technology-stack" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Decision note added after approval (2026-09-25):</strong> the backend framework split in §17.2 (NestJS for Auth, Notification, Requisition, Scoring Matrix, Publish; FastAPI for the rest) is superseded by <code>Technical/Teamora_Technical_Stack_Charter_v1.2.md</code>: <strong>every backend service is Python/FastAPI</strong>. Also recorded on PR #7 (B3–B5, accepted 2026-09-24): requisition-service owns all Module 1 tables, a candidate-service owns Module 2 candidate upload/search, and Release 1 has no Kong gateway and no Go services. Service boundaries, APIs, data model and isolation rules in this document are unchanged.</p>
+</blockquote>
+<p>The BRD/PRD's proposed architecture direction left the backend framework as an open choice ("FastAPI or NestJS"). This section resolves that ambiguity: the platform is built as a set of independently deployable microservices, each on the stack best suited to its own workload shape, communicating through the Kafka event backbone and the tenant-aware API Gateway rather than in-process calls. This finalizes and supersedes the BRD/PRD's placeholder stack language.</p>
+<h3 id="171-decomposition-principles">17.1 Decomposition Principles<a class="headerlink" href="#171-decomposition-principles" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Single responsibility per service, matching the Component Overview in Section 2 — a service owns exactly one bounded context's data and lifecycle; no service reaches into another service's tables directly.</p>
+</li>
+<li>
+<p>Stateless application services scale horizontally behind the API Gateway and, for background work, behind a queue — adding pods is the default answer to load, not resizing a pod.</p>
+</li>
+<li>
+<p>Stateful infrastructure (PostgreSQL, Redis, Kafka, OpenSearch, Vault) scales through its own managed clustering primitives — read replicas, partitions, shards — layered with vertical instance-size tiers for the write path and other components that cannot simply be replicated.</p>
+</li>
+<li>
+<p>Every cross-service interaction that is not a direct synchronous read goes through a Kafka event (e.g. requisition.frozen, candidate.parsed, duplicate.flagged) — this is what lets the Compute-Intensive Pool (Section 18) scale independently of, and recover independently from, the Stateless Service Pool.</p>
+</li>
+<li>
+<p>Compute-heavy, bursty workloads (NLP generation, resume parsing, similarity search) are separated onto their own node pool from steady, latency-sensitive request/response services — so a burst of resume uploads never starves the login or requisition-approval path.</p>
+</li>
+</ul>
+<h3 id="172-per-service-technology-stack">17.2 Per-Service Technology Stack<a class="headerlink" href="#172-per-service-technology-stack" title="Permanent link">&para;</a></h3>
+<p>"Horizontal Scaling" is the default lever for every stateless service — more replicas, triggered automatically. "Vertical Scaling" names the lever used for the workload's stateful or resource-bound half (a database, a cache, a large in-memory index, or a burst that needs a bigger box before more boxes help).</p>
+<table>
+<thead>
+<tr>
+<th><strong>Service</strong></th>
+<th><strong>Stack</strong></th>
+<th><strong>Data / Queue Dependency</strong></th>
+<th><strong>Horizontal Scaling</strong></th>
+<th><strong>Vertical Scaling</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API Gateway</td>
+<td>Kong Gateway (Go/Lua core)</td>
+<td>Redis (rate-limit counters)</td>
+<td>Stateless pods; K8s HPA on CPU + requests-per-second</td>
+<td>Larger pod CPU/memory limits absorb burst before HPA catches up</td>
+</tr>
+<tr>
+<td>Auth / AAA Service</td>
+<td>NestJS (TypeScript)</td>
+<td>Redis (session store), PostgreSQL (identity)</td>
+<td>Stateless pods; HPA on CPU/RPS</td>
+<td>Redis Cluster node-type upgrade for hot session shards</td>
+</tr>
+<tr>
+<td>Key / Secrets Management</td>
+<td>HashiCorp Vault (HA, Raft storage, on-prem) + Vault Transit Engine as native KMS, HSM-backed (Section 4.0)</td>
+<td>Raft-replicated storage backend; PKCS#11 HSM for root-key custody</td>
+<td>Vault HA replica set (reads scale with replicas)</td>
+<td>Primary lever — larger Vault node instance types and, unlike a cloud KMS, HSM throughput is a physical capacity that must be sized and procured up front</td>
+</tr>
+<tr>
+<td>Audit &amp; Event Log Service</td>
+<td>Go microservice</td>
+<td>Kafka (append) + OpenSearch (query)</td>
+<td>Kafka partitions + OpenSearch data nodes scale reads/writes</td>
+<td>Larger OpenSearch node instance types for hot audit-query shards</td>
+</tr>
+<tr>
+<td>Notification Service (email/SMS/WhatsApp)</td>
+<td>NestJS (TypeScript) + BullMQ</td>
+<td>Redis (job queue)</td>
+<td>Worker pod replicas; KEDA autoscale on queue depth</td>
+<td>Larger worker pod memory for template-rendering bursts</td>
+</tr>
+<tr>
+<td>Requisition Service (Module 1)</td>
+<td>NestJS (TypeScript)</td>
+<td>PostgreSQL</td>
+<td>Stateless pods; HPA on CPU/RPS</td>
+<td>PostgreSQL instance-size upgrade + read replicas; tenant_id partitioning at extreme scale</td>
+</tr>
+<tr>
+<td>JD Generation Service (Module 1)</td>
+<td>Python / FastAPI + third-party LLM API (Release 1 default, Section 16)</td>
+<td>PostgreSQL (JDVersion), external LLM API</td>
+<td>Stateless pods; HPA on CPU/RPS (no GPU fleet needed while using an external API)</td>
+<td>Reserved lever if a future in-house fine-tuned model requires GPU node pools</td>
+</tr>
+<tr>
+<td>Scoring Matrix Service (Module 1)</td>
+<td>NestJS (TypeScript)</td>
+<td>PostgreSQL</td>
+<td>Stateless pods; HPA on CPU/RPS</td>
+<td>PostgreSQL instance-size upgrade shared with Requisition Service</td>
+</tr>
+<tr>
+<td>Publish Service (Module 2)</td>
+<td>NestJS (TypeScript) + BullMQ</td>
+<td>Redis (job queue), Kafka (requisition.frozen)</td>
+<td>Worker pod replicas; KEDA autoscale on queue depth</td>
+<td>Larger worker pod memory for large fan-out batches</td>
+</tr>
+<tr>
+<td>Channel Adapters — Naukri RMS, LinkedIn, Email, Manual, Referral (Module 2)</td>
+<td>Go (one lightweight service per channel)</td>
+<td>Kafka (per-channel topics)</td>
+<td>Per-channel worker replicas; KEDA autoscale on channel-specific queue depth, respecting each vendor's rate limit</td>
+<td>Larger pod CPU for parsing-heavy channels (e.g. email MIME parsing)</td>
+</tr>
+<tr>
+<td>Resume Parsing Service (Module 2)</td>
+<td>Python / FastAPI + pdfplumber/textract</td>
+<td>Kafka (parse jobs), Object Storage (source files), PostgreSQL (parsed output)</td>
+<td>Worker pod replicas; KEDA autoscale on queue depth</td>
+<td>Larger pod CPU/memory for large batch PDF/DOCX files</td>
+</tr>
+<tr>
+<td>Dedupe Service (Module 2)</td>
+<td>Python / FastAPI + PostgreSQL pgvector (Release 1 default, Section 16)</td>
+<td>PostgreSQL (pgvector similarity index)</td>
+<td>Stateless query-serving pods; HPA on CPU/RPS</td>
+<td>PostgreSQL instance-size upgrade for the vector index's memory footprint; migration path to a dedicated vector-search service if pool scale demands it</td>
+</tr>
+<tr>
+<td>Candidate Store / Unified Inbox Index (Module 2)</td>
+<td>PostgreSQL (system of record) + OpenSearch (search index)</td>
+<td>PostgreSQL, OpenSearch</td>
+<td>OpenSearch data-node replicas absorb read/search traffic away from PostgreSQL</td>
+<td>PostgreSQL instance-size upgrade for the write path; OpenSearch node-type upgrade for hot tenant shards</td>
+</tr>
+<tr>
+<td>Frontend (Manager/Recruiter/Tenant Admin console)</td>
+<td>React + TypeScript SPA</td>
+<td>Served as static assets</td>
+<td>CDN edge caching — effectively unlimited horizontal scale, no origin compute</td>
+<td>Not applicable — static assets have no vertical dimension</td>
+</tr>
+</tbody>
+</table>
+<h2 id="18-deployment-architecture">18. Deployment Architecture<a class="headerlink" href="#18-deployment-architecture" title="Permanent link">&para;</a></h2>
+<p>Hosting is on-prem: the Section 17 stack runs on a self-managed Kubernetes cluster inside Phoneme's own data centre infrastructure, not on a hyperscaler. Every stateful component that a cloud deployment would normally reach as a managed service — the database, the message bus, object storage, the KMS — is instead self-hosted and operated by Phoneme, which is what makes the native-KMS decision in Section 4.0 the consistent choice rather than an isolated one. The two application node pools from Section 17.1 (Stateless Service Pool and Compute-Intensive Pool) are unchanged in shape; only what they connect to changes.</p>
+<p><img alt="" src="../tdd-v4.2-media/media/e302310ff7da73d1d00b4e3b7136ae952891a1d2.png" style="max-width:100%" /></p>
+<p><em>Figure 18.1 — On-prem deployment topology: edge, API Gateway, the two application node pools, and the self-hosted stateful/security layer</em></p>
+<h3 id="181-node-pools">18.1 Node Pools<a class="headerlink" href="#181-node-pools" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Node Pool</strong></th>
+<th><strong>Runs</strong></th>
+<th><strong>Autoscaling Trigger</strong></th>
+<th><strong>Rationale</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stateless Service Pool</td>
+<td>API Gateway, Requisition, Publish, Notification, Auth, Scoring Matrix</td>
+<td>Horizontal Pod Autoscaler (HPA) on CPU utilization and requests-per-second</td>
+<td>Latency-sensitive request/response traffic; scaling must react within seconds to a traffic spike</td>
+</tr>
+<tr>
+<td>Compute-Intensive Pool</td>
+<td>JD Generation, Resume Parsing, Dedupe, Channel Adapters</td>
+<td>KEDA, scaled on Kafka/Redis queue depth per topic/queue</td>
+<td>Bursty, queue-fed background work — a resume-upload spike should not compete with the login path for the same pods</td>
+</tr>
+</tbody>
+</table>
+<p>On-prem HPA/KEDA still add pods within existing node capacity exactly as they would in the cloud; the difference is cluster autoscaling — adding a brand-new physical or virtual node is not an on-demand cloud API call here, it is pre-provisioned capacity. Both pools are therefore sized with explicit headroom above the BRD/PRD's reference load (Section 5, BRD/PRD Acceptance Criteria), not sized to the load itself, and capacity planning is revisited on a fixed schedule rather than left to autoscaling alone.</p>
+<h3 id="182-on-prem-data-centre-disaster-recovery">18.2 On-Prem Data Centre &amp; Disaster Recovery<a class="headerlink" href="#182-on-prem-data-centre-disaster-recovery" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Every stateful component (PostgreSQL, Redis, Kafka, OpenSearch, Vault) runs Multi-Rack within the primary data centre — spread across separate racks, power feeds, and top-of-rack switches with automated failover — so a single rack, PDU, or switch failure does not take the platform down.</p>
+</li>
+<li>
+<p>PostgreSQL: one primary plus at least two read replicas (Patroni-managed, Section 17.2), placed on separate racks; automated failover promotes a replica within the RTO target stated in the BRD/PRD's Acceptance Criteria (Section 5, BRD/PRD).</p>
+</li>
+<li>
+<p>Backups: continuous WAL archiving plus daily full snapshots, written to on-prem storage separate from the primary array, retained per tenant-configurable policy, satisfying the RPO target in the same Acceptance Criteria table.</p>
+</li>
+<li>
+<p>Object storage (resumes, offer documents, MinIO) is versioned with erasure-coded local replication across nodes; deletion is soft (tombstoned) before any hard-delete retention-policy job runs, so a mistaken delete is always recoverable within the retention window.</p>
+</li>
+<li>
+<p>Full-DR posture — a secondary data centre with cross-DC replication for every stateful component — is a fast-follow, not a Release 1 commitment; Release 1 ships with the single-DC, multi-rack redundancy above. Confirming the secondary-DC timeline and target RTO/RPO for that phase is an open dependency (Section 16).</p>
+</li>
+<li>
+<p>Infrastructure is defined as code (Terraform, with its VMware/bare-metal providers as applicable) so the cluster and its surrounding network/storage configuration can be reprovisioned from source rather than hand-built during an incident.</p>
+</li>
+</ul>
+<h2 id="19-cicd-pipeline">19. CI/CD Pipeline<a class="headerlink" href="#19-cicd-pipeline" title="Permanent link">&para;</a></h2>
+<p>Every service in Section 17 ships through the same pipeline shape, parameterized per service rather than forked per service — one pipeline definition, one place to fix a broken gate. The pipeline enforces that nothing reaches production without passing through staging, an automated test suite, and an explicit human approval; a canary step limits the blast radius of anything the earlier gates missed.</p>
+<p><img alt="" src="../tdd-v4.2-media/media/69d05e3c1a12d27651bfdb8f833deea79e342ab7.png" style="max-width:100%" /></p>
+<p><em>Figure 19.1 — CI/CD pipeline: commit through canary to full production rollout, with automated SLO-triggered rollback</em></p>
+<h3 id="191-pipeline-stages">19.1 Pipeline Stages<a class="headerlink" href="#191-pipeline-stages" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Stage</strong></th>
+<th><strong>What Happens</strong></th>
+<th><strong>Gate to Proceed</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Commit &amp; PR Checks</td>
+<td>Lint, unit tests, and static application security testing (SAST) run on every pull request</td>
+<td>Branch protection requires these to pass plus a required human code review before merge</td>
+</tr>
+<tr>
+<td>CI Build</td>
+<td>On merge to main, a per-service Docker image is built (only the changed service's image, not a monolithic rebuild)</td>
+<td>Build must succeed; image is tagged with the commit SHA, never "latest"</td>
+</tr>
+<tr>
+<td>Scan &amp; Registry</td>
+<td>Software composition analysis (SCA) and container vulnerability scanning run against the built image</td>
+<td>No critical/high vulnerability may pass; the image is then signed and pushed to an immutable container registry</td>
+</tr>
+<tr>
+<td>Deploy to Staging</td>
+<td>GitOps (ArgoCD) detects the new image tag and syncs the staging cluster's manifest to match</td>
+<td>Sync must reach Healthy status in ArgoCD before the next stage starts</td>
+</tr>
+<tr>
+<td>Automated Test Suite</td>
+<td>Integration tests, the standing cross-tenant/cross-client isolation test suite (BRD/PRD Section 5), and contract tests against dependent services all run against staging</td>
+<td>100% of this suite must pass — no override</td>
+</tr>
+<tr>
+<td>Release Approval</td>
+<td>A named approver reviews the change record (what changed, test results, rollback plan)</td>
+<td>Manual gate — a human decision is required; nothing promotes automatically from tests to production</td>
+</tr>
+<tr>
+<td>Canary Deploy (Production)</td>
+<td>The new version receives 5% of production traffic behind the same API Gateway</td>
+<td>Automated health checks (error rate, latency, business-metric SLOs) must stay within threshold for a fixed observation window</td>
+</tr>
+<tr>
+<td>Full Rollout + Observability</td>
+<td>Traffic shifts progressively to 100% once the canary window passes clean</td>
+<td>Continuous observability (metrics, logs, alerts) watches every stage from canary onward and can trigger the automatic rollback transition on its own, without waiting for a human to notice</td>
+</tr>
+</tbody>
+</table>
+<h3 id="192-environment-promotion">19.2 Environment Promotion<a class="headerlink" href="#192-environment-promotion" title="Permanent link">&para;</a></h3>
+<p>A change moves Dev → Staging → Canary (Production) → Full Production in that fixed order; no service-specific shortcut skips staging or canary, including for a hotfix — the pipeline is the fastest safe path, not an obstacle to route around under pressure.</p>
+<ul>
+<li>
+<p>Infrastructure as Code (Terraform) provisions every environment from the same source, so Staging is a true architectural mirror of Production, not an approximation.</p>
+</li>
+<li>
+<p>Feature flags decouple code deployment from feature activation where a change needs to reach production before it is turned on for any tenant.</p>
+</li>
+<li>
+<p>Rollback is a redeploy of the last known-good image tag via the same GitOps path, never a manual server-side patch — the audit trail (Section 4.2) captures every promotion and rollback with requester identity and timestamp.</p>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.top", "toc.integrate", "content.action.edit", "content.code.copy", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
