@@ -1233,6 +1233,9 @@
 
   <h1>Teamora TDD v4.2 (Module 1 & 2)</h1>
 
+<blockquote>
+<p><strong>Decision note added after approval (2026-09-25):</strong> the backend framework split in §17.2 (below) (NestJS for Auth, Notification, Requisition, Scoring Matrix, Publish; FastAPI for the rest) is superseded by <code>Technical/Teamora_Technical_Stack_Charter_v1.2.md</code>: <strong>every backend service is Python/FastAPI</strong>. Also recorded on PR #7 (B3–B5, accepted 2026-09-24): requisition-service owns all Module 1 tables, a candidate-service owns Module 2 candidate upload/search, and Release 1 has no Kong gateway and no Go services. Service boundaries, APIs, data model and isolation rules in this document are unchanged.</p>
+</blockquote>
 <p><img alt="" src="../tdd-v4.2-media/media/1edd248455318f3da3f5928023b32e5fc6c76574.png" style="max-width:100%" /></p>
 <table style="width:93%;">
 <colgroup>
@@ -2595,6 +2598,9 @@
 </li>
 </ol>
 <h2 id="17-microservices-decomposition-per-service-technology-stack">17. Microservices Decomposition &amp; Per-Service Technology Stack<a class="headerlink" href="#17-microservices-decomposition-per-service-technology-stack" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Decision note added after approval (2026-09-25):</strong> the backend framework split in §17.2 (NestJS for Auth, Notification, Requisition, Scoring Matrix, Publish; FastAPI for the rest) is superseded by <code>Technical/Teamora_Technical_Stack_Charter_v1.2.md</code>: <strong>every backend service is Python/FastAPI</strong>. Also recorded on PR #7 (B3–B5, accepted 2026-09-24): requisition-service owns all Module 1 tables, a candidate-service owns Module 2 candidate upload/search, and Release 1 has no Kong gateway and no Go services. Service boundaries, APIs, data model and isolation rules in this document are unchanged.</p>
+</blockquote>
 <p>The BRD/PRD's proposed architecture direction left the backend framework as an open choice ("FastAPI or NestJS"). This section resolves that ambiguity: the platform is built as a set of independently deployable microservices, each on the stack best suited to its own workload shape, communicating through the Kafka event backbone and the tenant-aware API Gateway rather than in-process calls. This finalizes and supersedes the BRD/PRD's placeholder stack language.</p>
 <h3 id="171-decomposition-principles">17.1 Decomposition Principles<a class="headerlink" href="#171-decomposition-principles" title="Permanent link">&para;</a></h3>
 <ul>
